@@ -3,17 +3,9 @@ graft src
 graft ci
 graft tests
 
-include .bumpversion.cfg
-include .cookiecutterrc
 include .coveragerc
-include .editorconfig
 include tox.ini
-include .github/workflows/github-actions.yml
 include .readthedocs.yml
-include .pre-commit-config.yaml
-include AUTHORS.rst
-include CHANGELOG.rst
-include CONTRIBUTING.rst
 include LICENSE
 include README.rst
 

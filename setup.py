@@ -17,6 +17,46 @@ from setuptools import find_packages
 from setuptools import setup
 from setuptools.dist import Distribution
 
+from pkg_resources import parse_version
+
+from numpy import get_include
+from multiprocessing import cpu_count
+
+USE_CYTHON = True
+CYTHON_VERSION = '0.23.4'
+
+try:
+    from Cython import __version__
+    if parse_version(__version__) < parse_version(CYTHON_VERSION):
+        raise RuntimeError('Cython >= %s is needed to build' % CYTHON_VERSION)
+    from Cython.Build import cythonize
+except ImportError:
+    print('WARNING: Cython not found! Using pre-existing files to build.')
+    USE_CYTHON = False
+
+
+if USE_CYTHON:
+    extensions = [Extension("cows.filament", 
+                            ["src/cows/filament.pyx"],
+                            language="c"),
+                  Extension('cows._skeletonize_3d_cy',
+                            sources=['src/cows/_skeletonize_3d_cy.pyx'],
+                            include_dirs=[get_include()],
+                            language='c++')]
+    # Cython doesn't automatically choose a number of threads > 1
+    # https://github.com/cython/cython/blob/a0bbb940c847dfe92cac446c8784c34c28c92836/Cython/Build/Dependencies.py#L923-L925
+    extensions = cythonize(extensions, nthreads=cpu_count(),
+              compiler_directives={'language_level': 3})
+else:
+    extensions = [Extension("cows.filament", 
+                            ["src/cows/filament.c"],
+                            language="c"),
+                  Extension('cows._skeletonize_3d_cy',
+                            sources=['src/cows/_skeletonize_3d_cy.cpp'],
+                            include_dirs=[get_include()],
+                            language='c++')]
+
+
 # Enable code coverage for C code: we can't use CFLAGS=-coverage in tox.ini, since that may mess with compiling
 # dependencies (e.g. numpy). Therefore we set SETUPPY_CFLAGS=-coverage in tox.ini and copy it to CFLAGS here (after
 # deps have been safely installed).
@@ -47,9 +87,8 @@ setup(
     version='0.0.0',
     license='BSD-3-Clause',
     description='Cosmic filament finder',
-    long_description='%s\n%s' % (
+    long_description='%s\n' % (
         re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
-        re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
     ),
     author='Simon Pfeifer',
     author_email='spfeifer@aip.de',
@@ -100,16 +139,6 @@ setup(
         #   'rst': ['docutils>=0.11'],
         #   ':python_version=="2.6"': ['argparse'],
     },
-    ext_modules=[
-        Extension(
-            splitext(relpath(path, 'src').replace(os.sep, '.'))[0],
-            sources=[path],
-            extra_compile_args=CFLAGS.split(),
-            extra_link_args=LFLAGS.split(),
-            include_dirs=[dirname(path)]
-        )
-        for root, _, _ in os.walk('src')
-        for path in glob(join(root, '*.c'))
-    ],
+    ext_modules=extensions,
     distclass=BinaryDistribution,
 )
