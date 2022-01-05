@@ -29,10 +29,6 @@ def skeletonize(image, periodic=False):
     skeleton : ndarray
         The thinned image.
 
-    See Also
-    --------
-    skeletonize, medial_axis
-
     Notes
     -----
     The method of [Lee94]_ uses an octree data structure to examine a 3x3x3
@@ -41,10 +37,6 @@ def skeletonize(image, periodic=False):
     stops changing. Each iteration consists of two steps: first, a list of
     candidates for removal is assembled; then pixels from this list are
     rechecked sequentially, to better preserve connectivity of the image.
-
-    The algorithm this function implements is different from the algorithms
-    used by either `skeletonize` or `medial_axis`, thus for 2D images the
-    results produced by this function are generally different.
 
     References
     ----------
@@ -55,7 +47,7 @@ def skeletonize(image, periodic=False):
     """
     # make sure the image is 3D or 2D
     if image.ndim < 2 or image.ndim > 3:
-        raise ValueError("skeletonize_3d can only handle 2D or 3D images; "
+        raise ValueError("skeletonize can only handle 2D or 3D images; "
                          "got image.ndim = %s instead." % image.ndim)
     image = np.ascontiguousarray(image)
     image = img_as_ubyte(image, force_copy=False)
@@ -63,7 +55,7 @@ def skeletonize(image, periodic=False):
     if type(periodic) != bool:
         raise TypeError("keyword argument periodic must of of type bool; "
                         "got type %s instead." % type(periodic))
-    if periodic and image.ndim == 2:
+    if periodic and image.ndim != 3:
         raise ValueError("periodic boundaries currently only work for 3D "
                          "data. image.ndim = %s." % image.ndim)
 

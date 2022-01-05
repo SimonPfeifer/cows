@@ -1,11 +1,6 @@
 import numpy as np
 from warnings import warn
 
-
-__all__ = ['img_as_float32', 'img_as_float64', 'img_as_float',
-           'img_as_int', 'img_as_uint', 'img_as_ubyte',
-           'img_as_bool', 'dtype_limits']
-
 # For integers Numpy uses `_integer_types` basis internally, and builds a leaky
 # `np.XintYY` abstraction on top of it. This leads to situations when, for
 # example, there are two np.Xint64 dtypes with the same attributes but
