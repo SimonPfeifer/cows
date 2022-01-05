@@ -6,7 +6,7 @@ graft tests
 include .coveragerc
 include tox.ini
 include .readthedocs.yml
-include LICENSE
+include LICENSE.txt
 include README.rst
 
 
