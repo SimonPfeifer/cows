@@ -1,6 +1,6 @@
-"""
-Algorithms for computing the skeleton of a binary image
-"""
+'''
+Contains code from SciPy v1.7.3
+'''
 
 import numpy as np
 from .dtype import img_as_ubyte

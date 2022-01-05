@@ -1,3 +1,8 @@
+'''
+Contains code from SciPy v1.7.3
+'''
+
+
 import numpy as np
 from warnings import warn
 

@@ -1,7 +1,6 @@
-"""
-The arraycrop module contains functions to crop values from the edges of an
-n-dimensional array.
-"""
+'''
+Contains code from SciPy v1.7.3
+'''
 
 import numpy as np
 

@@ -1,3 +1,7 @@
+'''
+Contains code from SciPy v1.7.3
+'''
+
 # distutils: language = c++
 
 """
@@ -108,6 +112,7 @@ def _compute_thin_image(pixel_type[:, :, ::1] img not None, periodic=False):
             unchanged_borders = 0
             for j in range(num_borders):
 
+                # Periodic boundary conditions were added by SP
                 if _periodic == 1:
                     with gil:
                         img = np.pad(np.asarray(img[1:imax-1,1:jmax-1,1:kmax-1]), 1, mode='wrap')
