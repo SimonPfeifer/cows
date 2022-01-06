@@ -22,17 +22,17 @@ Overview
     :alt: GitHub Actions Build Status
     :target: https://github.com/SimonPfeifer/python-cows/actions
 
-.. |requires| image:: https://requires.io/github/SimonPfeifer/python-cows/requirements.svg?branch=main
+.. |requires| image:: https://requires.io/github/SimonPfeifer/python-cows/requirements.svg?branch=master
     :alt: Requirements Status
-    :target: https://requires.io/github/SimonPfeifer/python-cows/requirements/?branch=main
+    :target: https://requires.io/github/SimonPfeifer/python-cows/requirements/?branch=master
 
-.. |codecov| image:: https://codecov.io/gh/SimonPfeifer/python-cows/branch/main/graphs/badge.svg?branch=main
+.. |codecov| image:: https://codecov.io/gh/SimonPfeifer/python-cows/branch/master/graphs/badge.svg?branch=master
     :alt: Coverage Status
     :target: https://codecov.io/github/SimonPfeifer/python-cows
 
 .. |commits-since| image:: https://img.shields.io/github/commits-since/SimonPfeifer/python-cows/v0.0.0.svg
     :alt: Commits since latest release
-    :target: https://github.com/SimonPfeifer/python-cows/compare/v0.0.0...main
+    :target: https://github.com/SimonPfeifer/python-cows/compare/v0.0.0...master
 
 
 
@@ -51,7 +51,7 @@ Installation
 
 You can also install the in-development version with::
 
-    pip install https://github.com/SimonPfeifer/python-cows/archive/main.zip
+    pip install https://github.com/SimonPfeifer/python-cows/archive/master.zip
 
 
 Documentation
