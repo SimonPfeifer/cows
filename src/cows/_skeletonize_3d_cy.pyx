@@ -1,8 +1,8 @@
-'''
-Contains code from SciPy v1.7.3
-'''
-
 # distutils: language = c++
+
+'''
+Contains code from scikit-image v0.18.3
+'''
 
 """
 This is an implementation of the 2D/3D thinning algorithm

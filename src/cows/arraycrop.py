@@ -1,5 +1,5 @@
 '''
-Contains code from SciPy v1.7.3
+Contains code from scikit-image v0.18.3
 '''
 
 import numpy as np
