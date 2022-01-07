@@ -1,4 +1,4 @@
 sphinx>=1.3
 sphinx-rtd-theme
 myst-nb
-nbsphix
+nbsphinx
