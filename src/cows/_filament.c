@@ -1783,6 +1783,7 @@ static const char __pyx_k_obj[] = "obj";
 static const char __pyx_k_pad[] = "pad";
 static const char __pyx_k_sum[] = "sum";
 static const char __pyx_k_base[] = "base";
+static const char __pyx_k_data[] = "data";
 static const char __pyx_k_dict[] = "__dict__";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_mode[] = "mode";
@@ -1790,7 +1791,6 @@ static const char __pyx_k_name[] = "name";
 static const char __pyx_k_ndim[] = "ndim";
 static const char __pyx_k_pack[] = "pack";
 static const char __pyx_k_size[] = "size";
-static const char __pyx_k_skel[] = "skel";
 static const char __pyx_k_step[] = "step";
 static const char __pyx_k_stop[] = "stop";
 static const char __pyx_k_test[] = "__test__";
@@ -1917,6 +1917,7 @@ static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_kp_s_contiguous_and_direct;
 static PyObject *__pyx_kp_s_contiguous_and_indirect;
 static PyObject *__pyx_n_s_cows__filament;
+static PyObject *__pyx_n_s_data;
 static PyObject *__pyx_n_s_data_view;
 static PyObject *__pyx_n_s_dict;
 static PyObject *__pyx_n_s_dtype;
@@ -1970,7 +1971,6 @@ static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
 static PyObject *__pyx_n_s_shape;
 static PyObject *__pyx_n_s_size;
-static PyObject *__pyx_n_s_skel;
 static PyObject *__pyx_kp_s_src_cows__filament_pyx;
 static PyObject *__pyx_n_s_start;
 static PyObject *__pyx_n_s_step;
@@ -1990,8 +1990,8 @@ static PyObject *__pyx_n_s_visit_map;
 static PyObject *__pyx_n_s_visit_map_view;
 static PyObject *__pyx_n_u_wrap;
 static PyObject *__pyx_n_s_zeros;
-static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_skel); /* proto */
-static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_skel); /* proto */
+static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data); /* proto */
+static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array_2__getbuffer__(struct __pyx_array_obj *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_array___pyx_pf_15View_dot_MemoryView_5array_4__dealloc__(struct __pyx_array_obj *__pyx_v_self); /* proto */
@@ -2077,27 +2077,27 @@ static PyObject *__pyx_codeobj__29;
 /* "cows/_filament.pyx":4
  * cimport cython
  * 
- * def _label_skeleton(skel):             # <<<<<<<<<<<<<<
+ * def _label_skeleton(data):             # <<<<<<<<<<<<<<
  *     ''' Label the skeleton.
  * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cows_9_filament_1_label_skeleton(PyObject *__pyx_self, PyObject *__pyx_v_skel); /*proto*/
+static PyObject *__pyx_pw_4cows_9_filament_1_label_skeleton(PyObject *__pyx_self, PyObject *__pyx_v_data); /*proto*/
 static char __pyx_doc_4cows_9_filament__label_skeleton[] = " Label the skeleton. \n\n        Python wrapper for the cdef function ``label_skeleton``.\n\n        Label all skeleton cells with their respective number of neighbour.\n        Also removes cells with zero or more than four neighbours by setting\n        them to the background value of zero.\n    ";
 static PyMethodDef __pyx_mdef_4cows_9_filament_1_label_skeleton = {"_label_skeleton", (PyCFunction)__pyx_pw_4cows_9_filament_1_label_skeleton, METH_O, __pyx_doc_4cows_9_filament__label_skeleton};
-static PyObject *__pyx_pw_4cows_9_filament_1_label_skeleton(PyObject *__pyx_self, PyObject *__pyx_v_skel) {
+static PyObject *__pyx_pw_4cows_9_filament_1_label_skeleton(PyObject *__pyx_self, PyObject *__pyx_v_data) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("_label_skeleton (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cows_9_filament__label_skeleton(__pyx_self, ((PyObject *)__pyx_v_skel));
+  __pyx_r = __pyx_pf_4cows_9_filament__label_skeleton(__pyx_self, ((PyObject *)__pyx_v_data));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_skel) {
+static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data) {
   PyObject *__pyx_v_result = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -2112,13 +2112,13 @@ static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObjec
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_label_skeleton", 0);
-  __Pyx_INCREF(__pyx_v_skel);
+  __Pyx_INCREF(__pyx_v_data);
 
   /* "cows/_filament.pyx":15
  * 
  *     # Pad data to deal with periodic boundaries
- *     skel = np.pad(skel, 1, mode='wrap')             # <<<<<<<<<<<<<<
- *     skel = np.array(skel, dtype=np.int32, order='c')
+ *     data = np.pad(data, 1, mode='wrap')             # <<<<<<<<<<<<<<
+ *     data = np.array(data, dtype=np.int32, order='c')
  * 
  */
   __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
@@ -2128,9 +2128,9 @@ static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObjec
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(__pyx_v_skel);
-  __Pyx_GIVEREF(__pyx_v_skel);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_skel);
+  __Pyx_INCREF(__pyx_v_data);
+  __Pyx_GIVEREF(__pyx_v_data);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_data);
   __Pyx_INCREF(__pyx_int_1);
   __Pyx_GIVEREF(__pyx_int_1);
   PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_int_1);
@@ -2142,13 +2142,13 @@ static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObjec
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF_SET(__pyx_v_skel, __pyx_t_4);
+  __Pyx_DECREF_SET(__pyx_v_data, __pyx_t_4);
   __pyx_t_4 = 0;
 
   /* "cows/_filament.pyx":16
  *     # Pad data to deal with periodic boundaries
- *     skel = np.pad(skel, 1, mode='wrap')
- *     skel = np.array(skel, dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
+ *     data = np.pad(data, 1, mode='wrap')
+ *     data = np.array(data, dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
  * 
  *     # Define output array
  */
@@ -2159,9 +2159,9 @@ static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObjec
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_INCREF(__pyx_v_skel);
-  __Pyx_GIVEREF(__pyx_v_skel);
-  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_skel);
+  __Pyx_INCREF(__pyx_v_data);
+  __Pyx_GIVEREF(__pyx_v_data);
+  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_data);
   __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
@@ -2177,22 +2177,22 @@ static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObjec
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF_SET(__pyx_v_skel, __pyx_t_5);
+  __Pyx_DECREF_SET(__pyx_v_data, __pyx_t_5);
   __pyx_t_5 = 0;
 
   /* "cows/_filament.pyx":19
  * 
  *     # Define output array
- *     result = np.zeros(skel.shape, dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
+ *     result = np.zeros(data.shape, dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
  * 
- *     label_skeleton(skel, result) # calls the cdef function
+ *     label_skeleton(data, result) # calls the cdef function
  */
   __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_zeros); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_skel, __pyx_n_s_shape); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_shape); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
@@ -2218,13 +2218,13 @@ static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObjec
   __pyx_t_2 = 0;
 
   /* "cows/_filament.pyx":21
- *     result = np.zeros(skel.shape, dtype=np.int32, order='c')
+ *     result = np.zeros(data.shape, dtype=np.int32, order='c')
  * 
- *     label_skeleton(skel, result) # calls the cdef function             # <<<<<<<<<<<<<<
+ *     label_skeleton(data, result) # calls the cdef function             # <<<<<<<<<<<<<<
  *     return np.asarray(result)
  * 
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_int(__pyx_v_skel, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_int(__pyx_v_data, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 21, __pyx_L1_error)
   __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_int(__pyx_v_result, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 21, __pyx_L1_error)
   __pyx_t_2 = __pyx_f_4cows_9_filament_label_skeleton(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -2238,10 +2238,10 @@ static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObjec
 
   /* "cows/_filament.pyx":22
  * 
- *     label_skeleton(skel, result) # calls the cdef function
+ *     label_skeleton(data, result) # calls the cdef function
  *     return np.asarray(result)             # <<<<<<<<<<<<<<
  * 
- * def _find_filaments(skel):
+ * def _find_filaments(data):
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 22, __pyx_L1_error)
@@ -2271,7 +2271,7 @@ static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObjec
   /* "cows/_filament.pyx":4
  * cimport cython
  * 
- * def _label_skeleton(skel):             # <<<<<<<<<<<<<<
+ * def _label_skeleton(data):             # <<<<<<<<<<<<<<
  *     ''' Label the skeleton.
  * 
  */
@@ -2289,7 +2289,7 @@ static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObjec
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_result);
-  __Pyx_XDECREF(__pyx_v_skel);
+  __Pyx_XDECREF(__pyx_v_data);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -2298,27 +2298,27 @@ static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObjec
 /* "cows/_filament.pyx":24
  *     return np.asarray(result)
  * 
- * def _find_filaments(skel):             # <<<<<<<<<<<<<<
+ * def _find_filaments(data):             # <<<<<<<<<<<<<<
  *     ''' Find individual filament.
  * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cows_9_filament_3_find_filaments(PyObject *__pyx_self, PyObject *__pyx_v_skel); /*proto*/
+static PyObject *__pyx_pw_4cows_9_filament_3_find_filaments(PyObject *__pyx_self, PyObject *__pyx_v_data); /*proto*/
 static char __pyx_doc_4cows_9_filament_2_find_filaments[] = " Find individual filament.\n\n        Python wrapper for the cdef function ``connect_neighbours``.\n\n        Connects all cells that are neighbours within a 3x3x3 neihbourhood.\n        The set of connected cells are labled with a unique ID.\n    ";
 static PyMethodDef __pyx_mdef_4cows_9_filament_3_find_filaments = {"_find_filaments", (PyCFunction)__pyx_pw_4cows_9_filament_3_find_filaments, METH_O, __pyx_doc_4cows_9_filament_2_find_filaments};
-static PyObject *__pyx_pw_4cows_9_filament_3_find_filaments(PyObject *__pyx_self, PyObject *__pyx_v_skel) {
+static PyObject *__pyx_pw_4cows_9_filament_3_find_filaments(PyObject *__pyx_self, PyObject *__pyx_v_data) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("_find_filaments (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cows_9_filament_2_find_filaments(__pyx_self, ((PyObject *)__pyx_v_skel));
+  __pyx_r = __pyx_pf_4cows_9_filament_2_find_filaments(__pyx_self, ((PyObject *)__pyx_v_data));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_skel) {
+static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data) {
   PyObject *__pyx_v_result = NULL;
   PyObject *__pyx_v_visit_map = NULL;
   PyObject *__pyx_v_catalogue = NULL;
@@ -2339,12 +2339,12 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_find_filaments", 0);
-  __Pyx_INCREF(__pyx_v_skel);
+  __Pyx_INCREF(__pyx_v_data);
 
   /* "cows/_filament.pyx":34
  * 
- *     # Make sure input skel is the correct type and ordering
- *     skel = np.array(skel, dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
+ *     # Make sure input data is the correct type and ordering
+ *     data = np.array(data, dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
  * 
  *     # Define output array, visitation map and catalogue
  */
@@ -2355,9 +2355,9 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(__pyx_v_skel);
-  __Pyx_GIVEREF(__pyx_v_skel);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_skel);
+  __Pyx_INCREF(__pyx_v_data);
+  __Pyx_GIVEREF(__pyx_v_data);
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_data);
   __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 34, __pyx_L1_error)
@@ -2373,22 +2373,22 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF_SET(__pyx_v_skel, __pyx_t_5);
+  __Pyx_DECREF_SET(__pyx_v_data, __pyx_t_5);
   __pyx_t_5 = 0;
 
   /* "cows/_filament.pyx":37
  * 
  *     # Define output array, visitation map and catalogue
- *     result = np.zeros(skel.shape, dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
- *     visit_map = np.zeros(skel.shape, dtype=np.int32, order='c')
- *     catalogue = np.zeros([np.sum(skel!=0), 4], dtype=np.int32, order='c')
+ *     result = np.zeros(data.shape, dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
+ *     visit_map = np.zeros(data.shape, dtype=np.int32, order='c')
+ *     catalogue = np.zeros([np.sum(data!=0), 4], dtype=np.int32, order='c')
  */
   __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_skel, __pyx_n_s_shape); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_shape); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2415,9 +2415,9 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
 
   /* "cows/_filament.pyx":38
  *     # Define output array, visitation map and catalogue
- *     result = np.zeros(skel.shape, dtype=np.int32, order='c')
- *     visit_map = np.zeros(skel.shape, dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
- *     catalogue = np.zeros([np.sum(skel!=0), 4], dtype=np.int32, order='c')
+ *     result = np.zeros(data.shape, dtype=np.int32, order='c')
+ *     visit_map = np.zeros(data.shape, dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
+ *     catalogue = np.zeros([np.sum(data!=0), 4], dtype=np.int32, order='c')
  * 
  */
   __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
@@ -2425,7 +2425,7 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_zeros); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_skel, __pyx_n_s_shape); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_shape); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2451,9 +2451,9 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   __pyx_t_2 = 0;
 
   /* "cows/_filament.pyx":39
- *     result = np.zeros(skel.shape, dtype=np.int32, order='c')
- *     visit_map = np.zeros(skel.shape, dtype=np.int32, order='c')
- *     catalogue = np.zeros([np.sum(skel!=0), 4], dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
+ *     result = np.zeros(data.shape, dtype=np.int32, order='c')
+ *     visit_map = np.zeros(data.shape, dtype=np.int32, order='c')
+ *     catalogue = np.zeros([np.sum(data!=0), 4], dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
  * 
  *     # Define the C memory view of the variables
  */
@@ -2467,7 +2467,7 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sum); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_NeObjC(__pyx_v_skel, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_NeObjC(__pyx_v_data, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -2519,18 +2519,18 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   /* "cows/_filament.pyx":42
  * 
  *     # Define the C memory view of the variables
- *     cdef int[:, :, ::1] data_view = skel             # <<<<<<<<<<<<<<
+ *     cdef int[:, :, ::1] data_view = data             # <<<<<<<<<<<<<<
  *     cdef int[:, :, ::1] result_view = result
  *     cdef int[:, :, ::1] visit_map_view = visit_map
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_int(__pyx_v_skel, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_int(__pyx_v_data, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 42, __pyx_L1_error)
   __pyx_v_data_view = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
   /* "cows/_filament.pyx":43
  *     # Define the C memory view of the variables
- *     cdef int[:, :, ::1] data_view = skel
+ *     cdef int[:, :, ::1] data_view = data
  *     cdef int[:, :, ::1] result_view = result             # <<<<<<<<<<<<<<
  *     cdef int[:, :, ::1] visit_map_view = visit_map
  *     cdef int[:, ::1] cat_view = catalogue
@@ -2541,7 +2541,7 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   __pyx_t_6.data = NULL;
 
   /* "cows/_filament.pyx":44
- *     cdef int[:, :, ::1] data_view = skel
+ *     cdef int[:, :, ::1] data_view = data
  *     cdef int[:, :, ::1] result_view = result
  *     cdef int[:, :, ::1] visit_map_view = visit_map             # <<<<<<<<<<<<<<
  *     cdef int[:, ::1] cat_view = catalogue
@@ -2598,7 +2598,7 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   /* "cows/_filament.pyx":24
  *     return np.asarray(result)
  * 
- * def _find_filaments(skel):             # <<<<<<<<<<<<<<
+ * def _find_filaments(data):             # <<<<<<<<<<<<<<
  *     ''' Find individual filament.
  * 
  */
@@ -2622,7 +2622,7 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   __PYX_XDEC_MEMVIEW(&__pyx_v_result_view, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_v_visit_map_view, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_v_cat_view, 1);
-  __Pyx_XDECREF(__pyx_v_skel);
+  __Pyx_XDECREF(__pyx_v_data);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -17317,6 +17317,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_contiguous_and_direct, __pyx_k_contiguous_and_direct, sizeof(__pyx_k_contiguous_and_direct), 0, 0, 1, 0},
   {&__pyx_kp_s_contiguous_and_indirect, __pyx_k_contiguous_and_indirect, sizeof(__pyx_k_contiguous_and_indirect), 0, 0, 1, 0},
   {&__pyx_n_s_cows__filament, __pyx_k_cows__filament, sizeof(__pyx_k_cows__filament), 0, 0, 1, 1},
+  {&__pyx_n_s_data, __pyx_k_data, sizeof(__pyx_k_data), 0, 0, 1, 1},
   {&__pyx_n_s_data_view, __pyx_k_data_view, sizeof(__pyx_k_data_view), 0, 0, 1, 1},
   {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
   {&__pyx_n_s_dtype, __pyx_k_dtype, sizeof(__pyx_k_dtype), 0, 0, 1, 1},
@@ -17370,7 +17371,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
   {&__pyx_n_s_shape, __pyx_k_shape, sizeof(__pyx_k_shape), 0, 0, 1, 1},
   {&__pyx_n_s_size, __pyx_k_size, sizeof(__pyx_k_size), 0, 0, 1, 1},
-  {&__pyx_n_s_skel, __pyx_k_skel, sizeof(__pyx_k_skel), 0, 0, 1, 1},
   {&__pyx_kp_s_src_cows__filament_pyx, __pyx_k_src_cows__filament_pyx, sizeof(__pyx_k_src_cows__filament_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_start, __pyx_k_start, sizeof(__pyx_k_start), 0, 0, 1, 1},
   {&__pyx_n_s_step, __pyx_k_step, sizeof(__pyx_k_step), 0, 0, 1, 1},
@@ -17605,11 +17605,11 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "cows/_filament.pyx":4
  * cimport cython
  * 
- * def _label_skeleton(skel):             # <<<<<<<<<<<<<<
+ * def _label_skeleton(data):             # <<<<<<<<<<<<<<
  *     ''' Label the skeleton.
  * 
  */
-  __pyx_tuple__19 = PyTuple_Pack(2, __pyx_n_s_skel, __pyx_n_s_result); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(2, __pyx_n_s_data, __pyx_n_s_result); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
   __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_cows__filament_pyx, __pyx_n_s_label_skeleton, 4, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 4, __pyx_L1_error)
@@ -17617,11 +17617,11 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "cows/_filament.pyx":24
  *     return np.asarray(result)
  * 
- * def _find_filaments(skel):             # <<<<<<<<<<<<<<
+ * def _find_filaments(data):             # <<<<<<<<<<<<<<
  *     ''' Find individual filament.
  * 
  */
-  __pyx_tuple__21 = PyTuple_Pack(8, __pyx_n_s_skel, __pyx_n_s_result, __pyx_n_s_visit_map, __pyx_n_s_catalogue, __pyx_n_s_data_view, __pyx_n_s_result_view, __pyx_n_s_visit_map_view, __pyx_n_s_cat_view); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_tuple__21 = PyTuple_Pack(8, __pyx_n_s_data, __pyx_n_s_result, __pyx_n_s_visit_map, __pyx_n_s_catalogue, __pyx_n_s_data_view, __pyx_n_s_result_view, __pyx_n_s_visit_map_view, __pyx_n_s_cat_view); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
   __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(1, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_cows__filament_pyx, __pyx_n_s_find_filaments, 24, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 24, __pyx_L1_error)
@@ -18051,7 +18051,7 @@ if (!__Pyx_RefNanny) {
   /* "cows/_filament.pyx":4
  * cimport cython
  * 
- * def _label_skeleton(skel):             # <<<<<<<<<<<<<<
+ * def _label_skeleton(data):             # <<<<<<<<<<<<<<
  *     ''' Label the skeleton.
  * 
  */
@@ -18063,7 +18063,7 @@ if (!__Pyx_RefNanny) {
   /* "cows/_filament.pyx":24
  *     return np.asarray(result)
  * 
- * def _find_filaments(skel):             # <<<<<<<<<<<<<<
+ * def _find_filaments(data):             # <<<<<<<<<<<<<<
  *     ''' Find individual filament.
  * 
  */
