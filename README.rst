@@ -44,7 +44,7 @@ For more inforamtion on installation, see `INSTALL.rst <https://github.com/Simon
 Documentation
 ==============
 
-The full documentation can be accessed at `readthedocs <https://python-cows.readthedocs.io/>`_ or generated as a set of local files by running::
+The full documentation can be accessed at `readthedocs <https://python-cows.readthedocs.io/en/latest/index.html>`_ or generated as a set of local files by running::
 
     sphinx-build ./doc ./docs/_build
 
