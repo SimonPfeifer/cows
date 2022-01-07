@@ -1,25 +1,15 @@
 import numpy as np
 cimport cython
 
-def label_skeleton(data):
-    ''' Label the skeleton.
+def _label_skeleton(data):
+    ''' Label the skeleton. 
+
+        Python wrapper for the cdef function ``label_skeleton``.
 
         Label all skeleton cells with their respective number of neighbour.
         Also removes cells with zero or more than four neighbours by setting
         them to the background value of zero.
-
-    Parameters
-    ----------
-    data : ndarray, 3D
-        A binary image containing the skeletonized objects. Zeros
-        represent background, nonzero values are foreground.
-
-    Returns
-    -------
-    result : ndarray
-        The labeled skeleton.
     '''
-    assert data.ndim == 3
 
     # Pad data to deal with periodic boundaries
     data = np.pad(data, 1, mode='wrap')
@@ -28,63 +18,17 @@ def label_skeleton(data):
     # Define output array
     result = np.zeros(data.shape, dtype=np.int32, order='c')
 
-    _label_skeleton(data, result)
+    label_skeleton(data, result) # calls the cdef function
     return np.asarray(result)
 
-def separate_skeleton(data):
-    ''' Separate the skeleton.
-
-        Set all the skeleton cells with more than 2 neighbours to the
-        background value of zero. This results in a set of individual
-        objects of arbitrary length and 2 endpoints.
-
-    Parameters
-    ----------
-    data : ndarray, 3D
-        A binary image containing the skeletonized objects. Zeros
-        represent background, nonzero values are foreground.
-
-    Returns
-    -------
-    result : ndarray
-        The separated skeleton.
-    '''
-    assert data.ndim == 3
-
-    # Label the skeleton
-    data = label_skeleton(data)
-    
-    # Remove all cells with more than two neighbours
-    data_shape = data.shape
-    data[data>2] = 0
-    
-    return data.reshape(data_shape)
-
-def find_filaments(data):
+def _find_filaments(data):
     ''' Find individual filament.
+
+        Python wrapper for the cdef function ``connect_neighbours``.
 
         Connects all cells that are neighbours within a 3x3x3 neihbourhood.
         The set of connected cells are labled with a unique ID.
-
-        Parameters
-        ----------
-        data : ndarray, 3D
-            An array containing the classified and separated skeleton. Zeros
-            represent background, ones are endpoints and, twos are regular
-            cells.
-
-        Returns
-        -------
-        result : ndarray, 3D
-            An array with data.shape containing the sets of connected cells
-            (filaments) with their respective ID.
-        catalogue : ndarray, 2D
-            A catalogue containing, for each cell, a row of ID, X-, Y- and Z-
-            position.
     '''
-    assert data.ndim == 3
-    assert data.shape[0] == data.shape[1]
-    assert data.shape[0] == data.shape[2]
 
     # Make sure input data is the correct type and ordering
     data = np.array(data, dtype=np.int32, order='c')
@@ -94,16 +38,19 @@ def find_filaments(data):
     visit_map = np.zeros(data.shape, dtype=np.int32, order='c')
     catalogue = np.zeros([np.sum(data!=0), 4], dtype=np.int32, order='c')
     
-    _connect_neighbours(data, visit_map, result, catalogue)
-    if np.min(catalogue[:,0]) == 0:
-        catalogue = catalogue[:np.argmin(catalogue[:,0])]
+    # Define the C memory view of the variables
+    cdef int[:, :, ::1] data_view = data
+    cdef int[:, :, ::1] result_view = result
+    cdef int[:, :, ::1] visit_map_view = visit_map
+    cdef int[:, ::1] cat_view = catalogue
 
+    connect_neighbours(data_view, visit_map_view, result_view, cat_view)
     return result, catalogue
 
 
 @cython.boundscheck(False)  # Deactivate bounds checking
 @cython.wraparound(False)   # Deactivate negative indexing.
-cdef int _count_neighbours(int[:,:,:] data, int i, int j, int k):
+cdef int count_neighbours(int[:,:,:] data, int i, int j, int k):
     '''
         Count the neighbours in a 3x3x3 cube around a cell.
     '''
@@ -120,7 +67,7 @@ cdef int _count_neighbours(int[:,:,:] data, int i, int j, int k):
 
 @cython.boundscheck(False)  # Deactivate bounds checking
 @cython.wraparound(False)   # Deactivate negative indexing.
-cdef _label_skeleton(int[:,:,:] data, int[:,:,:] result):
+cdef label_skeleton(int[:,:,:] data, int[:,:,:] result):
     '''
         Loop through the data and assign a value equal to the number
         of neighbours each cell has for that cell.
@@ -147,7 +94,7 @@ cdef _label_skeleton(int[:,:,:] data, int[:,:,:] result):
                 if data[k, j, i] == 0:
                     continue
 
-                n_neighbours = _count_neighbours(data, i, j, k)
+                n_neighbours = count_neighbours(data, i, j, k)
                 if n_neighbours < 5 and n_neighbours > 0:
                     # -1 on indices because of padding
                     result[k-1, j-1, i-1] = n_neighbours
@@ -159,8 +106,8 @@ cdef int modulo_int(int a, int b):
 
 @cython.boundscheck(False)  # Deactivate bounds checking
 @cython.wraparound(False)   # Deactivate negative indexing.
-cdef int _check_has_neighbour(int[:,:,::1] data, int[:,:,::1] visit_map, 
-                              int* i, int* j, int* k, int ncells):
+cdef int check_has_neighbour(int[:,:,::1] data, int[:,:,::1] visit_map, 
+                                 int* i, int* j, int* k, int ncells):
     '''
         Check if cell with index (i,j,k) has a neighbour that has not been 
         visited before given a visitation map. Returns 1 if it has a neighbour
@@ -190,8 +137,8 @@ cdef int _check_has_neighbour(int[:,:,::1] data, int[:,:,::1] visit_map,
 
 @cython.boundscheck(False)  # Deactivate bounds checking
 @cython.wraparound(False)   # Deactivate negative indexing.
-cdef _connect_neighbours(int[:,:,::1] data, int[:,:,::1] visit_map, 
-                         int[:,:,::1] result, int[:, ::1] cat):
+cdef connect_neighbours(int[:,:,::1] data, int[:,:,::1] visit_map, 
+                            int[:,:,::1] result, int[:, ::1] cat):
     '''
         Find connected cells and mark each set with a unique ID starting
         at 1 and going to total sets of connected cells. 
@@ -240,7 +187,7 @@ cdef _connect_neighbours(int[:,:,::1] data, int[:,:,::1] visit_map,
                     result[idx_k ,idx_j, idx_i] = n_filaments
                     visit_map[idx_k, idx_j, idx_i] = 1
 
-                    has_neighbour = _check_has_neighbour(data, visit_map, 
-                                                         &idx_i, &idx_j, 
-                                                         &idx_k, ncells)
+                    has_neighbour = check_has_neighbour(data, visit_map, 
+                                                        &idx_i, &idx_j, 
+                                                        &idx_k, ncells)
                     count += 1

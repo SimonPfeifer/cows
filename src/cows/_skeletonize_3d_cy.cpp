@@ -1195,7 +1195,7 @@ typedef npy_double __pyx_t_5numpy_double_t;
  */
 typedef npy_longdouble __pyx_t_5numpy_longdouble_t;
 
-/* "cows/_skeletonize_3d_cy.pyx":39
+/* "cows/_skeletonize_3d_cy.pyx":43
  * cimport cython
  * 
  * ctypedef npy_uint8 pixel_type             # <<<<<<<<<<<<<<
@@ -1271,7 +1271,7 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
 struct __pyx_t_4cows_18_skeletonize_3d_cy_coordinate;
 
-/* "cows/_skeletonize_3d_cy.pyx":42
+/* "cows/_skeletonize_3d_cy.pyx":46
  * 
  * # struct to hold 3D coordinates
  * cdef struct coordinate:             # <<<<<<<<<<<<<<
@@ -2433,7 +2433,7 @@ static const char __pyx_k_Invalid_shape_in_axis_d_d[] = "Invalid shape in axis %
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
 static const char __pyx_k_unable_to_allocate_array_data[] = "unable to allocate array data.";
 static const char __pyx_k_strided_and_direct_or_indirect[] = "<strided and direct or indirect>";
-static const char __pyx_k_This_is_an_implementation_of_th[] = "\nThis is an implementation of the 2D/3D thinning algorithm\nof [Lee94]_ of binary images, based on [IAC15]_.\n\nThe original Java code [IAC15]_ carries the following message:\n\n * This work is an implementation by Ignacio Arganda-Carreras of the\n * 3D thinning algorithm from Lee et al. \"Building skeleton models via 3-D\n * medial surface/axis thinning algorithms. Computer Vision, Graphics, and\n * Image Processing, 56(6):462-478, 1994.\" Based on the ITK version from\n * Hanno Homann <a href=\"http://hdl.handle.net/1926/1292\"> http://hdl.handle.net/1926/1292</a>\n * <p>\n *  More information at Skeletonize3D homepage:\n *  https://imagej.net/Skeletonize3D\n *\n * @version 1.0 11/13/2015 (unique BSD licensed version for scikit-image)\n * @author Ignacio Arganda-Carreras (iargandacarreras at gmail.com)\n\nReferences\n----------\n.. [Lee94] T.-C. Lee, R.L. Kashyap and C.-N. Chu, Building skeleton models\n       via 3-D medial surface/axis thinning algorithms.\n       Computer Vision, Graphics, and Image Processing, 56(6):462-478, 1994.\n\n.. [IAC15] Ignacio Arganda-Carreras, 2015. Skeletonize3D plugin for ImageJ(C).\n           https://imagej.net/Skeletonize3D\n\n";
+static const char __pyx_k_Contains_code_from_scikit_image[] = "\nContains code from scikit-image v0.18.3\n";
 static const char __pyx_k_numpy_core_multiarray_failed_to[] = "numpy.core.multiarray failed to import";
 static const char __pyx_k_src_cows__skeletonize_3d_cy_pyx[] = "src/cows/_skeletonize_3d_cy.pyx";
 static const char __pyx_k_Buffer_view_does_not_expose_stri[] = "Buffer view does not expose strides";
@@ -2661,7 +2661,7 @@ static PyObject *__pyx_codeobj__26;
 static PyObject *__pyx_codeobj__33;
 /* Late includes */
 
-/* "cows/_skeletonize_3d_cy.pyx":50
+/* "cows/_skeletonize_3d_cy.pyx":54
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def _compute_thin_image(pixel_type[:, :, ::1] img not None, periodic=False):             # <<<<<<<<<<<<<<
@@ -2710,7 +2710,7 @@ static PyObject *__pyx_pw_4cows_18_skeletonize_3d_cy_1_compute_thin_image(PyObje
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "_compute_thin_image") < 0)) __PYX_ERR(0, 50, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "_compute_thin_image") < 0)) __PYX_ERR(0, 54, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2721,19 +2721,19 @@ static PyObject *__pyx_pw_4cows_18_skeletonize_3d_cy_1_compute_thin_image(PyObje
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_img = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4cows_18_skeletonize_3d_cy_pixel_type(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_img.memview)) __PYX_ERR(0, 50, __pyx_L3_error)
+    __pyx_v_img = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4cows_18_skeletonize_3d_cy_pixel_type(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_img.memview)) __PYX_ERR(0, 54, __pyx_L3_error)
     __pyx_v_periodic = values[1];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_compute_thin_image", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 50, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_compute_thin_image", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 54, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("cows._skeletonize_3d_cy._compute_thin_image", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(((PyObject *)__pyx_v_img.memview) == Py_None)) {
-    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "img"); __PYX_ERR(0, 50, __pyx_L1_error)
+    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "img"); __PYX_ERR(0, 54, __pyx_L1_error)
   }
   __pyx_r = __pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(__pyx_self, __pyx_v_img, __pyx_v_periodic);
 
@@ -2791,7 +2791,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_compute_thin_image", 0);
 
-  /* "cows/_skeletonize_3d_cy.pyx":74
+  /* "cows/_skeletonize_3d_cy.pyx":78
  *     """
  *     cdef:
  *         int unchanged_borders = 0, curr_border, num_borders             # <<<<<<<<<<<<<<
@@ -2800,20 +2800,20 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
  */
   __pyx_v_unchanged_borders = 0;
 
-  /* "cows/_skeletonize_3d_cy.pyx":90
+  /* "cows/_skeletonize_3d_cy.pyx":94
  *         pixel_type neighb[27]
  * 
  *     _periodic = int(periodic)             # <<<<<<<<<<<<<<
  * 
  *     # loop over the six directions in this order (for consistency with ImageJ)
  */
-  __pyx_t_1 = __Pyx_PyNumber_Int(__pyx_v_periodic); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyNumber_Int(__pyx_v_periodic); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v__periodic = __pyx_t_2;
 
-  /* "cows/_skeletonize_3d_cy.pyx":93
+  /* "cows/_skeletonize_3d_cy.pyx":97
  * 
  *     # loop over the six directions in this order (for consistency with ImageJ)
  *     borders[:] = [4, 3, 2, 1, 5, 6]             # <<<<<<<<<<<<<<
@@ -2828,7 +2828,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
   __pyx_t_3[5] = 6;
   memcpy(&(__pyx_v_borders[0]), __pyx_t_3, sizeof(__pyx_v_borders[0]) * (6));
 
-  /* "cows/_skeletonize_3d_cy.pyx":96
+  /* "cows/_skeletonize_3d_cy.pyx":100
  * 
  *     # no need to worry about the z direction if the original image is 2D.
  *     if img.shape[0] == 3:             # <<<<<<<<<<<<<<
@@ -2838,7 +2838,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
   __pyx_t_2 = (((__pyx_v_img.shape[0]) == 3) != 0);
   if (__pyx_t_2) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":97
+    /* "cows/_skeletonize_3d_cy.pyx":101
  *     # no need to worry about the z direction if the original image is 2D.
  *     if img.shape[0] == 3:
  *         num_borders = 4             # <<<<<<<<<<<<<<
@@ -2847,7 +2847,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
  */
     __pyx_v_num_borders = 4;
 
-    /* "cows/_skeletonize_3d_cy.pyx":96
+    /* "cows/_skeletonize_3d_cy.pyx":100
  * 
  *     # no need to worry about the z direction if the original image is 2D.
  *     if img.shape[0] == 3:             # <<<<<<<<<<<<<<
@@ -2857,7 +2857,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
     goto __pyx_L3;
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":99
+  /* "cows/_skeletonize_3d_cy.pyx":103
  *         num_borders = 4
  *     else:
  *         num_borders = 6             # <<<<<<<<<<<<<<
@@ -2867,7 +2867,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
   /*else*/ {
     __pyx_v_num_borders = 6;
 
-    /* "cows/_skeletonize_3d_cy.pyx":100
+    /* "cows/_skeletonize_3d_cy.pyx":104
  *     else:
  *         num_borders = 6
  *         kmax = img.shape[0]             # <<<<<<<<<<<<<<
@@ -2876,7 +2876,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
  */
     __pyx_v_kmax = (__pyx_v_img.shape[0]);
 
-    /* "cows/_skeletonize_3d_cy.pyx":101
+    /* "cows/_skeletonize_3d_cy.pyx":105
  *         num_borders = 6
  *         kmax = img.shape[0]
  *         jmax = img.shape[1]             # <<<<<<<<<<<<<<
@@ -2885,7 +2885,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
  */
     __pyx_v_jmax = (__pyx_v_img.shape[1]);
 
-    /* "cows/_skeletonize_3d_cy.pyx":102
+    /* "cows/_skeletonize_3d_cy.pyx":106
  *         kmax = img.shape[0]
  *         jmax = img.shape[1]
  *         imax = img.shape[2]             # <<<<<<<<<<<<<<
@@ -2896,7 +2896,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
   }
   __pyx_L3:;
 
-  /* "cows/_skeletonize_3d_cy.pyx":104
+  /* "cows/_skeletonize_3d_cy.pyx":108
  *         imax = img.shape[2]
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -2911,7 +2911,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
       #endif
       /*try:*/ {
 
-        /* "cows/_skeletonize_3d_cy.pyx":107
+        /* "cows/_skeletonize_3d_cy.pyx":111
  *         # loop through the image several times until there is no change for all
  *         # the six border types
  *         while unchanged_borders < num_borders:             # <<<<<<<<<<<<<<
@@ -2922,7 +2922,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
           __pyx_t_2 = ((__pyx_v_unchanged_borders < __pyx_v_num_borders) != 0);
           if (!__pyx_t_2) break;
 
-          /* "cows/_skeletonize_3d_cy.pyx":108
+          /* "cows/_skeletonize_3d_cy.pyx":112
  *         # the six border types
  *         while unchanged_borders < num_borders:
  *             unchanged_borders = 0             # <<<<<<<<<<<<<<
@@ -2931,21 +2931,21 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
  */
           __pyx_v_unchanged_borders = 0;
 
-          /* "cows/_skeletonize_3d_cy.pyx":109
+          /* "cows/_skeletonize_3d_cy.pyx":113
  *         while unchanged_borders < num_borders:
  *             unchanged_borders = 0
  *             for j in range(num_borders):             # <<<<<<<<<<<<<<
  * 
- *                 if _periodic == 1:
+ *                 # Periodic boundary conditions were added by SP
  */
           __pyx_t_4 = __pyx_v_num_borders;
           __pyx_t_5 = __pyx_t_4;
           for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
             __pyx_v_j = __pyx_t_6;
 
-            /* "cows/_skeletonize_3d_cy.pyx":111
- *             for j in range(num_borders):
+            /* "cows/_skeletonize_3d_cy.pyx":116
  * 
+ *                 # Periodic boundary conditions were added by SP
  *                 if _periodic == 1:             # <<<<<<<<<<<<<<
  *                     with gil:
  *                         img = np.pad(np.asarray(img[1:imax-1,1:jmax-1,1:kmax-1]), 1, mode='wrap')
@@ -2953,8 +2953,8 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
             __pyx_t_2 = ((__pyx_v__periodic == 1) != 0);
             if (__pyx_t_2) {
 
-              /* "cows/_skeletonize_3d_cy.pyx":112
- * 
+              /* "cows/_skeletonize_3d_cy.pyx":117
+ *                 # Periodic boundary conditions were added by SP
  *                 if _periodic == 1:
  *                     with gil:             # <<<<<<<<<<<<<<
  *                         img = np.pad(np.asarray(img[1:imax-1,1:jmax-1,1:kmax-1]), 1, mode='wrap')
@@ -2966,21 +2966,21 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
                   #endif
                   /*try:*/ {
 
-                    /* "cows/_skeletonize_3d_cy.pyx":113
+                    /* "cows/_skeletonize_3d_cy.pyx":118
  *                 if _periodic == 1:
  *                     with gil:
  *                         img = np.pad(np.asarray(img[1:imax-1,1:jmax-1,1:kmax-1]), 1, mode='wrap')             # <<<<<<<<<<<<<<
  * 
  *                 curr_border = borders[j]
  */
-                    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L15_error)
+                    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L15_error)
                     __Pyx_GOTREF(__pyx_t_1);
-                    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_pad); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 113, __pyx_L15_error)
+                    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_pad); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 118, __pyx_L15_error)
                     __Pyx_GOTREF(__pyx_t_7);
                     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-                    __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_np); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 113, __pyx_L15_error)
+                    __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_np); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 118, __pyx_L15_error)
                     __Pyx_GOTREF(__pyx_t_8);
-                    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_asarray); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 113, __pyx_L15_error)
+                    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_asarray); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 118, __pyx_L15_error)
                     __Pyx_GOTREF(__pyx_t_9);
                     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
                     __pyx_t_10.data = __pyx_v_img.data;
@@ -3001,7 +3001,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 113, __pyx_L15_error)
+    __PYX_ERR(0, 118, __pyx_L15_error)
 }
 
 if (unlikely(__pyx_memoryview_slice_memviewslice(
@@ -3018,7 +3018,7 @@ if (unlikely(__pyx_memoryview_slice_memviewslice(
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 113, __pyx_L15_error)
+    __PYX_ERR(0, 118, __pyx_L15_error)
 }
 
 if (unlikely(__pyx_memoryview_slice_memviewslice(
@@ -3035,10 +3035,10 @@ if (unlikely(__pyx_memoryview_slice_memviewslice(
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 113, __pyx_L15_error)
+    __PYX_ERR(0, 118, __pyx_L15_error)
 }
 
-__pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_4cows_18_skeletonize_3d_cy_pixel_type, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_4cows_18_skeletonize_3d_cy_pixel_type, 0);; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 113, __pyx_L15_error)
+__pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_4cows_18_skeletonize_3d_cy_pixel_type, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_4cows_18_skeletonize_3d_cy_pixel_type, 0);; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 118, __pyx_L15_error)
                     __Pyx_GOTREF(__pyx_t_8);
                     __PYX_XDEC_MEMVIEW(&__pyx_t_10, 1);
                     __pyx_t_10.memview = NULL;
@@ -3056,10 +3056,10 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
                     __pyx_t_1 = (__pyx_t_12) ? __Pyx_PyObject_Call2Args(__pyx_t_9, __pyx_t_12, __pyx_t_8) : __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_8);
                     __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
                     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-                    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L15_error)
+                    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L15_error)
                     __Pyx_GOTREF(__pyx_t_1);
                     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-                    __pyx_t_9 = PyTuple_New(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 113, __pyx_L15_error)
+                    __pyx_t_9 = PyTuple_New(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 118, __pyx_L15_error)
                     __Pyx_GOTREF(__pyx_t_9);
                     __Pyx_GIVEREF(__pyx_t_1);
                     PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_1);
@@ -3067,15 +3067,15 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
                     __Pyx_GIVEREF(__pyx_int_1);
                     PyTuple_SET_ITEM(__pyx_t_9, 1, __pyx_int_1);
                     __pyx_t_1 = 0;
-                    __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L15_error)
+                    __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L15_error)
                     __Pyx_GOTREF(__pyx_t_1);
-                    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_mode, __pyx_n_u_wrap) < 0) __PYX_ERR(0, 113, __pyx_L15_error)
-                    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_9, __pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 113, __pyx_L15_error)
+                    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_mode, __pyx_n_u_wrap) < 0) __PYX_ERR(0, 118, __pyx_L15_error)
+                    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_9, __pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 118, __pyx_L15_error)
                     __Pyx_GOTREF(__pyx_t_8);
                     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
                     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
                     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-                    __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4cows_18_skeletonize_3d_cy_pixel_type(__pyx_t_8, PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 113, __pyx_L15_error)
+                    __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4cows_18_skeletonize_3d_cy_pixel_type(__pyx_t_8, PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 118, __pyx_L15_error)
                     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
                     __PYX_XDEC_MEMVIEW(&__pyx_v_img, 1);
                     __pyx_v_img = __pyx_t_10;
@@ -3083,8 +3083,8 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
                     __pyx_t_10.data = NULL;
                   }
 
-                  /* "cows/_skeletonize_3d_cy.pyx":112
- * 
+                  /* "cows/_skeletonize_3d_cy.pyx":117
+ *                 # Periodic boundary conditions were added by SP
  *                 if _periodic == 1:
  *                     with gil:             # <<<<<<<<<<<<<<
  *                         img = np.pad(np.asarray(img[1:imax-1,1:jmax-1,1:kmax-1]), 1, mode='wrap')
@@ -3107,16 +3107,16 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
                   }
               }
 
-              /* "cows/_skeletonize_3d_cy.pyx":111
- *             for j in range(num_borders):
+              /* "cows/_skeletonize_3d_cy.pyx":116
  * 
+ *                 # Periodic boundary conditions were added by SP
  *                 if _periodic == 1:             # <<<<<<<<<<<<<<
  *                     with gil:
  *                         img = np.pad(np.asarray(img[1:imax-1,1:jmax-1,1:kmax-1]), 1, mode='wrap')
  */
             }
 
-            /* "cows/_skeletonize_3d_cy.pyx":115
+            /* "cows/_skeletonize_3d_cy.pyx":120
  *                         img = np.pad(np.asarray(img[1:imax-1,1:jmax-1,1:kmax-1]), 1, mode='wrap')
  * 
  *                 curr_border = borders[j]             # <<<<<<<<<<<<<<
@@ -3125,7 +3125,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
  */
             __pyx_v_curr_border = (__pyx_v_borders[__pyx_v_j]);
 
-            /* "cows/_skeletonize_3d_cy.pyx":117
+            /* "cows/_skeletonize_3d_cy.pyx":122
  *                 curr_border = borders[j]
  * 
  *                 find_simple_point_candidates(img, curr_border, simple_border_points)             # <<<<<<<<<<<<<<
@@ -3134,7 +3134,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
  */
             __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__pyx_v_img, __pyx_v_curr_border, __pyx_v_simple_border_points);
 
-            /* "cows/_skeletonize_3d_cy.pyx":121
+            /* "cows/_skeletonize_3d_cy.pyx":126
  *                 # sequential re-checking to preserve connectivity when deleting
  *                 # in a parallel way
  *                 no_change = True             # <<<<<<<<<<<<<<
@@ -3143,7 +3143,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
  */
             __pyx_v_no_change = 1;
 
-            /* "cows/_skeletonize_3d_cy.pyx":122
+            /* "cows/_skeletonize_3d_cy.pyx":127
  *                 # in a parallel way
  *                 no_change = True
  *                 num_border_points = simple_border_points.size()             # <<<<<<<<<<<<<<
@@ -3152,7 +3152,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
  */
             __pyx_v_num_border_points = __pyx_v_simple_border_points.size();
 
-            /* "cows/_skeletonize_3d_cy.pyx":123
+            /* "cows/_skeletonize_3d_cy.pyx":128
  *                 no_change = True
  *                 num_border_points = simple_border_points.size()
  *                 for i in range(num_border_points):             # <<<<<<<<<<<<<<
@@ -3164,7 +3164,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
             for (__pyx_t_15 = 0; __pyx_t_15 < __pyx_t_14; __pyx_t_15+=1) {
               __pyx_v_i = __pyx_t_15;
 
-              /* "cows/_skeletonize_3d_cy.pyx":124
+              /* "cows/_skeletonize_3d_cy.pyx":129
  *                 num_border_points = simple_border_points.size()
  *                 for i in range(num_border_points):
  *                     point = simple_border_points[i]             # <<<<<<<<<<<<<<
@@ -3173,7 +3173,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
  */
               __pyx_v_point = (__pyx_v_simple_border_points[__pyx_v_i]);
 
-              /* "cows/_skeletonize_3d_cy.pyx":125
+              /* "cows/_skeletonize_3d_cy.pyx":130
  *                 for i in range(num_border_points):
  *                     point = simple_border_points[i]
  *                     p = point.p             # <<<<<<<<<<<<<<
@@ -3183,7 +3183,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
               __pyx_t_16 = __pyx_v_point.p;
               __pyx_v_p = __pyx_t_16;
 
-              /* "cows/_skeletonize_3d_cy.pyx":126
+              /* "cows/_skeletonize_3d_cy.pyx":131
  *                     point = simple_border_points[i]
  *                     p = point.p
  *                     r = point.r             # <<<<<<<<<<<<<<
@@ -3193,7 +3193,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
               __pyx_t_16 = __pyx_v_point.r;
               __pyx_v_r = __pyx_t_16;
 
-              /* "cows/_skeletonize_3d_cy.pyx":127
+              /* "cows/_skeletonize_3d_cy.pyx":132
  *                     p = point.p
  *                     r = point.r
  *                     c = point.c             # <<<<<<<<<<<<<<
@@ -3203,7 +3203,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
               __pyx_t_16 = __pyx_v_point.c;
               __pyx_v_c = __pyx_t_16;
 
-              /* "cows/_skeletonize_3d_cy.pyx":128
+              /* "cows/_skeletonize_3d_cy.pyx":133
  *                     r = point.r
  *                     c = point.c
  *                     get_neighborhood(img, p, r, c, neighb)             # <<<<<<<<<<<<<<
@@ -3212,7 +3212,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
  */
               __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__pyx_v_img, __pyx_v_p, __pyx_v_r, __pyx_v_c, __pyx_v_neighb);
 
-              /* "cows/_skeletonize_3d_cy.pyx":129
+              /* "cows/_skeletonize_3d_cy.pyx":134
  *                     c = point.c
  *                     get_neighborhood(img, p, r, c, neighb)
  *                     if is_simple_point(neighb):             # <<<<<<<<<<<<<<
@@ -3222,7 +3222,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
               __pyx_t_2 = (__pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_v_neighb) != 0);
               if (__pyx_t_2) {
 
-                /* "cows/_skeletonize_3d_cy.pyx":130
+                /* "cows/_skeletonize_3d_cy.pyx":135
  *                     get_neighborhood(img, p, r, c, neighb)
  *                     if is_simple_point(neighb):
  *                         img[p, r, c] = 0             # <<<<<<<<<<<<<<
@@ -3234,7 +3234,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
                 __pyx_t_19 = __pyx_v_c;
                 *((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_17 * __pyx_v_img.strides[0]) ) + __pyx_t_18 * __pyx_v_img.strides[1]) )) + __pyx_t_19)) )) = 0;
 
-                /* "cows/_skeletonize_3d_cy.pyx":131
+                /* "cows/_skeletonize_3d_cy.pyx":136
  *                     if is_simple_point(neighb):
  *                         img[p, r, c] = 0
  *                         no_change = False             # <<<<<<<<<<<<<<
@@ -3243,7 +3243,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
  */
                 __pyx_v_no_change = 0;
 
-                /* "cows/_skeletonize_3d_cy.pyx":129
+                /* "cows/_skeletonize_3d_cy.pyx":134
  *                     c = point.c
  *                     get_neighborhood(img, p, r, c, neighb)
  *                     if is_simple_point(neighb):             # <<<<<<<<<<<<<<
@@ -3253,7 +3253,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
               }
             }
 
-            /* "cows/_skeletonize_3d_cy.pyx":133
+            /* "cows/_skeletonize_3d_cy.pyx":138
  *                         no_change = False
  * 
  *                 if no_change:             # <<<<<<<<<<<<<<
@@ -3263,7 +3263,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
             __pyx_t_2 = (__pyx_v_no_change != 0);
             if (__pyx_t_2) {
 
-              /* "cows/_skeletonize_3d_cy.pyx":134
+              /* "cows/_skeletonize_3d_cy.pyx":139
  * 
  *                 if no_change:
  *                     unchanged_borders += 1             # <<<<<<<<<<<<<<
@@ -3272,7 +3272,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
  */
               __pyx_v_unchanged_borders = (__pyx_v_unchanged_borders + 1);
 
-              /* "cows/_skeletonize_3d_cy.pyx":133
+              /* "cows/_skeletonize_3d_cy.pyx":138
  *                         no_change = False
  * 
  *                 if no_change:             # <<<<<<<<<<<<<<
@@ -3284,7 +3284,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
         }
       }
 
-      /* "cows/_skeletonize_3d_cy.pyx":104
+      /* "cows/_skeletonize_3d_cy.pyx":108
  *         imax = img.shape[2]
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -3310,7 +3310,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
       }
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":136
+  /* "cows/_skeletonize_3d_cy.pyx":141
  *                     unchanged_borders += 1
  * 
  *     return np.asarray(img)             # <<<<<<<<<<<<<<
@@ -3318,12 +3318,12 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_asarray); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_asarray); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_img, 3, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_4cows_18_skeletonize_3d_cy_pixel_type, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_4cows_18_skeletonize_3d_cy_pixel_type, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_img, 3, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_4cows_18_skeletonize_3d_cy_pixel_type, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_4cows_18_skeletonize_3d_cy_pixel_type, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_7 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_9))) {
@@ -3338,14 +3338,14 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
   __pyx_t_8 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_9, __pyx_t_7, __pyx_t_1) : __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_1);
   __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 136, __pyx_L1_error)
+  if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __pyx_r = __pyx_t_8;
   __pyx_t_8 = 0;
   goto __pyx_L0;
 
-  /* "cows/_skeletonize_3d_cy.pyx":50
+  /* "cows/_skeletonize_3d_cy.pyx":54
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def _compute_thin_image(pixel_type[:, :, ::1] img not None, periodic=False):             # <<<<<<<<<<<<<<
@@ -3370,7 +3370,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
   return __pyx_r;
 }
 
-/* "cows/_skeletonize_3d_cy.pyx":141
+/* "cows/_skeletonize_3d_cy.pyx":146
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cdef void find_simple_point_candidates(pixel_type[:, :, ::1] img,             # <<<<<<<<<<<<<<
@@ -3404,18 +3404,18 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
 
-  /* "cows/_skeletonize_3d_cy.pyx":163
+  /* "cows/_skeletonize_3d_cy.pyx":168
  *         # rebind a global name to avoid lookup. The table is filled in
  *         # at import time.
  *         int[::1] Euler_LUT = LUT             # <<<<<<<<<<<<<<
  * 
  *     # clear the output vector
  */
-  if (unlikely(!__pyx_v_4cows_18_skeletonize_3d_cy_LUT.memview)) { __Pyx_RaiseUnboundMemoryviewSliceNogil("LUT"); __PYX_ERR(0, 163, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_4cows_18_skeletonize_3d_cy_LUT.memview)) { __Pyx_RaiseUnboundMemoryviewSliceNogil("LUT"); __PYX_ERR(0, 168, __pyx_L1_error) }
   __PYX_INC_MEMVIEW(&__pyx_v_4cows_18_skeletonize_3d_cy_LUT, 1);
   __pyx_v_Euler_LUT = __pyx_v_4cows_18_skeletonize_3d_cy_LUT;
 
-  /* "cows/_skeletonize_3d_cy.pyx":166
+  /* "cows/_skeletonize_3d_cy.pyx":171
  * 
  *     # clear the output vector
  *     simple_border_points.clear();             # <<<<<<<<<<<<<<
@@ -3424,7 +3424,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
  */
   __pyx_v_simple_border_points.clear();
 
-  /* "cows/_skeletonize_3d_cy.pyx":170
+  /* "cows/_skeletonize_3d_cy.pyx":175
  *     # loop through the image
  *     # NB: each loop is from 1 to size-1: img is padded from all sides
  *     for p in range(1, img.shape[0] - 1):             # <<<<<<<<<<<<<<
@@ -3436,7 +3436,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
   for (__pyx_t_3 = 1; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_p = __pyx_t_3;
 
-    /* "cows/_skeletonize_3d_cy.pyx":171
+    /* "cows/_skeletonize_3d_cy.pyx":176
  *     # NB: each loop is from 1 to size-1: img is padded from all sides
  *     for p in range(1, img.shape[0] - 1):
  *         for r in range(1, img.shape[1] - 1):             # <<<<<<<<<<<<<<
@@ -3448,7 +3448,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
     for (__pyx_t_6 = 1; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_r = __pyx_t_6;
 
-      /* "cows/_skeletonize_3d_cy.pyx":172
+      /* "cows/_skeletonize_3d_cy.pyx":177
  *     for p in range(1, img.shape[0] - 1):
  *         for r in range(1, img.shape[1] - 1):
  *             for c in range(1, img.shape[2] - 1):             # <<<<<<<<<<<<<<
@@ -3460,7 +3460,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
       for (__pyx_t_9 = 1; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
         __pyx_v_c = __pyx_t_9;
 
-        /* "cows/_skeletonize_3d_cy.pyx":175
+        /* "cows/_skeletonize_3d_cy.pyx":180
  * 
  *                 # check if pixel is foreground
  *                 if img[p, r, c] != 1:             # <<<<<<<<<<<<<<
@@ -3473,7 +3473,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
         __pyx_t_13 = (((*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_10 * __pyx_v_img.strides[0]) ) + __pyx_t_11 * __pyx_v_img.strides[1]) )) + __pyx_t_12)) ))) != 1) != 0);
         if (__pyx_t_13) {
 
-          /* "cows/_skeletonize_3d_cy.pyx":176
+          /* "cows/_skeletonize_3d_cy.pyx":181
  *                 # check if pixel is foreground
  *                 if img[p, r, c] != 1:
  *                     continue             # <<<<<<<<<<<<<<
@@ -3482,7 +3482,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
  */
           goto __pyx_L7_continue;
 
-          /* "cows/_skeletonize_3d_cy.pyx":175
+          /* "cows/_skeletonize_3d_cy.pyx":180
  * 
  *                 # check if pixel is foreground
  *                 if img[p, r, c] != 1:             # <<<<<<<<<<<<<<
@@ -3491,7 +3491,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
  */
         }
 
-        /* "cows/_skeletonize_3d_cy.pyx":178
+        /* "cows/_skeletonize_3d_cy.pyx":183
  *                     continue
  * 
  *                 is_border_pt = (curr_border == 1 and img[p, r, c-1] == 0 or  #N             # <<<<<<<<<<<<<<
@@ -3514,7 +3514,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
         }
         __pyx_L11_next_or:;
 
-        /* "cows/_skeletonize_3d_cy.pyx":179
+        /* "cows/_skeletonize_3d_cy.pyx":184
  * 
  *                 is_border_pt = (curr_border == 1 and img[p, r, c-1] == 0 or  #N
  *                                 curr_border == 2 and img[p, r, c+1] == 0 or  #S             # <<<<<<<<<<<<<<
@@ -3537,7 +3537,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
         }
         __pyx_L13_next_or:;
 
-        /* "cows/_skeletonize_3d_cy.pyx":180
+        /* "cows/_skeletonize_3d_cy.pyx":185
  *                 is_border_pt = (curr_border == 1 and img[p, r, c-1] == 0 or  #N
  *                                 curr_border == 2 and img[p, r, c+1] == 0 or  #S
  *                                 curr_border == 3 and img[p, r+1, c] == 0 or  #E             # <<<<<<<<<<<<<<
@@ -3560,7 +3560,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
         }
         __pyx_L15_next_or:;
 
-        /* "cows/_skeletonize_3d_cy.pyx":181
+        /* "cows/_skeletonize_3d_cy.pyx":186
  *                                 curr_border == 2 and img[p, r, c+1] == 0 or  #S
  *                                 curr_border == 3 and img[p, r+1, c] == 0 or  #E
  *                                 curr_border == 4 and img[p, r-1, c] == 0 or  #W             # <<<<<<<<<<<<<<
@@ -3583,7 +3583,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
         }
         __pyx_L17_next_or:;
 
-        /* "cows/_skeletonize_3d_cy.pyx":182
+        /* "cows/_skeletonize_3d_cy.pyx":187
  *                                 curr_border == 3 and img[p, r+1, c] == 0 or  #E
  *                                 curr_border == 4 and img[p, r-1, c] == 0 or  #W
  *                                 curr_border == 5 and img[p+1, r, c] == 0 or  #U             # <<<<<<<<<<<<<<
@@ -3606,7 +3606,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
         }
         __pyx_L19_next_or:;
 
-        /* "cows/_skeletonize_3d_cy.pyx":183
+        /* "cows/_skeletonize_3d_cy.pyx":188
  *                                 curr_border == 4 and img[p, r-1, c] == 0 or  #W
  *                                 curr_border == 5 and img[p+1, r, c] == 0 or  #U
  *                                 curr_border == 6 and img[p-1, r, c] == 0)    #B             # <<<<<<<<<<<<<<
@@ -3627,7 +3627,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
         __pyx_L10_bool_binop_done:;
         __pyx_v_is_border_pt = __pyx_t_13;
 
-        /* "cows/_skeletonize_3d_cy.pyx":184
+        /* "cows/_skeletonize_3d_cy.pyx":189
  *                                 curr_border == 5 and img[p+1, r, c] == 0 or  #U
  *                                 curr_border == 6 and img[p-1, r, c] == 0)    #B
  *                 if not is_border_pt:             # <<<<<<<<<<<<<<
@@ -3637,7 +3637,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
         __pyx_t_13 = ((!(__pyx_v_is_border_pt != 0)) != 0);
         if (__pyx_t_13) {
 
-          /* "cows/_skeletonize_3d_cy.pyx":186
+          /* "cows/_skeletonize_3d_cy.pyx":191
  *                 if not is_border_pt:
  *                     # current point is not deletable
  *                     continue             # <<<<<<<<<<<<<<
@@ -3646,7 +3646,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
  */
           goto __pyx_L7_continue;
 
-          /* "cows/_skeletonize_3d_cy.pyx":184
+          /* "cows/_skeletonize_3d_cy.pyx":189
  *                                 curr_border == 5 and img[p+1, r, c] == 0 or  #U
  *                                 curr_border == 6 and img[p-1, r, c] == 0)    #B
  *                 if not is_border_pt:             # <<<<<<<<<<<<<<
@@ -3655,7 +3655,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
  */
         }
 
-        /* "cows/_skeletonize_3d_cy.pyx":188
+        /* "cows/_skeletonize_3d_cy.pyx":193
  *                     continue
  * 
  *                 get_neighborhood(img, p, r, c, neighborhood)             # <<<<<<<<<<<<<<
@@ -3664,7 +3664,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
  */
         __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__pyx_v_img, __pyx_v_p, __pyx_v_r, __pyx_v_c, __pyx_v_neighborhood);
 
-        /* "cows/_skeletonize_3d_cy.pyx":196
+        /* "cows/_skeletonize_3d_cy.pyx":201
  *                 #   connectivity in the 3x3x3 neighborhood)
  *                 #   this is conditions 2 and 3 in [Lee94]_
  *                 if (is_endpoint(neighborhood) or             # <<<<<<<<<<<<<<
@@ -3678,7 +3678,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
           goto __pyx_L24_bool_binop_done;
         }
 
-        /* "cows/_skeletonize_3d_cy.pyx":197
+        /* "cows/_skeletonize_3d_cy.pyx":202
  *                 #   this is conditions 2 and 3 in [Lee94]_
  *                 if (is_endpoint(neighborhood) or
  *                     not is_Euler_invariant(neighborhood, Euler_LUT) or             # <<<<<<<<<<<<<<
@@ -3692,7 +3692,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
           goto __pyx_L24_bool_binop_done;
         }
 
-        /* "cows/_skeletonize_3d_cy.pyx":198
+        /* "cows/_skeletonize_3d_cy.pyx":203
  *                 if (is_endpoint(neighborhood) or
  *                     not is_Euler_invariant(neighborhood, Euler_LUT) or
  *                     not is_simple_point(neighborhood)):             # <<<<<<<<<<<<<<
@@ -3703,7 +3703,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
         __pyx_t_13 = __pyx_t_14;
         __pyx_L24_bool_binop_done:;
 
-        /* "cows/_skeletonize_3d_cy.pyx":196
+        /* "cows/_skeletonize_3d_cy.pyx":201
  *                 #   connectivity in the 3x3x3 neighborhood)
  *                 #   this is conditions 2 and 3 in [Lee94]_
  *                 if (is_endpoint(neighborhood) or             # <<<<<<<<<<<<<<
@@ -3712,7 +3712,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
  */
         if (__pyx_t_13) {
 
-          /* "cows/_skeletonize_3d_cy.pyx":199
+          /* "cows/_skeletonize_3d_cy.pyx":204
  *                     not is_Euler_invariant(neighborhood, Euler_LUT) or
  *                     not is_simple_point(neighborhood)):
  *                     continue             # <<<<<<<<<<<<<<
@@ -3721,7 +3721,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
  */
           goto __pyx_L7_continue;
 
-          /* "cows/_skeletonize_3d_cy.pyx":196
+          /* "cows/_skeletonize_3d_cy.pyx":201
  *                 #   connectivity in the 3x3x3 neighborhood)
  *                 #   this is conditions 2 and 3 in [Lee94]_
  *                 if (is_endpoint(neighborhood) or             # <<<<<<<<<<<<<<
@@ -3730,7 +3730,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
  */
         }
 
-        /* "cows/_skeletonize_3d_cy.pyx":202
+        /* "cows/_skeletonize_3d_cy.pyx":207
  * 
  *                 # ok, add (p, r, c) to the list of simple border points
  *                 point.p = p             # <<<<<<<<<<<<<<
@@ -3739,7 +3739,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
  */
         __pyx_v_point.p = __pyx_v_p;
 
-        /* "cows/_skeletonize_3d_cy.pyx":203
+        /* "cows/_skeletonize_3d_cy.pyx":208
  *                 # ok, add (p, r, c) to the list of simple border points
  *                 point.p = p
  *                 point.r = r             # <<<<<<<<<<<<<<
@@ -3748,7 +3748,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
  */
         __pyx_v_point.r = __pyx_v_r;
 
-        /* "cows/_skeletonize_3d_cy.pyx":204
+        /* "cows/_skeletonize_3d_cy.pyx":209
  *                 point.p = p
  *                 point.r = r
  *                 point.c = c             # <<<<<<<<<<<<<<
@@ -3757,7 +3757,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
  */
         __pyx_v_point.c = __pyx_v_c;
 
-        /* "cows/_skeletonize_3d_cy.pyx":205
+        /* "cows/_skeletonize_3d_cy.pyx":210
  *                 point.r = r
  *                 point.c = c
  *                 simple_border_points.push_back(point)             # <<<<<<<<<<<<<<
@@ -3774,14 +3774,14 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
           #ifdef WITH_THREAD
           __Pyx_PyGILState_Release(__pyx_gilstate_save);
           #endif
-          __PYX_ERR(0, 205, __pyx_L1_error)
+          __PYX_ERR(0, 210, __pyx_L1_error)
         }
         __pyx_L7_continue:;
       }
     }
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":141
+  /* "cows/_skeletonize_3d_cy.pyx":146
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cdef void find_simple_point_candidates(pixel_type[:, :, ::1] img,             # <<<<<<<<<<<<<<
@@ -3797,7 +3797,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_find_simple_point_candidates(__Py
   __PYX_XDEC_MEMVIEW(&__pyx_v_Euler_LUT, 0);
 }
 
-/* "cows/_skeletonize_3d_cy.pyx":210
+/* "cows/_skeletonize_3d_cy.pyx":215
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cdef void get_neighborhood(pixel_type[:, :, ::1] img,             # <<<<<<<<<<<<<<
@@ -3810,7 +3810,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   Py_ssize_t __pyx_t_2;
   Py_ssize_t __pyx_t_3;
 
-  /* "cows/_skeletonize_3d_cy.pyx":222
+  /* "cows/_skeletonize_3d_cy.pyx":227
  *     includes it as number 13. The latter is consistent with [IAC15]_.
  *     """
  *     neighborhood[0] = img[p-1, r-1, c-1]             # <<<<<<<<<<<<<<
@@ -3822,7 +3822,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_3 = (__pyx_v_c - 1);
   (__pyx_v_neighborhood[0]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_1 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_3)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":223
+  /* "cows/_skeletonize_3d_cy.pyx":228
  *     """
  *     neighborhood[0] = img[p-1, r-1, c-1]
  *     neighborhood[1] = img[p-1, r,   c-1]             # <<<<<<<<<<<<<<
@@ -3834,7 +3834,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_1 = (__pyx_v_c - 1);
   (__pyx_v_neighborhood[1]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_3 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_1)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":224
+  /* "cows/_skeletonize_3d_cy.pyx":229
  *     neighborhood[0] = img[p-1, r-1, c-1]
  *     neighborhood[1] = img[p-1, r,   c-1]
  *     neighborhood[2] = img[p-1, r+1, c-1]             # <<<<<<<<<<<<<<
@@ -3846,7 +3846,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_3 = (__pyx_v_c - 1);
   (__pyx_v_neighborhood[2]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_1 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_3)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":226
+  /* "cows/_skeletonize_3d_cy.pyx":231
  *     neighborhood[2] = img[p-1, r+1, c-1]
  * 
  *     neighborhood[ 3] = img[p-1, r-1, c]             # <<<<<<<<<<<<<<
@@ -3858,7 +3858,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_1 = __pyx_v_c;
   (__pyx_v_neighborhood[3]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_3 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_1)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":227
+  /* "cows/_skeletonize_3d_cy.pyx":232
  * 
  *     neighborhood[ 3] = img[p-1, r-1, c]
  *     neighborhood[ 4] = img[p-1, r,   c]             # <<<<<<<<<<<<<<
@@ -3870,7 +3870,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_3 = __pyx_v_c;
   (__pyx_v_neighborhood[4]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_1 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_3)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":228
+  /* "cows/_skeletonize_3d_cy.pyx":233
  *     neighborhood[ 3] = img[p-1, r-1, c]
  *     neighborhood[ 4] = img[p-1, r,   c]
  *     neighborhood[ 5] = img[p-1, r+1, c]             # <<<<<<<<<<<<<<
@@ -3882,7 +3882,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_1 = __pyx_v_c;
   (__pyx_v_neighborhood[5]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_3 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_1)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":230
+  /* "cows/_skeletonize_3d_cy.pyx":235
  *     neighborhood[ 5] = img[p-1, r+1, c]
  * 
  *     neighborhood[ 6] = img[p-1, r-1, c+1]             # <<<<<<<<<<<<<<
@@ -3894,7 +3894,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_3 = (__pyx_v_c + 1);
   (__pyx_v_neighborhood[6]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_1 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_3)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":231
+  /* "cows/_skeletonize_3d_cy.pyx":236
  * 
  *     neighborhood[ 6] = img[p-1, r-1, c+1]
  *     neighborhood[ 7] = img[p-1, r,   c+1]             # <<<<<<<<<<<<<<
@@ -3906,7 +3906,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_1 = (__pyx_v_c + 1);
   (__pyx_v_neighborhood[7]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_3 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_1)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":232
+  /* "cows/_skeletonize_3d_cy.pyx":237
  *     neighborhood[ 6] = img[p-1, r-1, c+1]
  *     neighborhood[ 7] = img[p-1, r,   c+1]
  *     neighborhood[ 8] = img[p-1, r+1, c+1]             # <<<<<<<<<<<<<<
@@ -3918,7 +3918,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_3 = (__pyx_v_c + 1);
   (__pyx_v_neighborhood[8]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_1 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_3)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":234
+  /* "cows/_skeletonize_3d_cy.pyx":239
  *     neighborhood[ 8] = img[p-1, r+1, c+1]
  * 
  *     neighborhood[ 9] = img[p, r-1, c-1]             # <<<<<<<<<<<<<<
@@ -3930,7 +3930,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_1 = (__pyx_v_c - 1);
   (__pyx_v_neighborhood[9]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_3 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_1)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":235
+  /* "cows/_skeletonize_3d_cy.pyx":240
  * 
  *     neighborhood[ 9] = img[p, r-1, c-1]
  *     neighborhood[10] = img[p, r,   c-1]             # <<<<<<<<<<<<<<
@@ -3942,7 +3942,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_3 = (__pyx_v_c - 1);
   (__pyx_v_neighborhood[10]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_1 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_3)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":236
+  /* "cows/_skeletonize_3d_cy.pyx":241
  *     neighborhood[ 9] = img[p, r-1, c-1]
  *     neighborhood[10] = img[p, r,   c-1]
  *     neighborhood[11] = img[p, r+1, c-1]             # <<<<<<<<<<<<<<
@@ -3954,7 +3954,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_1 = (__pyx_v_c - 1);
   (__pyx_v_neighborhood[11]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_3 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_1)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":238
+  /* "cows/_skeletonize_3d_cy.pyx":243
  *     neighborhood[11] = img[p, r+1, c-1]
  * 
  *     neighborhood[12] = img[p, r-1, c]             # <<<<<<<<<<<<<<
@@ -3966,7 +3966,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_3 = __pyx_v_c;
   (__pyx_v_neighborhood[12]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_1 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_3)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":239
+  /* "cows/_skeletonize_3d_cy.pyx":244
  * 
  *     neighborhood[12] = img[p, r-1, c]
  *     neighborhood[13] = img[p, r,   c]             # <<<<<<<<<<<<<<
@@ -3978,7 +3978,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_1 = __pyx_v_c;
   (__pyx_v_neighborhood[13]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_3 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_1)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":240
+  /* "cows/_skeletonize_3d_cy.pyx":245
  *     neighborhood[12] = img[p, r-1, c]
  *     neighborhood[13] = img[p, r,   c]
  *     neighborhood[14] = img[p, r+1, c]             # <<<<<<<<<<<<<<
@@ -3990,7 +3990,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_3 = __pyx_v_c;
   (__pyx_v_neighborhood[14]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_1 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_3)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":242
+  /* "cows/_skeletonize_3d_cy.pyx":247
  *     neighborhood[14] = img[p, r+1, c]
  * 
  *     neighborhood[15] = img[p, r-1, c+1]             # <<<<<<<<<<<<<<
@@ -4002,7 +4002,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_1 = (__pyx_v_c + 1);
   (__pyx_v_neighborhood[15]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_3 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_1)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":243
+  /* "cows/_skeletonize_3d_cy.pyx":248
  * 
  *     neighborhood[15] = img[p, r-1, c+1]
  *     neighborhood[16] = img[p, r,   c+1]             # <<<<<<<<<<<<<<
@@ -4014,7 +4014,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_3 = (__pyx_v_c + 1);
   (__pyx_v_neighborhood[16]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_1 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_3)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":244
+  /* "cows/_skeletonize_3d_cy.pyx":249
  *     neighborhood[15] = img[p, r-1, c+1]
  *     neighborhood[16] = img[p, r,   c+1]
  *     neighborhood[17] = img[p, r+1, c+1]             # <<<<<<<<<<<<<<
@@ -4026,7 +4026,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_1 = (__pyx_v_c + 1);
   (__pyx_v_neighborhood[17]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_3 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_1)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":246
+  /* "cows/_skeletonize_3d_cy.pyx":251
  *     neighborhood[17] = img[p, r+1, c+1]
  * 
  *     neighborhood[18] = img[p+1, r-1, c-1]             # <<<<<<<<<<<<<<
@@ -4038,7 +4038,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_3 = (__pyx_v_c - 1);
   (__pyx_v_neighborhood[18]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_1 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_3)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":247
+  /* "cows/_skeletonize_3d_cy.pyx":252
  * 
  *     neighborhood[18] = img[p+1, r-1, c-1]
  *     neighborhood[19] = img[p+1, r,   c-1]             # <<<<<<<<<<<<<<
@@ -4050,7 +4050,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_1 = (__pyx_v_c - 1);
   (__pyx_v_neighborhood[19]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_3 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_1)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":248
+  /* "cows/_skeletonize_3d_cy.pyx":253
  *     neighborhood[18] = img[p+1, r-1, c-1]
  *     neighborhood[19] = img[p+1, r,   c-1]
  *     neighborhood[20] = img[p+1, r+1, c-1]             # <<<<<<<<<<<<<<
@@ -4062,7 +4062,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_3 = (__pyx_v_c - 1);
   (__pyx_v_neighborhood[20]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_1 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_3)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":250
+  /* "cows/_skeletonize_3d_cy.pyx":255
  *     neighborhood[20] = img[p+1, r+1, c-1]
  * 
  *     neighborhood[21] = img[p+1, r-1, c]             # <<<<<<<<<<<<<<
@@ -4074,7 +4074,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_1 = __pyx_v_c;
   (__pyx_v_neighborhood[21]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_3 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_1)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":251
+  /* "cows/_skeletonize_3d_cy.pyx":256
  * 
  *     neighborhood[21] = img[p+1, r-1, c]
  *     neighborhood[22] = img[p+1, r,   c]             # <<<<<<<<<<<<<<
@@ -4086,7 +4086,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_3 = __pyx_v_c;
   (__pyx_v_neighborhood[22]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_1 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_3)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":252
+  /* "cows/_skeletonize_3d_cy.pyx":257
  *     neighborhood[21] = img[p+1, r-1, c]
  *     neighborhood[22] = img[p+1, r,   c]
  *     neighborhood[23] = img[p+1, r+1, c]             # <<<<<<<<<<<<<<
@@ -4098,7 +4098,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_1 = __pyx_v_c;
   (__pyx_v_neighborhood[23]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_3 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_1)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":254
+  /* "cows/_skeletonize_3d_cy.pyx":259
  *     neighborhood[23] = img[p+1, r+1, c]
  * 
  *     neighborhood[24] = img[p+1, r-1, c+1]             # <<<<<<<<<<<<<<
@@ -4110,7 +4110,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_3 = (__pyx_v_c + 1);
   (__pyx_v_neighborhood[24]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_1 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_3)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":255
+  /* "cows/_skeletonize_3d_cy.pyx":260
  * 
  *     neighborhood[24] = img[p+1, r-1, c+1]
  *     neighborhood[25] = img[p+1, r,   c+1]             # <<<<<<<<<<<<<<
@@ -4122,7 +4122,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_1 = (__pyx_v_c + 1);
   (__pyx_v_neighborhood[25]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_3 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_1)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":256
+  /* "cows/_skeletonize_3d_cy.pyx":261
  *     neighborhood[24] = img[p+1, r-1, c+1]
  *     neighborhood[25] = img[p+1, r,   c+1]
  *     neighborhood[26] = img[p+1, r+1, c+1]             # <<<<<<<<<<<<<<
@@ -4134,7 +4134,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   __pyx_t_3 = (__pyx_v_c + 1);
   (__pyx_v_neighborhood[26]) = (*((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=2 */ ((char *) (((__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_img.data + __pyx_t_1 * __pyx_v_img.strides[0]) ) + __pyx_t_2 * __pyx_v_img.strides[1]) )) + __pyx_t_3)) )));
 
-  /* "cows/_skeletonize_3d_cy.pyx":210
+  /* "cows/_skeletonize_3d_cy.pyx":215
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cdef void get_neighborhood(pixel_type[:, :, ::1] img,             # <<<<<<<<<<<<<<
@@ -4145,7 +4145,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_get_neighborhood(__Pyx_memviewsli
   /* function exit code */
 }
 
-/* "cows/_skeletonize_3d_cy.pyx":260
+/* "cows/_skeletonize_3d_cy.pyx":265
  * 
  * ###### look-up tables
  * def fill_Euler_LUT():             # <<<<<<<<<<<<<<
@@ -4183,7 +4183,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy_2fill_Euler_LUT(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("fill_Euler_LUT", 0);
 
-  /* "cows/_skeletonize_3d_cy.pyx":266
+  /* "cows/_skeletonize_3d_cy.pyx":271
  *     """
  *     cdef int arr[128]
  *     arr[:] = [1, -1, -1, 1, -3, -1, -1, 1, -1, 1, 1, -1, 3, 1, 1, -1, -3, -1,             # <<<<<<<<<<<<<<
@@ -4320,52 +4320,52 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy_2fill_Euler_LUT(CYTHON_UNUS
   __pyx_t_1[127] = -1;
   if (unlikely((0x80) != (128))) {
     PyErr_Format(PyExc_ValueError, "Assignment to slice of wrong length, expected %" CYTHON_FORMAT_SSIZE_T "d, got %" CYTHON_FORMAT_SSIZE_T "d", (Py_ssize_t)(128), (Py_ssize_t)(0x80));
-    __PYX_ERR(0, 266, __pyx_L1_error)
+    __PYX_ERR(0, 271, __pyx_L1_error)
   }
   memcpy(&(__pyx_v_arr[0]), __pyx_t_1, sizeof(__pyx_v_arr[0]) * (128));
 
-  /* "cows/_skeletonize_3d_cy.pyx":273
+  /* "cows/_skeletonize_3d_cy.pyx":278
  *                  -1, 3, 1, 1, -1, -3, 3, -1, 1, 1, 3, -1, 1, -1, 1, 1, -1, 3,
  *                  1, 1, -1, 1, 3, 3, 1, 5, 3, 3, 1, -1, 1, 1, -1, 3, 1, 1, -1]
  *     cdef ndarray LUT = np.zeros(256, dtype=np.intc)             # <<<<<<<<<<<<<<
  *     LUT[1::2] = arr
  *     return LUT
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 273, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 273, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 273, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 273, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_intc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 273, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_intc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 273, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple_, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 273, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple_, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 273, __pyx_L1_error)
+  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 278, __pyx_L1_error)
   __pyx_v_LUT = ((PyArrayObject *)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "cows/_skeletonize_3d_cy.pyx":274
+  /* "cows/_skeletonize_3d_cy.pyx":279
  *                  1, 1, -1, 1, 3, 3, 1, 5, 3, 3, 1, -1, 1, 1, -1, 3, 1, 1, -1]
  *     cdef ndarray LUT = np.zeros(256, dtype=np.intc)
  *     LUT[1::2] = arr             # <<<<<<<<<<<<<<
  *     return LUT
  * cdef int[::1] LUT = fill_Euler_LUT()
  */
-  __pyx_t_5 = __Pyx_carray_to_py_int(__pyx_v_arr, 0x80); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 274, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_carray_to_py_int(__pyx_v_arr, 0x80); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 279, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_LUT), __pyx_slice__2, __pyx_t_5) < 0)) __PYX_ERR(0, 274, __pyx_L1_error)
+  if (unlikely(PyObject_SetItem(((PyObject *)__pyx_v_LUT), __pyx_slice__2, __pyx_t_5) < 0)) __PYX_ERR(0, 279, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cows/_skeletonize_3d_cy.pyx":275
+  /* "cows/_skeletonize_3d_cy.pyx":280
  *     cdef ndarray LUT = np.zeros(256, dtype=np.intc)
  *     LUT[1::2] = arr
  *     return LUT             # <<<<<<<<<<<<<<
@@ -4377,7 +4377,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy_2fill_Euler_LUT(CYTHON_UNUS
   __pyx_r = ((PyObject *)__pyx_v_LUT);
   goto __pyx_L0;
 
-  /* "cows/_skeletonize_3d_cy.pyx":260
+  /* "cows/_skeletonize_3d_cy.pyx":265
  * 
  * ###### look-up tables
  * def fill_Euler_LUT():             # <<<<<<<<<<<<<<
@@ -4400,7 +4400,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy_2fill_Euler_LUT(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "cows/_skeletonize_3d_cy.pyx":285
+/* "cows/_skeletonize_3d_cy.pyx":290
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cdef bint is_Euler_invariant(pixel_type neighbors[],             # <<<<<<<<<<<<<<
@@ -4415,7 +4415,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   int __pyx_t_1;
   Py_ssize_t __pyx_t_2;
 
-  /* "cows/_skeletonize_3d_cy.pyx":303
+  /* "cows/_skeletonize_3d_cy.pyx":308
  * 
  *     """
  *     cdef int n, euler_char = 0             # <<<<<<<<<<<<<<
@@ -4424,7 +4424,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   __pyx_v_euler_char = 0;
 
-  /* "cows/_skeletonize_3d_cy.pyx":306
+  /* "cows/_skeletonize_3d_cy.pyx":311
  * 
  *     # octant 0:
  *     n = 1             # <<<<<<<<<<<<<<
@@ -4433,7 +4433,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   __pyx_v_n = 1;
 
-  /* "cows/_skeletonize_3d_cy.pyx":307
+  /* "cows/_skeletonize_3d_cy.pyx":312
  *     # octant 0:
  *     n = 1
  *     if neighbors[2] == 1:             # <<<<<<<<<<<<<<
@@ -4443,7 +4443,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[2]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":308
+    /* "cows/_skeletonize_3d_cy.pyx":313
  *     n = 1
  *     if neighbors[2] == 1:
  *         n |= 128             # <<<<<<<<<<<<<<
@@ -4452,7 +4452,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 0x80);
 
-    /* "cows/_skeletonize_3d_cy.pyx":307
+    /* "cows/_skeletonize_3d_cy.pyx":312
  *     # octant 0:
  *     n = 1
  *     if neighbors[2] == 1:             # <<<<<<<<<<<<<<
@@ -4461,7 +4461,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":310
+  /* "cows/_skeletonize_3d_cy.pyx":315
  *         n |= 128
  * 
  *     if neighbors[1] == 1:             # <<<<<<<<<<<<<<
@@ -4471,7 +4471,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[1]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":311
+    /* "cows/_skeletonize_3d_cy.pyx":316
  * 
  *     if neighbors[1] == 1:
  *         n |= 64             # <<<<<<<<<<<<<<
@@ -4480,7 +4480,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 64);
 
-    /* "cows/_skeletonize_3d_cy.pyx":310
+    /* "cows/_skeletonize_3d_cy.pyx":315
  *         n |= 128
  * 
  *     if neighbors[1] == 1:             # <<<<<<<<<<<<<<
@@ -4489,7 +4489,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":313
+  /* "cows/_skeletonize_3d_cy.pyx":318
  *         n |= 64
  * 
  *     if neighbors[11] == 1:             # <<<<<<<<<<<<<<
@@ -4499,7 +4499,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[11]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":314
+    /* "cows/_skeletonize_3d_cy.pyx":319
  * 
  *     if neighbors[11] == 1:
  *         n |= 32             # <<<<<<<<<<<<<<
@@ -4508,7 +4508,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 32);
 
-    /* "cows/_skeletonize_3d_cy.pyx":313
+    /* "cows/_skeletonize_3d_cy.pyx":318
  *         n |= 64
  * 
  *     if neighbors[11] == 1:             # <<<<<<<<<<<<<<
@@ -4517,7 +4517,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":316
+  /* "cows/_skeletonize_3d_cy.pyx":321
  *         n |= 32
  * 
  *     if neighbors[10] == 1:             # <<<<<<<<<<<<<<
@@ -4527,7 +4527,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[10]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":317
+    /* "cows/_skeletonize_3d_cy.pyx":322
  * 
  *     if neighbors[10] == 1:
  *         n |= 16             # <<<<<<<<<<<<<<
@@ -4536,7 +4536,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 16);
 
-    /* "cows/_skeletonize_3d_cy.pyx":316
+    /* "cows/_skeletonize_3d_cy.pyx":321
  *         n |= 32
  * 
  *     if neighbors[10] == 1:             # <<<<<<<<<<<<<<
@@ -4545,7 +4545,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":319
+  /* "cows/_skeletonize_3d_cy.pyx":324
  *         n |= 16
  * 
  *     if neighbors[5] == 1:             # <<<<<<<<<<<<<<
@@ -4555,7 +4555,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[5]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":320
+    /* "cows/_skeletonize_3d_cy.pyx":325
  * 
  *     if neighbors[5] == 1:
  *         n |= 8             # <<<<<<<<<<<<<<
@@ -4564,7 +4564,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 8);
 
-    /* "cows/_skeletonize_3d_cy.pyx":319
+    /* "cows/_skeletonize_3d_cy.pyx":324
  *         n |= 16
  * 
  *     if neighbors[5] == 1:             # <<<<<<<<<<<<<<
@@ -4573,7 +4573,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":322
+  /* "cows/_skeletonize_3d_cy.pyx":327
  *         n |= 8
  * 
  *     if neighbors[4] == 1:             # <<<<<<<<<<<<<<
@@ -4583,7 +4583,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[4]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":323
+    /* "cows/_skeletonize_3d_cy.pyx":328
  * 
  *     if neighbors[4] == 1:
  *         n |= 4             # <<<<<<<<<<<<<<
@@ -4592,7 +4592,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 4);
 
-    /* "cows/_skeletonize_3d_cy.pyx":322
+    /* "cows/_skeletonize_3d_cy.pyx":327
  *         n |= 8
  * 
  *     if neighbors[4] == 1:             # <<<<<<<<<<<<<<
@@ -4601,7 +4601,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":325
+  /* "cows/_skeletonize_3d_cy.pyx":330
  *         n |= 4
  * 
  *     if neighbors[14] == 1:             # <<<<<<<<<<<<<<
@@ -4611,7 +4611,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[14]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":326
+    /* "cows/_skeletonize_3d_cy.pyx":331
  * 
  *     if neighbors[14] == 1:
  *         n |= 2             # <<<<<<<<<<<<<<
@@ -4620,7 +4620,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 2);
 
-    /* "cows/_skeletonize_3d_cy.pyx":325
+    /* "cows/_skeletonize_3d_cy.pyx":330
  *         n |= 4
  * 
  *     if neighbors[14] == 1:             # <<<<<<<<<<<<<<
@@ -4629,7 +4629,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":328
+  /* "cows/_skeletonize_3d_cy.pyx":333
  *         n |= 2
  * 
  *     euler_char += lut[n]             # <<<<<<<<<<<<<<
@@ -4639,7 +4639,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_2 = __pyx_v_n;
   __pyx_v_euler_char = (__pyx_v_euler_char + (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_lut.data) + __pyx_t_2)) ))));
 
-  /* "cows/_skeletonize_3d_cy.pyx":331
+  /* "cows/_skeletonize_3d_cy.pyx":336
  * 
  *     # octant 1:
  *     n = 1             # <<<<<<<<<<<<<<
@@ -4648,7 +4648,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   __pyx_v_n = 1;
 
-  /* "cows/_skeletonize_3d_cy.pyx":332
+  /* "cows/_skeletonize_3d_cy.pyx":337
  *     # octant 1:
  *     n = 1
  *     if neighbors[0] == 1:             # <<<<<<<<<<<<<<
@@ -4658,7 +4658,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[0]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":333
+    /* "cows/_skeletonize_3d_cy.pyx":338
  *     n = 1
  *     if neighbors[0] == 1:
  *         n |= 128             # <<<<<<<<<<<<<<
@@ -4667,7 +4667,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 0x80);
 
-    /* "cows/_skeletonize_3d_cy.pyx":332
+    /* "cows/_skeletonize_3d_cy.pyx":337
  *     # octant 1:
  *     n = 1
  *     if neighbors[0] == 1:             # <<<<<<<<<<<<<<
@@ -4676,7 +4676,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":335
+  /* "cows/_skeletonize_3d_cy.pyx":340
  *         n |= 128
  * 
  *     if neighbors[9] == 1:             # <<<<<<<<<<<<<<
@@ -4686,7 +4686,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[9]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":336
+    /* "cows/_skeletonize_3d_cy.pyx":341
  * 
  *     if neighbors[9] == 1:
  *         n |= 64             # <<<<<<<<<<<<<<
@@ -4695,7 +4695,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 64);
 
-    /* "cows/_skeletonize_3d_cy.pyx":335
+    /* "cows/_skeletonize_3d_cy.pyx":340
  *         n |= 128
  * 
  *     if neighbors[9] == 1:             # <<<<<<<<<<<<<<
@@ -4704,7 +4704,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":338
+  /* "cows/_skeletonize_3d_cy.pyx":343
  *         n |= 64
  * 
  *     if neighbors[3] == 1:             # <<<<<<<<<<<<<<
@@ -4714,7 +4714,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[3]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":339
+    /* "cows/_skeletonize_3d_cy.pyx":344
  * 
  *     if neighbors[3] == 1:
  *         n |= 32             # <<<<<<<<<<<<<<
@@ -4723,7 +4723,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 32);
 
-    /* "cows/_skeletonize_3d_cy.pyx":338
+    /* "cows/_skeletonize_3d_cy.pyx":343
  *         n |= 64
  * 
  *     if neighbors[3] == 1:             # <<<<<<<<<<<<<<
@@ -4732,7 +4732,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":341
+  /* "cows/_skeletonize_3d_cy.pyx":346
  *         n |= 32
  * 
  *     if neighbors[12] == 1:             # <<<<<<<<<<<<<<
@@ -4742,7 +4742,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[12]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":342
+    /* "cows/_skeletonize_3d_cy.pyx":347
  * 
  *     if neighbors[12] == 1:
  *         n |= 16             # <<<<<<<<<<<<<<
@@ -4751,7 +4751,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 16);
 
-    /* "cows/_skeletonize_3d_cy.pyx":341
+    /* "cows/_skeletonize_3d_cy.pyx":346
  *         n |= 32
  * 
  *     if neighbors[12] == 1:             # <<<<<<<<<<<<<<
@@ -4760,7 +4760,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":344
+  /* "cows/_skeletonize_3d_cy.pyx":349
  *         n |= 16
  * 
  *     if neighbors[1] == 1:             # <<<<<<<<<<<<<<
@@ -4770,7 +4770,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[1]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":345
+    /* "cows/_skeletonize_3d_cy.pyx":350
  * 
  *     if neighbors[1] == 1:
  *         n |= 8             # <<<<<<<<<<<<<<
@@ -4779,7 +4779,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 8);
 
-    /* "cows/_skeletonize_3d_cy.pyx":344
+    /* "cows/_skeletonize_3d_cy.pyx":349
  *         n |= 16
  * 
  *     if neighbors[1] == 1:             # <<<<<<<<<<<<<<
@@ -4788,7 +4788,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":347
+  /* "cows/_skeletonize_3d_cy.pyx":352
  *         n |= 8
  * 
  *     if neighbors[10] == 1:             # <<<<<<<<<<<<<<
@@ -4798,7 +4798,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[10]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":348
+    /* "cows/_skeletonize_3d_cy.pyx":353
  * 
  *     if neighbors[10] == 1:
  *         n |= 4             # <<<<<<<<<<<<<<
@@ -4807,7 +4807,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 4);
 
-    /* "cows/_skeletonize_3d_cy.pyx":347
+    /* "cows/_skeletonize_3d_cy.pyx":352
  *         n |= 8
  * 
  *     if neighbors[10] == 1:             # <<<<<<<<<<<<<<
@@ -4816,7 +4816,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":350
+  /* "cows/_skeletonize_3d_cy.pyx":355
  *         n |= 4
  * 
  *     if neighbors[4] == 1:             # <<<<<<<<<<<<<<
@@ -4826,7 +4826,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[4]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":351
+    /* "cows/_skeletonize_3d_cy.pyx":356
  * 
  *     if neighbors[4] == 1:
  *         n |= 2             # <<<<<<<<<<<<<<
@@ -4835,7 +4835,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 2);
 
-    /* "cows/_skeletonize_3d_cy.pyx":350
+    /* "cows/_skeletonize_3d_cy.pyx":355
  *         n |= 4
  * 
  *     if neighbors[4] == 1:             # <<<<<<<<<<<<<<
@@ -4844,7 +4844,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":353
+  /* "cows/_skeletonize_3d_cy.pyx":358
  *         n |= 2
  * 
  *     euler_char += lut[n]             # <<<<<<<<<<<<<<
@@ -4854,7 +4854,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_2 = __pyx_v_n;
   __pyx_v_euler_char = (__pyx_v_euler_char + (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_lut.data) + __pyx_t_2)) ))));
 
-  /* "cows/_skeletonize_3d_cy.pyx":356
+  /* "cows/_skeletonize_3d_cy.pyx":361
  * 
  *     # octant 2:
  *     n = 1             # <<<<<<<<<<<<<<
@@ -4863,7 +4863,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   __pyx_v_n = 1;
 
-  /* "cows/_skeletonize_3d_cy.pyx":357
+  /* "cows/_skeletonize_3d_cy.pyx":362
  *     # octant 2:
  *     n = 1
  *     if neighbors[8] == 1:             # <<<<<<<<<<<<<<
@@ -4873,7 +4873,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[8]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":358
+    /* "cows/_skeletonize_3d_cy.pyx":363
  *     n = 1
  *     if neighbors[8] == 1:
  *         n |= 128             # <<<<<<<<<<<<<<
@@ -4882,7 +4882,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 0x80);
 
-    /* "cows/_skeletonize_3d_cy.pyx":357
+    /* "cows/_skeletonize_3d_cy.pyx":362
  *     # octant 2:
  *     n = 1
  *     if neighbors[8] == 1:             # <<<<<<<<<<<<<<
@@ -4891,7 +4891,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":360
+  /* "cows/_skeletonize_3d_cy.pyx":365
  *         n |= 128
  * 
  *     if neighbors[7] == 1:             # <<<<<<<<<<<<<<
@@ -4901,7 +4901,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[7]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":361
+    /* "cows/_skeletonize_3d_cy.pyx":366
  * 
  *     if neighbors[7] == 1:
  *         n |= 64             # <<<<<<<<<<<<<<
@@ -4910,7 +4910,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 64);
 
-    /* "cows/_skeletonize_3d_cy.pyx":360
+    /* "cows/_skeletonize_3d_cy.pyx":365
  *         n |= 128
  * 
  *     if neighbors[7] == 1:             # <<<<<<<<<<<<<<
@@ -4919,7 +4919,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":363
+  /* "cows/_skeletonize_3d_cy.pyx":368
  *         n |= 64
  * 
  *     if neighbors[17] == 1:             # <<<<<<<<<<<<<<
@@ -4929,7 +4929,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[17]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":364
+    /* "cows/_skeletonize_3d_cy.pyx":369
  * 
  *     if neighbors[17] == 1:
  *         n |= 32             # <<<<<<<<<<<<<<
@@ -4938,7 +4938,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 32);
 
-    /* "cows/_skeletonize_3d_cy.pyx":363
+    /* "cows/_skeletonize_3d_cy.pyx":368
  *         n |= 64
  * 
  *     if neighbors[17] == 1:             # <<<<<<<<<<<<<<
@@ -4947,7 +4947,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":366
+  /* "cows/_skeletonize_3d_cy.pyx":371
  *         n |= 32
  * 
  *     if neighbors[16] == 1:             # <<<<<<<<<<<<<<
@@ -4957,7 +4957,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[16]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":367
+    /* "cows/_skeletonize_3d_cy.pyx":372
  * 
  *     if neighbors[16] == 1:
  *         n |= 16             # <<<<<<<<<<<<<<
@@ -4966,7 +4966,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 16);
 
-    /* "cows/_skeletonize_3d_cy.pyx":366
+    /* "cows/_skeletonize_3d_cy.pyx":371
  *         n |= 32
  * 
  *     if neighbors[16] == 1:             # <<<<<<<<<<<<<<
@@ -4975,7 +4975,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":369
+  /* "cows/_skeletonize_3d_cy.pyx":374
  *         n |= 16
  * 
  *     if neighbors[5] == 1:             # <<<<<<<<<<<<<<
@@ -4985,7 +4985,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[5]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":370
+    /* "cows/_skeletonize_3d_cy.pyx":375
  * 
  *     if neighbors[5] == 1:
  *         n |= 8             # <<<<<<<<<<<<<<
@@ -4994,7 +4994,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 8);
 
-    /* "cows/_skeletonize_3d_cy.pyx":369
+    /* "cows/_skeletonize_3d_cy.pyx":374
  *         n |= 16
  * 
  *     if neighbors[5] == 1:             # <<<<<<<<<<<<<<
@@ -5003,7 +5003,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":372
+  /* "cows/_skeletonize_3d_cy.pyx":377
  *         n |= 8
  * 
  *     if neighbors[4] == 1:             # <<<<<<<<<<<<<<
@@ -5013,7 +5013,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[4]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":373
+    /* "cows/_skeletonize_3d_cy.pyx":378
  * 
  *     if neighbors[4] == 1:
  *         n |= 4             # <<<<<<<<<<<<<<
@@ -5022,7 +5022,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 4);
 
-    /* "cows/_skeletonize_3d_cy.pyx":372
+    /* "cows/_skeletonize_3d_cy.pyx":377
  *         n |= 8
  * 
  *     if neighbors[4] == 1:             # <<<<<<<<<<<<<<
@@ -5031,7 +5031,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":375
+  /* "cows/_skeletonize_3d_cy.pyx":380
  *         n |= 4
  * 
  *     if neighbors[14] == 1:             # <<<<<<<<<<<<<<
@@ -5041,7 +5041,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[14]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":376
+    /* "cows/_skeletonize_3d_cy.pyx":381
  * 
  *     if neighbors[14] == 1:
  *         n |= 2             # <<<<<<<<<<<<<<
@@ -5050,7 +5050,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 2);
 
-    /* "cows/_skeletonize_3d_cy.pyx":375
+    /* "cows/_skeletonize_3d_cy.pyx":380
  *         n |= 4
  * 
  *     if neighbors[14] == 1:             # <<<<<<<<<<<<<<
@@ -5059,7 +5059,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":378
+  /* "cows/_skeletonize_3d_cy.pyx":383
  *         n |= 2
  * 
  *     euler_char += lut[n]             # <<<<<<<<<<<<<<
@@ -5069,7 +5069,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_2 = __pyx_v_n;
   __pyx_v_euler_char = (__pyx_v_euler_char + (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_lut.data) + __pyx_t_2)) ))));
 
-  /* "cows/_skeletonize_3d_cy.pyx":381
+  /* "cows/_skeletonize_3d_cy.pyx":386
  * 
  *     # octant 3:
  *     n = 1             # <<<<<<<<<<<<<<
@@ -5078,7 +5078,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   __pyx_v_n = 1;
 
-  /* "cows/_skeletonize_3d_cy.pyx":382
+  /* "cows/_skeletonize_3d_cy.pyx":387
  *     # octant 3:
  *     n = 1
  *     if neighbors[6] == 1:             # <<<<<<<<<<<<<<
@@ -5088,7 +5088,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[6]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":383
+    /* "cows/_skeletonize_3d_cy.pyx":388
  *     n = 1
  *     if neighbors[6] == 1:
  *         n |= 128             # <<<<<<<<<<<<<<
@@ -5097,7 +5097,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 0x80);
 
-    /* "cows/_skeletonize_3d_cy.pyx":382
+    /* "cows/_skeletonize_3d_cy.pyx":387
  *     # octant 3:
  *     n = 1
  *     if neighbors[6] == 1:             # <<<<<<<<<<<<<<
@@ -5106,7 +5106,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":385
+  /* "cows/_skeletonize_3d_cy.pyx":390
  *         n |= 128
  * 
  *     if neighbors[15] == 1:             # <<<<<<<<<<<<<<
@@ -5116,7 +5116,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[15]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":386
+    /* "cows/_skeletonize_3d_cy.pyx":391
  * 
  *     if neighbors[15] == 1:
  *         n |= 64             # <<<<<<<<<<<<<<
@@ -5125,7 +5125,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 64);
 
-    /* "cows/_skeletonize_3d_cy.pyx":385
+    /* "cows/_skeletonize_3d_cy.pyx":390
  *         n |= 128
  * 
  *     if neighbors[15] == 1:             # <<<<<<<<<<<<<<
@@ -5134,7 +5134,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":388
+  /* "cows/_skeletonize_3d_cy.pyx":393
  *         n |= 64
  * 
  *     if neighbors[7] == 1:             # <<<<<<<<<<<<<<
@@ -5144,7 +5144,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[7]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":389
+    /* "cows/_skeletonize_3d_cy.pyx":394
  * 
  *     if neighbors[7] == 1:
  *         n |= 32             # <<<<<<<<<<<<<<
@@ -5153,7 +5153,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 32);
 
-    /* "cows/_skeletonize_3d_cy.pyx":388
+    /* "cows/_skeletonize_3d_cy.pyx":393
  *         n |= 64
  * 
  *     if neighbors[7] == 1:             # <<<<<<<<<<<<<<
@@ -5162,7 +5162,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":391
+  /* "cows/_skeletonize_3d_cy.pyx":396
  *         n |= 32
  * 
  *     if neighbors[16] == 1:             # <<<<<<<<<<<<<<
@@ -5172,7 +5172,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[16]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":392
+    /* "cows/_skeletonize_3d_cy.pyx":397
  * 
  *     if neighbors[16] == 1:
  *         n |= 16             # <<<<<<<<<<<<<<
@@ -5181,7 +5181,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 16);
 
-    /* "cows/_skeletonize_3d_cy.pyx":391
+    /* "cows/_skeletonize_3d_cy.pyx":396
  *         n |= 32
  * 
  *     if neighbors[16] == 1:             # <<<<<<<<<<<<<<
@@ -5190,7 +5190,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":394
+  /* "cows/_skeletonize_3d_cy.pyx":399
  *         n |= 16
  * 
  *     if neighbors[3] == 1:             # <<<<<<<<<<<<<<
@@ -5200,7 +5200,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[3]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":395
+    /* "cows/_skeletonize_3d_cy.pyx":400
  * 
  *     if neighbors[3] == 1:
  *         n |= 8             # <<<<<<<<<<<<<<
@@ -5209,7 +5209,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 8);
 
-    /* "cows/_skeletonize_3d_cy.pyx":394
+    /* "cows/_skeletonize_3d_cy.pyx":399
  *         n |= 16
  * 
  *     if neighbors[3] == 1:             # <<<<<<<<<<<<<<
@@ -5218,7 +5218,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":397
+  /* "cows/_skeletonize_3d_cy.pyx":402
  *         n |= 8
  * 
  *     if neighbors[12] == 1:             # <<<<<<<<<<<<<<
@@ -5228,7 +5228,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[12]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":398
+    /* "cows/_skeletonize_3d_cy.pyx":403
  * 
  *     if neighbors[12] == 1:
  *         n |= 4             # <<<<<<<<<<<<<<
@@ -5237,7 +5237,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 4);
 
-    /* "cows/_skeletonize_3d_cy.pyx":397
+    /* "cows/_skeletonize_3d_cy.pyx":402
  *         n |= 8
  * 
  *     if neighbors[12] == 1:             # <<<<<<<<<<<<<<
@@ -5246,7 +5246,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":400
+  /* "cows/_skeletonize_3d_cy.pyx":405
  *         n |= 4
  * 
  *     if neighbors[4] == 1:             # <<<<<<<<<<<<<<
@@ -5256,7 +5256,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[4]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":401
+    /* "cows/_skeletonize_3d_cy.pyx":406
  * 
  *     if neighbors[4] == 1:
  *         n |= 2             # <<<<<<<<<<<<<<
@@ -5265,7 +5265,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 2);
 
-    /* "cows/_skeletonize_3d_cy.pyx":400
+    /* "cows/_skeletonize_3d_cy.pyx":405
  *         n |= 4
  * 
  *     if neighbors[4] == 1:             # <<<<<<<<<<<<<<
@@ -5274,7 +5274,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":403
+  /* "cows/_skeletonize_3d_cy.pyx":408
  *         n |= 2
  * 
  *     euler_char += lut[n]             # <<<<<<<<<<<<<<
@@ -5284,7 +5284,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_2 = __pyx_v_n;
   __pyx_v_euler_char = (__pyx_v_euler_char + (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_lut.data) + __pyx_t_2)) ))));
 
-  /* "cows/_skeletonize_3d_cy.pyx":406
+  /* "cows/_skeletonize_3d_cy.pyx":411
  * 
  *     # octant 4:
  *     n = 1             # <<<<<<<<<<<<<<
@@ -5293,7 +5293,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   __pyx_v_n = 1;
 
-  /* "cows/_skeletonize_3d_cy.pyx":407
+  /* "cows/_skeletonize_3d_cy.pyx":412
  *     # octant 4:
  *     n = 1
  *     if neighbors[20] == 1:             # <<<<<<<<<<<<<<
@@ -5303,7 +5303,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[20]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":408
+    /* "cows/_skeletonize_3d_cy.pyx":413
  *     n = 1
  *     if neighbors[20] == 1:
  *         n |= 128             # <<<<<<<<<<<<<<
@@ -5312,7 +5312,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 0x80);
 
-    /* "cows/_skeletonize_3d_cy.pyx":407
+    /* "cows/_skeletonize_3d_cy.pyx":412
  *     # octant 4:
  *     n = 1
  *     if neighbors[20] == 1:             # <<<<<<<<<<<<<<
@@ -5321,7 +5321,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":410
+  /* "cows/_skeletonize_3d_cy.pyx":415
  *         n |= 128
  * 
  *     if neighbors[23] == 1:             # <<<<<<<<<<<<<<
@@ -5331,7 +5331,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[23]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":411
+    /* "cows/_skeletonize_3d_cy.pyx":416
  * 
  *     if neighbors[23] == 1:
  *         n |= 64             # <<<<<<<<<<<<<<
@@ -5340,7 +5340,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 64);
 
-    /* "cows/_skeletonize_3d_cy.pyx":410
+    /* "cows/_skeletonize_3d_cy.pyx":415
  *         n |= 128
  * 
  *     if neighbors[23] == 1:             # <<<<<<<<<<<<<<
@@ -5349,7 +5349,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":413
+  /* "cows/_skeletonize_3d_cy.pyx":418
  *         n |= 64
  * 
  *     if neighbors[19] == 1:             # <<<<<<<<<<<<<<
@@ -5359,7 +5359,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[19]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":414
+    /* "cows/_skeletonize_3d_cy.pyx":419
  * 
  *     if neighbors[19] == 1:
  *         n |= 32             # <<<<<<<<<<<<<<
@@ -5368,7 +5368,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 32);
 
-    /* "cows/_skeletonize_3d_cy.pyx":413
+    /* "cows/_skeletonize_3d_cy.pyx":418
  *         n |= 64
  * 
  *     if neighbors[19] == 1:             # <<<<<<<<<<<<<<
@@ -5377,7 +5377,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":416
+  /* "cows/_skeletonize_3d_cy.pyx":421
  *         n |= 32
  * 
  *     if neighbors[22] == 1:             # <<<<<<<<<<<<<<
@@ -5387,7 +5387,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[22]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":417
+    /* "cows/_skeletonize_3d_cy.pyx":422
  * 
  *     if neighbors[22] == 1:
  *         n |= 16             # <<<<<<<<<<<<<<
@@ -5396,7 +5396,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 16);
 
-    /* "cows/_skeletonize_3d_cy.pyx":416
+    /* "cows/_skeletonize_3d_cy.pyx":421
  *         n |= 32
  * 
  *     if neighbors[22] == 1:             # <<<<<<<<<<<<<<
@@ -5405,7 +5405,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":419
+  /* "cows/_skeletonize_3d_cy.pyx":424
  *         n |= 16
  * 
  *     if neighbors[11] == 1:             # <<<<<<<<<<<<<<
@@ -5415,7 +5415,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[11]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":420
+    /* "cows/_skeletonize_3d_cy.pyx":425
  * 
  *     if neighbors[11] == 1:
  *         n |= 8             # <<<<<<<<<<<<<<
@@ -5424,7 +5424,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 8);
 
-    /* "cows/_skeletonize_3d_cy.pyx":419
+    /* "cows/_skeletonize_3d_cy.pyx":424
  *         n |= 16
  * 
  *     if neighbors[11] == 1:             # <<<<<<<<<<<<<<
@@ -5433,7 +5433,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":422
+  /* "cows/_skeletonize_3d_cy.pyx":427
  *         n |= 8
  * 
  *     if neighbors[14] == 1:             # <<<<<<<<<<<<<<
@@ -5443,7 +5443,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[14]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":423
+    /* "cows/_skeletonize_3d_cy.pyx":428
  * 
  *     if neighbors[14] == 1:
  *         n |= 4             # <<<<<<<<<<<<<<
@@ -5452,7 +5452,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 4);
 
-    /* "cows/_skeletonize_3d_cy.pyx":422
+    /* "cows/_skeletonize_3d_cy.pyx":427
  *         n |= 8
  * 
  *     if neighbors[14] == 1:             # <<<<<<<<<<<<<<
@@ -5461,7 +5461,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":425
+  /* "cows/_skeletonize_3d_cy.pyx":430
  *         n |= 4
  * 
  *     if neighbors[10] == 1:             # <<<<<<<<<<<<<<
@@ -5471,7 +5471,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[10]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":426
+    /* "cows/_skeletonize_3d_cy.pyx":431
  * 
  *     if neighbors[10] == 1:
  *         n |= 2             # <<<<<<<<<<<<<<
@@ -5480,7 +5480,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 2);
 
-    /* "cows/_skeletonize_3d_cy.pyx":425
+    /* "cows/_skeletonize_3d_cy.pyx":430
  *         n |= 4
  * 
  *     if neighbors[10] == 1:             # <<<<<<<<<<<<<<
@@ -5489,7 +5489,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":428
+  /* "cows/_skeletonize_3d_cy.pyx":433
  *         n |= 2
  * 
  *     euler_char += lut[n]             # <<<<<<<<<<<<<<
@@ -5499,7 +5499,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_2 = __pyx_v_n;
   __pyx_v_euler_char = (__pyx_v_euler_char + (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_lut.data) + __pyx_t_2)) ))));
 
-  /* "cows/_skeletonize_3d_cy.pyx":431
+  /* "cows/_skeletonize_3d_cy.pyx":436
  * 
  *     # octant 5:
  *     n = 1             # <<<<<<<<<<<<<<
@@ -5508,7 +5508,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   __pyx_v_n = 1;
 
-  /* "cows/_skeletonize_3d_cy.pyx":432
+  /* "cows/_skeletonize_3d_cy.pyx":437
  *     # octant 5:
  *     n = 1
  *     if neighbors[18] == 1:             # <<<<<<<<<<<<<<
@@ -5518,7 +5518,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[18]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":433
+    /* "cows/_skeletonize_3d_cy.pyx":438
  *     n = 1
  *     if neighbors[18] == 1:
  *         n |= 128             # <<<<<<<<<<<<<<
@@ -5527,7 +5527,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 0x80);
 
-    /* "cows/_skeletonize_3d_cy.pyx":432
+    /* "cows/_skeletonize_3d_cy.pyx":437
  *     # octant 5:
  *     n = 1
  *     if neighbors[18] == 1:             # <<<<<<<<<<<<<<
@@ -5536,7 +5536,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":435
+  /* "cows/_skeletonize_3d_cy.pyx":440
  *         n |= 128
  * 
  *     if neighbors[21] == 1:             # <<<<<<<<<<<<<<
@@ -5546,7 +5546,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[21]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":436
+    /* "cows/_skeletonize_3d_cy.pyx":441
  * 
  *     if neighbors[21] == 1:
  *         n |= 64             # <<<<<<<<<<<<<<
@@ -5555,7 +5555,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 64);
 
-    /* "cows/_skeletonize_3d_cy.pyx":435
+    /* "cows/_skeletonize_3d_cy.pyx":440
  *         n |= 128
  * 
  *     if neighbors[21] == 1:             # <<<<<<<<<<<<<<
@@ -5564,7 +5564,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":438
+  /* "cows/_skeletonize_3d_cy.pyx":443
  *         n |= 64
  * 
  *     if neighbors[9] == 1:             # <<<<<<<<<<<<<<
@@ -5574,7 +5574,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[9]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":439
+    /* "cows/_skeletonize_3d_cy.pyx":444
  * 
  *     if neighbors[9] == 1:
  *         n |= 32             # <<<<<<<<<<<<<<
@@ -5583,7 +5583,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 32);
 
-    /* "cows/_skeletonize_3d_cy.pyx":438
+    /* "cows/_skeletonize_3d_cy.pyx":443
  *         n |= 64
  * 
  *     if neighbors[9] == 1:             # <<<<<<<<<<<<<<
@@ -5592,7 +5592,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":441
+  /* "cows/_skeletonize_3d_cy.pyx":446
  *         n |= 32
  * 
  *     if neighbors[12] == 1:             # <<<<<<<<<<<<<<
@@ -5602,7 +5602,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[12]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":442
+    /* "cows/_skeletonize_3d_cy.pyx":447
  * 
  *     if neighbors[12] == 1:
  *         n |= 16             # <<<<<<<<<<<<<<
@@ -5611,7 +5611,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 16);
 
-    /* "cows/_skeletonize_3d_cy.pyx":441
+    /* "cows/_skeletonize_3d_cy.pyx":446
  *         n |= 32
  * 
  *     if neighbors[12] == 1:             # <<<<<<<<<<<<<<
@@ -5620,7 +5620,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":444
+  /* "cows/_skeletonize_3d_cy.pyx":449
  *         n |= 16
  * 
  *     if neighbors[19] == 1:             # <<<<<<<<<<<<<<
@@ -5630,7 +5630,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[19]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":445
+    /* "cows/_skeletonize_3d_cy.pyx":450
  * 
  *     if neighbors[19] == 1:
  *         n |= 8             # <<<<<<<<<<<<<<
@@ -5639,7 +5639,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 8);
 
-    /* "cows/_skeletonize_3d_cy.pyx":444
+    /* "cows/_skeletonize_3d_cy.pyx":449
  *         n |= 16
  * 
  *     if neighbors[19] == 1:             # <<<<<<<<<<<<<<
@@ -5648,7 +5648,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":447
+  /* "cows/_skeletonize_3d_cy.pyx":452
  *         n |= 8
  * 
  *     if neighbors[22] == 1:             # <<<<<<<<<<<<<<
@@ -5658,7 +5658,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[22]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":448
+    /* "cows/_skeletonize_3d_cy.pyx":453
  * 
  *     if neighbors[22] == 1:
  *         n |= 4             # <<<<<<<<<<<<<<
@@ -5667,7 +5667,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 4);
 
-    /* "cows/_skeletonize_3d_cy.pyx":447
+    /* "cows/_skeletonize_3d_cy.pyx":452
  *         n |= 8
  * 
  *     if neighbors[22] == 1:             # <<<<<<<<<<<<<<
@@ -5676,7 +5676,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":450
+  /* "cows/_skeletonize_3d_cy.pyx":455
  *         n |= 4
  * 
  *     if neighbors[10] == 1:             # <<<<<<<<<<<<<<
@@ -5686,7 +5686,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[10]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":451
+    /* "cows/_skeletonize_3d_cy.pyx":456
  * 
  *     if neighbors[10] == 1:
  *         n |= 2             # <<<<<<<<<<<<<<
@@ -5695,7 +5695,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 2);
 
-    /* "cows/_skeletonize_3d_cy.pyx":450
+    /* "cows/_skeletonize_3d_cy.pyx":455
  *         n |= 4
  * 
  *     if neighbors[10] == 1:             # <<<<<<<<<<<<<<
@@ -5704,7 +5704,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":453
+  /* "cows/_skeletonize_3d_cy.pyx":458
  *         n |= 2
  * 
  *     euler_char += lut[n]             # <<<<<<<<<<<<<<
@@ -5714,7 +5714,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_2 = __pyx_v_n;
   __pyx_v_euler_char = (__pyx_v_euler_char + (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_lut.data) + __pyx_t_2)) ))));
 
-  /* "cows/_skeletonize_3d_cy.pyx":456
+  /* "cows/_skeletonize_3d_cy.pyx":461
  * 
  *     # octant 6:
  *     n = 1             # <<<<<<<<<<<<<<
@@ -5723,7 +5723,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   __pyx_v_n = 1;
 
-  /* "cows/_skeletonize_3d_cy.pyx":457
+  /* "cows/_skeletonize_3d_cy.pyx":462
  *     # octant 6:
  *     n = 1
  *     if neighbors[26] == 1:             # <<<<<<<<<<<<<<
@@ -5733,7 +5733,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[26]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":458
+    /* "cows/_skeletonize_3d_cy.pyx":463
  *     n = 1
  *     if neighbors[26] == 1:
  *         n |= 128             # <<<<<<<<<<<<<<
@@ -5742,7 +5742,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 0x80);
 
-    /* "cows/_skeletonize_3d_cy.pyx":457
+    /* "cows/_skeletonize_3d_cy.pyx":462
  *     # octant 6:
  *     n = 1
  *     if neighbors[26] == 1:             # <<<<<<<<<<<<<<
@@ -5751,7 +5751,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":460
+  /* "cows/_skeletonize_3d_cy.pyx":465
  *         n |= 128
  * 
  *     if neighbors[23] == 1:             # <<<<<<<<<<<<<<
@@ -5761,7 +5761,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[23]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":461
+    /* "cows/_skeletonize_3d_cy.pyx":466
  * 
  *     if neighbors[23] == 1:
  *         n |= 64             # <<<<<<<<<<<<<<
@@ -5770,7 +5770,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 64);
 
-    /* "cows/_skeletonize_3d_cy.pyx":460
+    /* "cows/_skeletonize_3d_cy.pyx":465
  *         n |= 128
  * 
  *     if neighbors[23] == 1:             # <<<<<<<<<<<<<<
@@ -5779,7 +5779,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":463
+  /* "cows/_skeletonize_3d_cy.pyx":468
  *         n |= 64
  * 
  *     if neighbors[17] == 1:             # <<<<<<<<<<<<<<
@@ -5789,7 +5789,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[17]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":464
+    /* "cows/_skeletonize_3d_cy.pyx":469
  * 
  *     if neighbors[17] == 1:
  *         n |= 32             # <<<<<<<<<<<<<<
@@ -5798,7 +5798,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 32);
 
-    /* "cows/_skeletonize_3d_cy.pyx":463
+    /* "cows/_skeletonize_3d_cy.pyx":468
  *         n |= 64
  * 
  *     if neighbors[17] == 1:             # <<<<<<<<<<<<<<
@@ -5807,7 +5807,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":466
+  /* "cows/_skeletonize_3d_cy.pyx":471
  *         n |= 32
  * 
  *     if neighbors[14] == 1:             # <<<<<<<<<<<<<<
@@ -5817,7 +5817,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[14]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":467
+    /* "cows/_skeletonize_3d_cy.pyx":472
  * 
  *     if neighbors[14] == 1:
  *         n |= 16             # <<<<<<<<<<<<<<
@@ -5826,7 +5826,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 16);
 
-    /* "cows/_skeletonize_3d_cy.pyx":466
+    /* "cows/_skeletonize_3d_cy.pyx":471
  *         n |= 32
  * 
  *     if neighbors[14] == 1:             # <<<<<<<<<<<<<<
@@ -5835,7 +5835,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":469
+  /* "cows/_skeletonize_3d_cy.pyx":474
  *         n |= 16
  * 
  *     if neighbors[25] == 1:             # <<<<<<<<<<<<<<
@@ -5845,7 +5845,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[25]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":470
+    /* "cows/_skeletonize_3d_cy.pyx":475
  * 
  *     if neighbors[25] == 1:
  *         n |= 8             # <<<<<<<<<<<<<<
@@ -5854,7 +5854,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 8);
 
-    /* "cows/_skeletonize_3d_cy.pyx":469
+    /* "cows/_skeletonize_3d_cy.pyx":474
  *         n |= 16
  * 
  *     if neighbors[25] == 1:             # <<<<<<<<<<<<<<
@@ -5863,7 +5863,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":472
+  /* "cows/_skeletonize_3d_cy.pyx":477
  *         n |= 8
  * 
  *     if neighbors[22] == 1:             # <<<<<<<<<<<<<<
@@ -5873,7 +5873,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[22]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":473
+    /* "cows/_skeletonize_3d_cy.pyx":478
  * 
  *     if neighbors[22] == 1:
  *         n |= 4             # <<<<<<<<<<<<<<
@@ -5882,7 +5882,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 4);
 
-    /* "cows/_skeletonize_3d_cy.pyx":472
+    /* "cows/_skeletonize_3d_cy.pyx":477
  *         n |= 8
  * 
  *     if neighbors[22] == 1:             # <<<<<<<<<<<<<<
@@ -5891,7 +5891,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":475
+  /* "cows/_skeletonize_3d_cy.pyx":480
  *         n |= 4
  * 
  *     if neighbors[16] == 1:             # <<<<<<<<<<<<<<
@@ -5901,7 +5901,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[16]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":476
+    /* "cows/_skeletonize_3d_cy.pyx":481
  * 
  *     if neighbors[16] == 1:
  *         n |= 2             # <<<<<<<<<<<<<<
@@ -5910,7 +5910,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 2);
 
-    /* "cows/_skeletonize_3d_cy.pyx":475
+    /* "cows/_skeletonize_3d_cy.pyx":480
  *         n |= 4
  * 
  *     if neighbors[16] == 1:             # <<<<<<<<<<<<<<
@@ -5919,7 +5919,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":478
+  /* "cows/_skeletonize_3d_cy.pyx":483
  *         n |= 2
  * 
  *     euler_char += lut[n]             # <<<<<<<<<<<<<<
@@ -5929,7 +5929,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_2 = __pyx_v_n;
   __pyx_v_euler_char = (__pyx_v_euler_char + (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_lut.data) + __pyx_t_2)) ))));
 
-  /* "cows/_skeletonize_3d_cy.pyx":481
+  /* "cows/_skeletonize_3d_cy.pyx":486
  * 
  *     # octant 7:
  *     n = 1             # <<<<<<<<<<<<<<
@@ -5938,7 +5938,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   __pyx_v_n = 1;
 
-  /* "cows/_skeletonize_3d_cy.pyx":482
+  /* "cows/_skeletonize_3d_cy.pyx":487
  *     # octant 7:
  *     n = 1
  *     if neighbors[24] == 1:             # <<<<<<<<<<<<<<
@@ -5948,7 +5948,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[24]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":483
+    /* "cows/_skeletonize_3d_cy.pyx":488
  *     n = 1
  *     if neighbors[24] == 1:
  *         n |= 128             # <<<<<<<<<<<<<<
@@ -5957,7 +5957,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 0x80);
 
-    /* "cows/_skeletonize_3d_cy.pyx":482
+    /* "cows/_skeletonize_3d_cy.pyx":487
  *     # octant 7:
  *     n = 1
  *     if neighbors[24] == 1:             # <<<<<<<<<<<<<<
@@ -5966,7 +5966,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":485
+  /* "cows/_skeletonize_3d_cy.pyx":490
  *         n |= 128
  * 
  *     if neighbors[25] == 1:             # <<<<<<<<<<<<<<
@@ -5976,7 +5976,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[25]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":486
+    /* "cows/_skeletonize_3d_cy.pyx":491
  * 
  *     if neighbors[25] == 1:
  *         n |= 64             # <<<<<<<<<<<<<<
@@ -5985,7 +5985,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 64);
 
-    /* "cows/_skeletonize_3d_cy.pyx":485
+    /* "cows/_skeletonize_3d_cy.pyx":490
  *         n |= 128
  * 
  *     if neighbors[25] == 1:             # <<<<<<<<<<<<<<
@@ -5994,7 +5994,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":488
+  /* "cows/_skeletonize_3d_cy.pyx":493
  *         n |= 64
  * 
  *     if neighbors[15] == 1:             # <<<<<<<<<<<<<<
@@ -6004,7 +6004,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[15]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":489
+    /* "cows/_skeletonize_3d_cy.pyx":494
  * 
  *     if neighbors[15] == 1:
  *         n |= 32             # <<<<<<<<<<<<<<
@@ -6013,7 +6013,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 32);
 
-    /* "cows/_skeletonize_3d_cy.pyx":488
+    /* "cows/_skeletonize_3d_cy.pyx":493
  *         n |= 64
  * 
  *     if neighbors[15] == 1:             # <<<<<<<<<<<<<<
@@ -6022,7 +6022,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":491
+  /* "cows/_skeletonize_3d_cy.pyx":496
  *         n |= 32
  * 
  *     if neighbors[16] == 1:             # <<<<<<<<<<<<<<
@@ -6032,7 +6032,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[16]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":492
+    /* "cows/_skeletonize_3d_cy.pyx":497
  * 
  *     if neighbors[16] == 1:
  *         n |= 16             # <<<<<<<<<<<<<<
@@ -6041,7 +6041,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 16);
 
-    /* "cows/_skeletonize_3d_cy.pyx":491
+    /* "cows/_skeletonize_3d_cy.pyx":496
  *         n |= 32
  * 
  *     if neighbors[16] == 1:             # <<<<<<<<<<<<<<
@@ -6050,7 +6050,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":494
+  /* "cows/_skeletonize_3d_cy.pyx":499
  *         n |= 16
  * 
  *     if neighbors[21] == 1:             # <<<<<<<<<<<<<<
@@ -6060,7 +6060,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[21]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":495
+    /* "cows/_skeletonize_3d_cy.pyx":500
  * 
  *     if neighbors[21] == 1:
  *         n |= 8             # <<<<<<<<<<<<<<
@@ -6069,7 +6069,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 8);
 
-    /* "cows/_skeletonize_3d_cy.pyx":494
+    /* "cows/_skeletonize_3d_cy.pyx":499
  *         n |= 16
  * 
  *     if neighbors[21] == 1:             # <<<<<<<<<<<<<<
@@ -6078,7 +6078,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":497
+  /* "cows/_skeletonize_3d_cy.pyx":502
  *         n |= 8
  * 
  *     if neighbors[22] == 1:             # <<<<<<<<<<<<<<
@@ -6088,7 +6088,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[22]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":498
+    /* "cows/_skeletonize_3d_cy.pyx":503
  * 
  *     if neighbors[22] == 1:
  *         n |= 4             # <<<<<<<<<<<<<<
@@ -6097,7 +6097,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 4);
 
-    /* "cows/_skeletonize_3d_cy.pyx":497
+    /* "cows/_skeletonize_3d_cy.pyx":502
  *         n |= 8
  * 
  *     if neighbors[22] == 1:             # <<<<<<<<<<<<<<
@@ -6106,7 +6106,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":500
+  /* "cows/_skeletonize_3d_cy.pyx":505
  *         n |= 4
  * 
  *     if neighbors[12] == 1:             # <<<<<<<<<<<<<<
@@ -6116,7 +6116,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_1 = (((__pyx_v_neighbors[12]) == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":501
+    /* "cows/_skeletonize_3d_cy.pyx":506
  * 
  *     if neighbors[12] == 1:
  *         n |= 2             # <<<<<<<<<<<<<<
@@ -6125,7 +6125,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
     __pyx_v_n = (__pyx_v_n | 2);
 
-    /* "cows/_skeletonize_3d_cy.pyx":500
+    /* "cows/_skeletonize_3d_cy.pyx":505
  *         n |= 4
  * 
  *     if neighbors[12] == 1:             # <<<<<<<<<<<<<<
@@ -6134,7 +6134,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":503
+  /* "cows/_skeletonize_3d_cy.pyx":508
  *         n |= 2
  * 
  *     euler_char += lut[n]             # <<<<<<<<<<<<<<
@@ -6144,7 +6144,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_t_2 = __pyx_v_n;
   __pyx_v_euler_char = (__pyx_v_euler_char + (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_lut.data) + __pyx_t_2)) ))));
 
-  /* "cows/_skeletonize_3d_cy.pyx":504
+  /* "cows/_skeletonize_3d_cy.pyx":509
  * 
  *     euler_char += lut[n]
  *     return euler_char == 0             # <<<<<<<<<<<<<<
@@ -6154,7 +6154,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   __pyx_r = (__pyx_v_euler_char == 0);
   goto __pyx_L0;
 
-  /* "cows/_skeletonize_3d_cy.pyx":285
+  /* "cows/_skeletonize_3d_cy.pyx":290
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cdef bint is_Euler_invariant(pixel_type neighbors[],             # <<<<<<<<<<<<<<
@@ -6167,7 +6167,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_Euler_invariant(__pyx_t_4cows_1
   return __pyx_r;
 }
 
-/* "cows/_skeletonize_3d_cy.pyx":507
+/* "cows/_skeletonize_3d_cy.pyx":512
  * 
  * 
  * cdef inline bint is_endpoint(pixel_type neighbors[]) nogil:             # <<<<<<<<<<<<<<
@@ -6181,7 +6181,7 @@ static CYTHON_INLINE int __pyx_f_4cows_18_skeletonize_3d_cy_is_endpoint(__pyx_t_
   int __pyx_r;
   int __pyx_t_1;
 
-  /* "cows/_skeletonize_3d_cy.pyx":511
+  /* "cows/_skeletonize_3d_cy.pyx":516
  *     """
  *     # The center pixel is counted, thus r.h.s. is 2
  *     cdef int s = 0, j             # <<<<<<<<<<<<<<
@@ -6190,7 +6190,7 @@ static CYTHON_INLINE int __pyx_f_4cows_18_skeletonize_3d_cy_is_endpoint(__pyx_t_
  */
   __pyx_v_s = 0;
 
-  /* "cows/_skeletonize_3d_cy.pyx":512
+  /* "cows/_skeletonize_3d_cy.pyx":517
  *     # The center pixel is counted, thus r.h.s. is 2
  *     cdef int s = 0, j
  *     for j in range(27):             # <<<<<<<<<<<<<<
@@ -6200,7 +6200,7 @@ static CYTHON_INLINE int __pyx_f_4cows_18_skeletonize_3d_cy_is_endpoint(__pyx_t_
   for (__pyx_t_1 = 0; __pyx_t_1 < 27; __pyx_t_1+=1) {
     __pyx_v_j = __pyx_t_1;
 
-    /* "cows/_skeletonize_3d_cy.pyx":513
+    /* "cows/_skeletonize_3d_cy.pyx":518
  *     cdef int s = 0, j
  *     for j in range(27):
  *         s += neighbors[j]             # <<<<<<<<<<<<<<
@@ -6210,7 +6210,7 @@ static CYTHON_INLINE int __pyx_f_4cows_18_skeletonize_3d_cy_is_endpoint(__pyx_t_
     __pyx_v_s = (__pyx_v_s + (__pyx_v_neighbors[__pyx_v_j]));
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":514
+  /* "cows/_skeletonize_3d_cy.pyx":519
  *     for j in range(27):
  *         s += neighbors[j]
  *     return s == 2             # <<<<<<<<<<<<<<
@@ -6220,7 +6220,7 @@ static CYTHON_INLINE int __pyx_f_4cows_18_skeletonize_3d_cy_is_endpoint(__pyx_t_
   __pyx_r = (__pyx_v_s == 2);
   goto __pyx_L0;
 
-  /* "cows/_skeletonize_3d_cy.pyx":507
+  /* "cows/_skeletonize_3d_cy.pyx":512
  * 
  * 
  * cdef inline bint is_endpoint(pixel_type neighbors[]) nogil:             # <<<<<<<<<<<<<<
@@ -6233,7 +6233,7 @@ static CYTHON_INLINE int __pyx_f_4cows_18_skeletonize_3d_cy_is_endpoint(__pyx_t_
   return __pyx_r;
 }
 
-/* "cows/_skeletonize_3d_cy.pyx":517
+/* "cows/_skeletonize_3d_cy.pyx":522
  * 
  * 
  * cdef bint is_simple_point(pixel_type neighbors[]) nogil:             # <<<<<<<<<<<<<<
@@ -6249,7 +6249,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
   int __pyx_t_1;
   int __pyx_t_2;
 
-  /* "cows/_skeletonize_3d_cy.pyx":539
+  /* "cows/_skeletonize_3d_cy.pyx":544
  *     # ignore center pixel (i=13) when counting (see [Lee94]_)
  *     cdef pixel_type cube[26]
  *     memcpy(cube, neighbors, 13*sizeof(pixel_type))             # <<<<<<<<<<<<<<
@@ -6258,7 +6258,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
   (void)(memcpy(__pyx_v_cube, __pyx_v_neighbors, (13 * (sizeof(__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type)))));
 
-  /* "cows/_skeletonize_3d_cy.pyx":540
+  /* "cows/_skeletonize_3d_cy.pyx":545
  *     cdef pixel_type cube[26]
  *     memcpy(cube, neighbors, 13*sizeof(pixel_type))
  *     memcpy(cube+13, neighbors+14, 13*sizeof(pixel_type))             # <<<<<<<<<<<<<<
@@ -6267,7 +6267,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
   (void)(memcpy((__pyx_v_cube + 13), (__pyx_v_neighbors + 14), (13 * (sizeof(__pyx_t_4cows_18_skeletonize_3d_cy_pixel_type)))));
 
-  /* "cows/_skeletonize_3d_cy.pyx":543
+  /* "cows/_skeletonize_3d_cy.pyx":548
  * 
  *     # set initial label
  *     cdef int label = 2, i             # <<<<<<<<<<<<<<
@@ -6276,7 +6276,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
   __pyx_v_label = 2;
 
-  /* "cows/_skeletonize_3d_cy.pyx":546
+  /* "cows/_skeletonize_3d_cy.pyx":551
  * 
  *     # for all point in the neighborhood
  *     for i in range(26):             # <<<<<<<<<<<<<<
@@ -6286,7 +6286,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
   for (__pyx_t_1 = 0; __pyx_t_1 < 26; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
 
-    /* "cows/_skeletonize_3d_cy.pyx":547
+    /* "cows/_skeletonize_3d_cy.pyx":552
  *     # for all point in the neighborhood
  *     for i in range(26):
  *         if cube[i] == 1:             # <<<<<<<<<<<<<<
@@ -6296,7 +6296,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
     __pyx_t_2 = (((__pyx_v_cube[__pyx_v_i]) == 1) != 0);
     if (__pyx_t_2) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":550
+      /* "cows/_skeletonize_3d_cy.pyx":555
  *             # voxel has not been labeled yet
  *             # start recursion with any octant that contains the point i
  *             if i in (0, 1, 3, 4, 9, 10, 12):             # <<<<<<<<<<<<<<
@@ -6312,7 +6312,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
         case 10:
         case 12:
 
-        /* "cows/_skeletonize_3d_cy.pyx":551
+        /* "cows/_skeletonize_3d_cy.pyx":556
  *             # start recursion with any octant that contains the point i
  *             if i in (0, 1, 3, 4, 9, 10, 12):
  *                 octree_labeling(1, label, cube)             # <<<<<<<<<<<<<<
@@ -6321,7 +6321,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
         __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(1, __pyx_v_label, __pyx_v_cube);
 
-        /* "cows/_skeletonize_3d_cy.pyx":550
+        /* "cows/_skeletonize_3d_cy.pyx":555
  *             # voxel has not been labeled yet
  *             # start recursion with any octant that contains the point i
  *             if i in (0, 1, 3, 4, 9, 10, 12):             # <<<<<<<<<<<<<<
@@ -6331,7 +6331,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
         break;
         case 2:
 
-        /* "cows/_skeletonize_3d_cy.pyx":552
+        /* "cows/_skeletonize_3d_cy.pyx":557
  *             if i in (0, 1, 3, 4, 9, 10, 12):
  *                 octree_labeling(1, label, cube)
  *             elif i in (2, 5, 11, 13):             # <<<<<<<<<<<<<<
@@ -6342,7 +6342,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
         case 11:
         case 13:
 
-        /* "cows/_skeletonize_3d_cy.pyx":553
+        /* "cows/_skeletonize_3d_cy.pyx":558
  *                 octree_labeling(1, label, cube)
  *             elif i in (2, 5, 11, 13):
  *                 octree_labeling(2, label, cube)             # <<<<<<<<<<<<<<
@@ -6351,7 +6351,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
         __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(2, __pyx_v_label, __pyx_v_cube);
 
-        /* "cows/_skeletonize_3d_cy.pyx":552
+        /* "cows/_skeletonize_3d_cy.pyx":557
  *             if i in (0, 1, 3, 4, 9, 10, 12):
  *                 octree_labeling(1, label, cube)
  *             elif i in (2, 5, 11, 13):             # <<<<<<<<<<<<<<
@@ -6361,7 +6361,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
         break;
         case 6:
 
-        /* "cows/_skeletonize_3d_cy.pyx":554
+        /* "cows/_skeletonize_3d_cy.pyx":559
  *             elif i in (2, 5, 11, 13):
  *                 octree_labeling(2, label, cube)
  *             elif i in (6, 7, 14, 15):             # <<<<<<<<<<<<<<
@@ -6372,7 +6372,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
         case 14:
         case 15:
 
-        /* "cows/_skeletonize_3d_cy.pyx":555
+        /* "cows/_skeletonize_3d_cy.pyx":560
  *                 octree_labeling(2, label, cube)
  *             elif i in (6, 7, 14, 15):
  *                 octree_labeling(3, label, cube)             # <<<<<<<<<<<<<<
@@ -6381,7 +6381,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
         __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(3, __pyx_v_label, __pyx_v_cube);
 
-        /* "cows/_skeletonize_3d_cy.pyx":554
+        /* "cows/_skeletonize_3d_cy.pyx":559
  *             elif i in (2, 5, 11, 13):
  *                 octree_labeling(2, label, cube)
  *             elif i in (6, 7, 14, 15):             # <<<<<<<<<<<<<<
@@ -6391,7 +6391,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
         break;
         case 8:
 
-        /* "cows/_skeletonize_3d_cy.pyx":556
+        /* "cows/_skeletonize_3d_cy.pyx":561
  *             elif i in (6, 7, 14, 15):
  *                 octree_labeling(3, label, cube)
  *             elif i in (8, 16):             # <<<<<<<<<<<<<<
@@ -6400,7 +6400,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
         case 16:
 
-        /* "cows/_skeletonize_3d_cy.pyx":557
+        /* "cows/_skeletonize_3d_cy.pyx":562
  *                 octree_labeling(3, label, cube)
  *             elif i in (8, 16):
  *                 octree_labeling(4, label, cube)             # <<<<<<<<<<<<<<
@@ -6409,7 +6409,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
         __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(4, __pyx_v_label, __pyx_v_cube);
 
-        /* "cows/_skeletonize_3d_cy.pyx":556
+        /* "cows/_skeletonize_3d_cy.pyx":561
  *             elif i in (6, 7, 14, 15):
  *                 octree_labeling(3, label, cube)
  *             elif i in (8, 16):             # <<<<<<<<<<<<<<
@@ -6419,7 +6419,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
         break;
         case 17:
 
-        /* "cows/_skeletonize_3d_cy.pyx":558
+        /* "cows/_skeletonize_3d_cy.pyx":563
  *             elif i in (8, 16):
  *                 octree_labeling(4, label, cube)
  *             elif i in (17, 18, 20, 21):             # <<<<<<<<<<<<<<
@@ -6430,7 +6430,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
         case 20:
         case 21:
 
-        /* "cows/_skeletonize_3d_cy.pyx":559
+        /* "cows/_skeletonize_3d_cy.pyx":564
  *                 octree_labeling(4, label, cube)
  *             elif i in (17, 18, 20, 21):
  *                 octree_labeling(5, label, cube)             # <<<<<<<<<<<<<<
@@ -6439,7 +6439,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
         __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(5, __pyx_v_label, __pyx_v_cube);
 
-        /* "cows/_skeletonize_3d_cy.pyx":558
+        /* "cows/_skeletonize_3d_cy.pyx":563
  *             elif i in (8, 16):
  *                 octree_labeling(4, label, cube)
  *             elif i in (17, 18, 20, 21):             # <<<<<<<<<<<<<<
@@ -6449,7 +6449,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
         break;
         case 19:
 
-        /* "cows/_skeletonize_3d_cy.pyx":560
+        /* "cows/_skeletonize_3d_cy.pyx":565
  *             elif i in (17, 18, 20, 21):
  *                 octree_labeling(5, label, cube)
  *             elif i in (19, 22):             # <<<<<<<<<<<<<<
@@ -6458,7 +6458,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
         case 22:
 
-        /* "cows/_skeletonize_3d_cy.pyx":561
+        /* "cows/_skeletonize_3d_cy.pyx":566
  *                 octree_labeling(5, label, cube)
  *             elif i in (19, 22):
  *                 octree_labeling(6, label, cube)             # <<<<<<<<<<<<<<
@@ -6467,7 +6467,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
         __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(6, __pyx_v_label, __pyx_v_cube);
 
-        /* "cows/_skeletonize_3d_cy.pyx":560
+        /* "cows/_skeletonize_3d_cy.pyx":565
  *             elif i in (17, 18, 20, 21):
  *                 octree_labeling(5, label, cube)
  *             elif i in (19, 22):             # <<<<<<<<<<<<<<
@@ -6477,7 +6477,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
         break;
         case 23:
 
-        /* "cows/_skeletonize_3d_cy.pyx":562
+        /* "cows/_skeletonize_3d_cy.pyx":567
  *             elif i in (19, 22):
  *                 octree_labeling(6, label, cube)
  *             elif i in (23, 24):             # <<<<<<<<<<<<<<
@@ -6486,7 +6486,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
         case 24:
 
-        /* "cows/_skeletonize_3d_cy.pyx":563
+        /* "cows/_skeletonize_3d_cy.pyx":568
  *                 octree_labeling(6, label, cube)
  *             elif i in (23, 24):
  *                 octree_labeling(7, label, cube)             # <<<<<<<<<<<<<<
@@ -6495,7 +6495,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
         __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(7, __pyx_v_label, __pyx_v_cube);
 
-        /* "cows/_skeletonize_3d_cy.pyx":562
+        /* "cows/_skeletonize_3d_cy.pyx":567
  *             elif i in (19, 22):
  *                 octree_labeling(6, label, cube)
  *             elif i in (23, 24):             # <<<<<<<<<<<<<<
@@ -6505,7 +6505,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
         break;
         case 25:
 
-        /* "cows/_skeletonize_3d_cy.pyx":565
+        /* "cows/_skeletonize_3d_cy.pyx":570
  *                 octree_labeling(7, label, cube)
  *             elif i == 25:
  *                 octree_labeling(8, label, cube)             # <<<<<<<<<<<<<<
@@ -6514,7 +6514,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
         __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(8, __pyx_v_label, __pyx_v_cube);
 
-        /* "cows/_skeletonize_3d_cy.pyx":564
+        /* "cows/_skeletonize_3d_cy.pyx":569
  *             elif i in (23, 24):
  *                 octree_labeling(7, label, cube)
  *             elif i == 25:             # <<<<<<<<<<<<<<
@@ -6525,7 +6525,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
         default: break;
       }
 
-      /* "cows/_skeletonize_3d_cy.pyx":566
+      /* "cows/_skeletonize_3d_cy.pyx":571
  *             elif i == 25:
  *                 octree_labeling(8, label, cube)
  *             label += 1             # <<<<<<<<<<<<<<
@@ -6534,7 +6534,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
       __pyx_v_label = (__pyx_v_label + 1);
 
-      /* "cows/_skeletonize_3d_cy.pyx":567
+      /* "cows/_skeletonize_3d_cy.pyx":572
  *                 octree_labeling(8, label, cube)
  *             label += 1
  *             if label - 2 >= 2:             # <<<<<<<<<<<<<<
@@ -6544,7 +6544,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
       __pyx_t_2 = (((__pyx_v_label - 2) >= 2) != 0);
       if (__pyx_t_2) {
 
-        /* "cows/_skeletonize_3d_cy.pyx":568
+        /* "cows/_skeletonize_3d_cy.pyx":573
  *             label += 1
  *             if label - 2 >= 2:
  *                 return False             # <<<<<<<<<<<<<<
@@ -6554,7 +6554,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
         __pyx_r = 0;
         goto __pyx_L0;
 
-        /* "cows/_skeletonize_3d_cy.pyx":567
+        /* "cows/_skeletonize_3d_cy.pyx":572
  *                 octree_labeling(8, label, cube)
  *             label += 1
  *             if label - 2 >= 2:             # <<<<<<<<<<<<<<
@@ -6563,7 +6563,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
  */
       }
 
-      /* "cows/_skeletonize_3d_cy.pyx":547
+      /* "cows/_skeletonize_3d_cy.pyx":552
  *     # for all point in the neighborhood
  *     for i in range(26):
  *         if cube[i] == 1:             # <<<<<<<<<<<<<<
@@ -6573,7 +6573,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
     }
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":569
+  /* "cows/_skeletonize_3d_cy.pyx":574
  *             if label - 2 >= 2:
  *                 return False
  *     return True             # <<<<<<<<<<<<<<
@@ -6583,7 +6583,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
   __pyx_r = 1;
   goto __pyx_L0;
 
-  /* "cows/_skeletonize_3d_cy.pyx":517
+  /* "cows/_skeletonize_3d_cy.pyx":522
  * 
  * 
  * cdef bint is_simple_point(pixel_type neighbors[]) nogil:             # <<<<<<<<<<<<<<
@@ -6596,7 +6596,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
   return __pyx_r;
 }
 
-/* "cows/_skeletonize_3d_cy.pyx":577
+/* "cows/_skeletonize_3d_cy.pyx":582
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cdef void octree_labeling(int octant, int label, pixel_type cube[]) nogil:             # <<<<<<<<<<<<<<
@@ -6607,7 +6607,7 @@ static int __pyx_f_4cows_18_skeletonize_3d_cy_is_simple_point(__pyx_t_4cows_18_s
 static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octant, int __pyx_v_label, __pyx_t_4cows_18_skeletonize_3d_cy_pixel_type *__pyx_v_cube) {
   int __pyx_t_1;
 
-  /* "cows/_skeletonize_3d_cy.pyx":600
+  /* "cows/_skeletonize_3d_cy.pyx":605
  *     # Below, leading underscore means build-time variables.
  * 
  *     if octant == 1:             # <<<<<<<<<<<<<<
@@ -6617,7 +6617,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
   __pyx_t_1 = ((__pyx_v_octant == 1) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":601
+    /* "cows/_skeletonize_3d_cy.pyx":606
  * 
  *     if octant == 1:
  *         if cube[0] == 1:             # <<<<<<<<<<<<<<
@@ -6627,7 +6627,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[0]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":602
+      /* "cows/_skeletonize_3d_cy.pyx":607
  *     if octant == 1:
  *         if cube[0] == 1:
  *             cube[0] = label             # <<<<<<<<<<<<<<
@@ -6636,7 +6636,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[0]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":601
+      /* "cows/_skeletonize_3d_cy.pyx":606
  * 
  *     if octant == 1:
  *         if cube[0] == 1:             # <<<<<<<<<<<<<<
@@ -6645,7 +6645,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":603
+    /* "cows/_skeletonize_3d_cy.pyx":608
  *         if cube[0] == 1:
  *             cube[0] = label
  *         if cube[1] == 1:             # <<<<<<<<<<<<<<
@@ -6655,7 +6655,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[1]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":604
+      /* "cows/_skeletonize_3d_cy.pyx":609
  *             cube[0] = label
  *         if cube[1] == 1:
  *             cube[1] = label             # <<<<<<<<<<<<<<
@@ -6664,7 +6664,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[1]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":605
+      /* "cows/_skeletonize_3d_cy.pyx":610
  *         if cube[1] == 1:
  *             cube[1] = label
  *             octree_labeling(2, label, cube)             # <<<<<<<<<<<<<<
@@ -6673,7 +6673,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(2, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":603
+      /* "cows/_skeletonize_3d_cy.pyx":608
  *         if cube[0] == 1:
  *             cube[0] = label
  *         if cube[1] == 1:             # <<<<<<<<<<<<<<
@@ -6682,7 +6682,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":606
+    /* "cows/_skeletonize_3d_cy.pyx":611
  *             cube[1] = label
  *             octree_labeling(2, label, cube)
  *         if cube[3] == 1:             # <<<<<<<<<<<<<<
@@ -6692,7 +6692,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[3]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":607
+      /* "cows/_skeletonize_3d_cy.pyx":612
  *             octree_labeling(2, label, cube)
  *         if cube[3] == 1:
  *             cube[3] = label             # <<<<<<<<<<<<<<
@@ -6701,7 +6701,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[3]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":608
+      /* "cows/_skeletonize_3d_cy.pyx":613
  *         if cube[3] == 1:
  *             cube[3] = label
  *             octree_labeling(3, label, cube)             # <<<<<<<<<<<<<<
@@ -6710,7 +6710,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(3, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":606
+      /* "cows/_skeletonize_3d_cy.pyx":611
  *             cube[1] = label
  *             octree_labeling(2, label, cube)
  *         if cube[3] == 1:             # <<<<<<<<<<<<<<
@@ -6719,7 +6719,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":609
+    /* "cows/_skeletonize_3d_cy.pyx":614
  *             cube[3] = label
  *             octree_labeling(3, label, cube)
  *         if cube[4] == 1:             # <<<<<<<<<<<<<<
@@ -6729,7 +6729,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[4]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":610
+      /* "cows/_skeletonize_3d_cy.pyx":615
  *             octree_labeling(3, label, cube)
  *         if cube[4] == 1:
  *             cube[4] = label             # <<<<<<<<<<<<<<
@@ -6738,7 +6738,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[4]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":611
+      /* "cows/_skeletonize_3d_cy.pyx":616
  *         if cube[4] == 1:
  *             cube[4] = label
  *             octree_labeling(2, label, cube)             # <<<<<<<<<<<<<<
@@ -6747,7 +6747,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(2, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":612
+      /* "cows/_skeletonize_3d_cy.pyx":617
  *             cube[4] = label
  *             octree_labeling(2, label, cube)
  *             octree_labeling(3, label, cube)             # <<<<<<<<<<<<<<
@@ -6756,7 +6756,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(3, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":613
+      /* "cows/_skeletonize_3d_cy.pyx":618
  *             octree_labeling(2, label, cube)
  *             octree_labeling(3, label, cube)
  *             octree_labeling(4, label, cube)             # <<<<<<<<<<<<<<
@@ -6765,7 +6765,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(4, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":609
+      /* "cows/_skeletonize_3d_cy.pyx":614
  *             cube[3] = label
  *             octree_labeling(3, label, cube)
  *         if cube[4] == 1:             # <<<<<<<<<<<<<<
@@ -6774,7 +6774,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":614
+    /* "cows/_skeletonize_3d_cy.pyx":619
  *             octree_labeling(3, label, cube)
  *             octree_labeling(4, label, cube)
  *         if cube[9] == 1:             # <<<<<<<<<<<<<<
@@ -6784,7 +6784,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[9]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":615
+      /* "cows/_skeletonize_3d_cy.pyx":620
  *             octree_labeling(4, label, cube)
  *         if cube[9] == 1:
  *             cube[9] = label             # <<<<<<<<<<<<<<
@@ -6793,7 +6793,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[9]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":616
+      /* "cows/_skeletonize_3d_cy.pyx":621
  *         if cube[9] == 1:
  *             cube[9] = label
  *             octree_labeling(5, label, cube)             # <<<<<<<<<<<<<<
@@ -6802,7 +6802,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(5, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":614
+      /* "cows/_skeletonize_3d_cy.pyx":619
  *             octree_labeling(3, label, cube)
  *             octree_labeling(4, label, cube)
  *         if cube[9] == 1:             # <<<<<<<<<<<<<<
@@ -6811,7 +6811,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":617
+    /* "cows/_skeletonize_3d_cy.pyx":622
  *             cube[9] = label
  *             octree_labeling(5, label, cube)
  *         if cube[10] == 1:             # <<<<<<<<<<<<<<
@@ -6821,7 +6821,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[10]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":618
+      /* "cows/_skeletonize_3d_cy.pyx":623
  *             octree_labeling(5, label, cube)
  *         if cube[10] == 1:
  *             cube[10] = label             # <<<<<<<<<<<<<<
@@ -6830,7 +6830,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[10]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":619
+      /* "cows/_skeletonize_3d_cy.pyx":624
  *         if cube[10] == 1:
  *             cube[10] = label
  *             octree_labeling(2, label, cube)             # <<<<<<<<<<<<<<
@@ -6839,7 +6839,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(2, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":620
+      /* "cows/_skeletonize_3d_cy.pyx":625
  *             cube[10] = label
  *             octree_labeling(2, label, cube)
  *             octree_labeling(5, label, cube)             # <<<<<<<<<<<<<<
@@ -6848,7 +6848,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(5, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":621
+      /* "cows/_skeletonize_3d_cy.pyx":626
  *             octree_labeling(2, label, cube)
  *             octree_labeling(5, label, cube)
  *             octree_labeling(6, label, cube)             # <<<<<<<<<<<<<<
@@ -6857,7 +6857,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(6, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":617
+      /* "cows/_skeletonize_3d_cy.pyx":622
  *             cube[9] = label
  *             octree_labeling(5, label, cube)
  *         if cube[10] == 1:             # <<<<<<<<<<<<<<
@@ -6866,7 +6866,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":622
+    /* "cows/_skeletonize_3d_cy.pyx":627
  *             octree_labeling(5, label, cube)
  *             octree_labeling(6, label, cube)
  *         if cube[12] == 1:             # <<<<<<<<<<<<<<
@@ -6876,7 +6876,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[12]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":623
+      /* "cows/_skeletonize_3d_cy.pyx":628
  *             octree_labeling(6, label, cube)
  *         if cube[12] == 1:
  *             cube[12] = label             # <<<<<<<<<<<<<<
@@ -6885,7 +6885,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[12]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":624
+      /* "cows/_skeletonize_3d_cy.pyx":629
  *         if cube[12] == 1:
  *             cube[12] = label
  *             octree_labeling(3, label, cube)             # <<<<<<<<<<<<<<
@@ -6894,7 +6894,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(3, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":625
+      /* "cows/_skeletonize_3d_cy.pyx":630
  *             cube[12] = label
  *             octree_labeling(3, label, cube)
  *             octree_labeling(5, label, cube)             # <<<<<<<<<<<<<<
@@ -6903,7 +6903,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(5, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":626
+      /* "cows/_skeletonize_3d_cy.pyx":631
  *             octree_labeling(3, label, cube)
  *             octree_labeling(5, label, cube)
  *             octree_labeling(7, label, cube)             # <<<<<<<<<<<<<<
@@ -6912,7 +6912,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(7, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":622
+      /* "cows/_skeletonize_3d_cy.pyx":627
  *             octree_labeling(5, label, cube)
  *             octree_labeling(6, label, cube)
  *         if cube[12] == 1:             # <<<<<<<<<<<<<<
@@ -6921,7 +6921,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":600
+    /* "cows/_skeletonize_3d_cy.pyx":605
  *     # Below, leading underscore means build-time variables.
  * 
  *     if octant == 1:             # <<<<<<<<<<<<<<
@@ -6930,7 +6930,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":628
+  /* "cows/_skeletonize_3d_cy.pyx":633
  *             octree_labeling(7, label, cube)
  * 
  *     if octant == 2:             # <<<<<<<<<<<<<<
@@ -6940,7 +6940,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
   __pyx_t_1 = ((__pyx_v_octant == 2) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":629
+    /* "cows/_skeletonize_3d_cy.pyx":634
  * 
  *     if octant == 2:
  *         if cube[1] == 1:             # <<<<<<<<<<<<<<
@@ -6950,7 +6950,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[1]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":630
+      /* "cows/_skeletonize_3d_cy.pyx":635
  *     if octant == 2:
  *         if cube[1] == 1:
  *             cube[1] = label             # <<<<<<<<<<<<<<
@@ -6959,7 +6959,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[1]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":631
+      /* "cows/_skeletonize_3d_cy.pyx":636
  *         if cube[1] == 1:
  *             cube[1] = label
  *             octree_labeling(1, label, cube)             # <<<<<<<<<<<<<<
@@ -6968,7 +6968,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(1, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":629
+      /* "cows/_skeletonize_3d_cy.pyx":634
  * 
  *     if octant == 2:
  *         if cube[1] == 1:             # <<<<<<<<<<<<<<
@@ -6977,7 +6977,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":632
+    /* "cows/_skeletonize_3d_cy.pyx":637
  *             cube[1] = label
  *             octree_labeling(1, label, cube)
  *         if cube[4] == 1:             # <<<<<<<<<<<<<<
@@ -6987,7 +6987,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[4]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":633
+      /* "cows/_skeletonize_3d_cy.pyx":638
  *             octree_labeling(1, label, cube)
  *         if cube[4] == 1:
  *             cube[4] = label             # <<<<<<<<<<<<<<
@@ -6996,7 +6996,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[4]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":634
+      /* "cows/_skeletonize_3d_cy.pyx":639
  *         if cube[4] == 1:
  *             cube[4] = label
  *             octree_labeling(1, label, cube)             # <<<<<<<<<<<<<<
@@ -7005,7 +7005,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(1, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":635
+      /* "cows/_skeletonize_3d_cy.pyx":640
  *             cube[4] = label
  *             octree_labeling(1, label, cube)
  *             octree_labeling(3, label, cube)             # <<<<<<<<<<<<<<
@@ -7014,7 +7014,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(3, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":636
+      /* "cows/_skeletonize_3d_cy.pyx":641
  *             octree_labeling(1, label, cube)
  *             octree_labeling(3, label, cube)
  *             octree_labeling(4, label, cube)             # <<<<<<<<<<<<<<
@@ -7023,7 +7023,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(4, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":632
+      /* "cows/_skeletonize_3d_cy.pyx":637
  *             cube[1] = label
  *             octree_labeling(1, label, cube)
  *         if cube[4] == 1:             # <<<<<<<<<<<<<<
@@ -7032,7 +7032,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":637
+    /* "cows/_skeletonize_3d_cy.pyx":642
  *             octree_labeling(3, label, cube)
  *             octree_labeling(4, label, cube)
  *         if cube[10] == 1:             # <<<<<<<<<<<<<<
@@ -7042,7 +7042,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[10]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":638
+      /* "cows/_skeletonize_3d_cy.pyx":643
  *             octree_labeling(4, label, cube)
  *         if cube[10] == 1:
  *             cube[10] = label             # <<<<<<<<<<<<<<
@@ -7051,7 +7051,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[10]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":639
+      /* "cows/_skeletonize_3d_cy.pyx":644
  *         if cube[10] == 1:
  *             cube[10] = label
  *             octree_labeling(1, label, cube)             # <<<<<<<<<<<<<<
@@ -7060,7 +7060,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(1, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":640
+      /* "cows/_skeletonize_3d_cy.pyx":645
  *             cube[10] = label
  *             octree_labeling(1, label, cube)
  *             octree_labeling(5, label, cube)             # <<<<<<<<<<<<<<
@@ -7069,7 +7069,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(5, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":641
+      /* "cows/_skeletonize_3d_cy.pyx":646
  *             octree_labeling(1, label, cube)
  *             octree_labeling(5, label, cube)
  *             octree_labeling(6, label, cube)             # <<<<<<<<<<<<<<
@@ -7078,7 +7078,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(6, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":637
+      /* "cows/_skeletonize_3d_cy.pyx":642
  *             octree_labeling(3, label, cube)
  *             octree_labeling(4, label, cube)
  *         if cube[10] == 1:             # <<<<<<<<<<<<<<
@@ -7087,7 +7087,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":642
+    /* "cows/_skeletonize_3d_cy.pyx":647
  *             octree_labeling(5, label, cube)
  *             octree_labeling(6, label, cube)
  *         if cube[2] == 1:             # <<<<<<<<<<<<<<
@@ -7097,7 +7097,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[2]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":643
+      /* "cows/_skeletonize_3d_cy.pyx":648
  *             octree_labeling(6, label, cube)
  *         if cube[2] == 1:
  *             cube[2] = label             # <<<<<<<<<<<<<<
@@ -7106,7 +7106,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[2]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":642
+      /* "cows/_skeletonize_3d_cy.pyx":647
  *             octree_labeling(5, label, cube)
  *             octree_labeling(6, label, cube)
  *         if cube[2] == 1:             # <<<<<<<<<<<<<<
@@ -7115,7 +7115,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":644
+    /* "cows/_skeletonize_3d_cy.pyx":649
  *         if cube[2] == 1:
  *             cube[2] = label
  *         if cube[5] == 1:             # <<<<<<<<<<<<<<
@@ -7125,7 +7125,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[5]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":645
+      /* "cows/_skeletonize_3d_cy.pyx":650
  *             cube[2] = label
  *         if cube[5] == 1:
  *             cube[5] = label             # <<<<<<<<<<<<<<
@@ -7134,7 +7134,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[5]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":646
+      /* "cows/_skeletonize_3d_cy.pyx":651
  *         if cube[5] == 1:
  *             cube[5] = label
  *             octree_labeling(4, label, cube)             # <<<<<<<<<<<<<<
@@ -7143,7 +7143,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(4, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":644
+      /* "cows/_skeletonize_3d_cy.pyx":649
  *         if cube[2] == 1:
  *             cube[2] = label
  *         if cube[5] == 1:             # <<<<<<<<<<<<<<
@@ -7152,7 +7152,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":647
+    /* "cows/_skeletonize_3d_cy.pyx":652
  *             cube[5] = label
  *             octree_labeling(4, label, cube)
  *         if cube[11] == 1:             # <<<<<<<<<<<<<<
@@ -7162,7 +7162,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[11]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":648
+      /* "cows/_skeletonize_3d_cy.pyx":653
  *             octree_labeling(4, label, cube)
  *         if cube[11] == 1:
  *             cube[11] = label             # <<<<<<<<<<<<<<
@@ -7171,7 +7171,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[11]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":649
+      /* "cows/_skeletonize_3d_cy.pyx":654
  *         if cube[11] == 1:
  *             cube[11] = label
  *             octree_labeling(6, label, cube)             # <<<<<<<<<<<<<<
@@ -7180,7 +7180,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(6, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":647
+      /* "cows/_skeletonize_3d_cy.pyx":652
  *             cube[5] = label
  *             octree_labeling(4, label, cube)
  *         if cube[11] == 1:             # <<<<<<<<<<<<<<
@@ -7189,7 +7189,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":650
+    /* "cows/_skeletonize_3d_cy.pyx":655
  *             cube[11] = label
  *             octree_labeling(6, label, cube)
  *         if cube[13] == 1:             # <<<<<<<<<<<<<<
@@ -7199,7 +7199,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[13]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":651
+      /* "cows/_skeletonize_3d_cy.pyx":656
  *             octree_labeling(6, label, cube)
  *         if cube[13] == 1:
  *             cube[13] = label             # <<<<<<<<<<<<<<
@@ -7208,7 +7208,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[13]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":652
+      /* "cows/_skeletonize_3d_cy.pyx":657
  *         if cube[13] == 1:
  *             cube[13] = label
  *             octree_labeling(4, label, cube)             # <<<<<<<<<<<<<<
@@ -7217,7 +7217,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(4, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":653
+      /* "cows/_skeletonize_3d_cy.pyx":658
  *             cube[13] = label
  *             octree_labeling(4, label, cube)
  *             octree_labeling(6, label, cube)             # <<<<<<<<<<<<<<
@@ -7226,7 +7226,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(6, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":654
+      /* "cows/_skeletonize_3d_cy.pyx":659
  *             octree_labeling(4, label, cube)
  *             octree_labeling(6, label, cube)
  *             octree_labeling(8, label, cube)             # <<<<<<<<<<<<<<
@@ -7235,7 +7235,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(8, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":650
+      /* "cows/_skeletonize_3d_cy.pyx":655
  *             cube[11] = label
  *             octree_labeling(6, label, cube)
  *         if cube[13] == 1:             # <<<<<<<<<<<<<<
@@ -7244,7 +7244,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":628
+    /* "cows/_skeletonize_3d_cy.pyx":633
  *             octree_labeling(7, label, cube)
  * 
  *     if octant == 2:             # <<<<<<<<<<<<<<
@@ -7253,7 +7253,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":656
+  /* "cows/_skeletonize_3d_cy.pyx":661
  *             octree_labeling(8, label, cube)
  * 
  *     if octant == 3:             # <<<<<<<<<<<<<<
@@ -7263,7 +7263,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
   __pyx_t_1 = ((__pyx_v_octant == 3) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":657
+    /* "cows/_skeletonize_3d_cy.pyx":662
  * 
  *     if octant == 3:
  *         if cube[3] == 1:             # <<<<<<<<<<<<<<
@@ -7273,7 +7273,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[3]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":658
+      /* "cows/_skeletonize_3d_cy.pyx":663
  *     if octant == 3:
  *         if cube[3] == 1:
  *             cube[3] = label             # <<<<<<<<<<<<<<
@@ -7282,7 +7282,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[3]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":659
+      /* "cows/_skeletonize_3d_cy.pyx":664
  *         if cube[3] == 1:
  *             cube[3] = label
  *             octree_labeling(1, label, cube)             # <<<<<<<<<<<<<<
@@ -7291,7 +7291,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(1, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":657
+      /* "cows/_skeletonize_3d_cy.pyx":662
  * 
  *     if octant == 3:
  *         if cube[3] == 1:             # <<<<<<<<<<<<<<
@@ -7300,7 +7300,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":660
+    /* "cows/_skeletonize_3d_cy.pyx":665
  *             cube[3] = label
  *             octree_labeling(1, label, cube)
  *         if cube[4] == 1:             # <<<<<<<<<<<<<<
@@ -7310,7 +7310,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[4]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":661
+      /* "cows/_skeletonize_3d_cy.pyx":666
  *             octree_labeling(1, label, cube)
  *         if cube[4] == 1:
  *             cube[4] = label             # <<<<<<<<<<<<<<
@@ -7319,7 +7319,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[4]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":662
+      /* "cows/_skeletonize_3d_cy.pyx":667
  *         if cube[4] == 1:
  *             cube[4] = label
  *             octree_labeling(1, label, cube)             # <<<<<<<<<<<<<<
@@ -7328,7 +7328,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(1, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":663
+      /* "cows/_skeletonize_3d_cy.pyx":668
  *             cube[4] = label
  *             octree_labeling(1, label, cube)
  *             octree_labeling(2, label, cube)             # <<<<<<<<<<<<<<
@@ -7337,7 +7337,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(2, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":664
+      /* "cows/_skeletonize_3d_cy.pyx":669
  *             octree_labeling(1, label, cube)
  *             octree_labeling(2, label, cube)
  *             octree_labeling(4, label, cube)             # <<<<<<<<<<<<<<
@@ -7346,7 +7346,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(4, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":660
+      /* "cows/_skeletonize_3d_cy.pyx":665
  *             cube[3] = label
  *             octree_labeling(1, label, cube)
  *         if cube[4] == 1:             # <<<<<<<<<<<<<<
@@ -7355,7 +7355,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":665
+    /* "cows/_skeletonize_3d_cy.pyx":670
  *             octree_labeling(2, label, cube)
  *             octree_labeling(4, label, cube)
  *         if cube[12] == 1:             # <<<<<<<<<<<<<<
@@ -7365,7 +7365,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[12]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":666
+      /* "cows/_skeletonize_3d_cy.pyx":671
  *             octree_labeling(4, label, cube)
  *         if cube[12] == 1:
  *             cube[12] = label             # <<<<<<<<<<<<<<
@@ -7374,7 +7374,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[12]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":667
+      /* "cows/_skeletonize_3d_cy.pyx":672
  *         if cube[12] == 1:
  *             cube[12] = label
  *             octree_labeling(1, label, cube)             # <<<<<<<<<<<<<<
@@ -7383,7 +7383,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(1, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":668
+      /* "cows/_skeletonize_3d_cy.pyx":673
  *             cube[12] = label
  *             octree_labeling(1, label, cube)
  *             octree_labeling(5, label, cube)             # <<<<<<<<<<<<<<
@@ -7392,7 +7392,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(5, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":669
+      /* "cows/_skeletonize_3d_cy.pyx":674
  *             octree_labeling(1, label, cube)
  *             octree_labeling(5, label, cube)
  *             octree_labeling(7, label, cube)             # <<<<<<<<<<<<<<
@@ -7401,7 +7401,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(7, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":665
+      /* "cows/_skeletonize_3d_cy.pyx":670
  *             octree_labeling(2, label, cube)
  *             octree_labeling(4, label, cube)
  *         if cube[12] == 1:             # <<<<<<<<<<<<<<
@@ -7410,7 +7410,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":670
+    /* "cows/_skeletonize_3d_cy.pyx":675
  *             octree_labeling(5, label, cube)
  *             octree_labeling(7, label, cube)
  *         if cube[6] == 1:             # <<<<<<<<<<<<<<
@@ -7420,7 +7420,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[6]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":671
+      /* "cows/_skeletonize_3d_cy.pyx":676
  *             octree_labeling(7, label, cube)
  *         if cube[6] == 1:
  *             cube[6] = label             # <<<<<<<<<<<<<<
@@ -7429,7 +7429,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[6]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":670
+      /* "cows/_skeletonize_3d_cy.pyx":675
  *             octree_labeling(5, label, cube)
  *             octree_labeling(7, label, cube)
  *         if cube[6] == 1:             # <<<<<<<<<<<<<<
@@ -7438,7 +7438,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":672
+    /* "cows/_skeletonize_3d_cy.pyx":677
  *         if cube[6] == 1:
  *             cube[6] = label
  *         if cube[7] == 1:             # <<<<<<<<<<<<<<
@@ -7448,7 +7448,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[7]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":673
+      /* "cows/_skeletonize_3d_cy.pyx":678
  *             cube[6] = label
  *         if cube[7] == 1:
  *             cube[7] = label             # <<<<<<<<<<<<<<
@@ -7457,7 +7457,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[7]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":674
+      /* "cows/_skeletonize_3d_cy.pyx":679
  *         if cube[7] == 1:
  *             cube[7] = label
  *             octree_labeling(4, label, cube)             # <<<<<<<<<<<<<<
@@ -7466,7 +7466,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(4, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":672
+      /* "cows/_skeletonize_3d_cy.pyx":677
  *         if cube[6] == 1:
  *             cube[6] = label
  *         if cube[7] == 1:             # <<<<<<<<<<<<<<
@@ -7475,7 +7475,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":675
+    /* "cows/_skeletonize_3d_cy.pyx":680
  *             cube[7] = label
  *             octree_labeling(4, label, cube)
  *         if cube[14] == 1:             # <<<<<<<<<<<<<<
@@ -7485,7 +7485,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[14]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":676
+      /* "cows/_skeletonize_3d_cy.pyx":681
  *             octree_labeling(4, label, cube)
  *         if cube[14] == 1:
  *             cube[14] = label             # <<<<<<<<<<<<<<
@@ -7494,7 +7494,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[14]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":677
+      /* "cows/_skeletonize_3d_cy.pyx":682
  *         if cube[14] == 1:
  *             cube[14] = label
  *             octree_labeling(7, label, cube)             # <<<<<<<<<<<<<<
@@ -7503,7 +7503,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(7, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":675
+      /* "cows/_skeletonize_3d_cy.pyx":680
  *             cube[7] = label
  *             octree_labeling(4, label, cube)
  *         if cube[14] == 1:             # <<<<<<<<<<<<<<
@@ -7512,7 +7512,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":678
+    /* "cows/_skeletonize_3d_cy.pyx":683
  *             cube[14] = label
  *             octree_labeling(7, label, cube)
  *         if cube[15] == 1:             # <<<<<<<<<<<<<<
@@ -7522,7 +7522,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[15]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":679
+      /* "cows/_skeletonize_3d_cy.pyx":684
  *             octree_labeling(7, label, cube)
  *         if cube[15] == 1:
  *             cube[15] = label             # <<<<<<<<<<<<<<
@@ -7531,7 +7531,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[15]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":680
+      /* "cows/_skeletonize_3d_cy.pyx":685
  *         if cube[15] == 1:
  *             cube[15] = label
  *             octree_labeling(4, label, cube)             # <<<<<<<<<<<<<<
@@ -7540,7 +7540,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(4, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":681
+      /* "cows/_skeletonize_3d_cy.pyx":686
  *             cube[15] = label
  *             octree_labeling(4, label, cube)
  *             octree_labeling(7, label, cube)             # <<<<<<<<<<<<<<
@@ -7549,7 +7549,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(7, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":682
+      /* "cows/_skeletonize_3d_cy.pyx":687
  *             octree_labeling(4, label, cube)
  *             octree_labeling(7, label, cube)
  *             octree_labeling(8, label, cube)             # <<<<<<<<<<<<<<
@@ -7558,7 +7558,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(8, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":678
+      /* "cows/_skeletonize_3d_cy.pyx":683
  *             cube[14] = label
  *             octree_labeling(7, label, cube)
  *         if cube[15] == 1:             # <<<<<<<<<<<<<<
@@ -7567,7 +7567,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":656
+    /* "cows/_skeletonize_3d_cy.pyx":661
  *             octree_labeling(8, label, cube)
  * 
  *     if octant == 3:             # <<<<<<<<<<<<<<
@@ -7576,7 +7576,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":684
+  /* "cows/_skeletonize_3d_cy.pyx":689
  *             octree_labeling(8, label, cube)
  * 
  *     if octant == 4:             # <<<<<<<<<<<<<<
@@ -7586,7 +7586,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
   __pyx_t_1 = ((__pyx_v_octant == 4) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":685
+    /* "cows/_skeletonize_3d_cy.pyx":690
  * 
  *     if octant == 4:
  *         if cube[4] == 1:             # <<<<<<<<<<<<<<
@@ -7596,7 +7596,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[4]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":686
+      /* "cows/_skeletonize_3d_cy.pyx":691
  *     if octant == 4:
  *         if cube[4] == 1:
  *             cube[4] = label             # <<<<<<<<<<<<<<
@@ -7605,7 +7605,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[4]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":687
+      /* "cows/_skeletonize_3d_cy.pyx":692
  *         if cube[4] == 1:
  *             cube[4] = label
  *             octree_labeling(1, label, cube)             # <<<<<<<<<<<<<<
@@ -7614,7 +7614,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(1, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":688
+      /* "cows/_skeletonize_3d_cy.pyx":693
  *             cube[4] = label
  *             octree_labeling(1, label, cube)
  *             octree_labeling(2, label, cube)             # <<<<<<<<<<<<<<
@@ -7623,7 +7623,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(2, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":689
+      /* "cows/_skeletonize_3d_cy.pyx":694
  *             octree_labeling(1, label, cube)
  *             octree_labeling(2, label, cube)
  *             octree_labeling(3, label, cube)             # <<<<<<<<<<<<<<
@@ -7632,7 +7632,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(3, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":685
+      /* "cows/_skeletonize_3d_cy.pyx":690
  * 
  *     if octant == 4:
  *         if cube[4] == 1:             # <<<<<<<<<<<<<<
@@ -7641,7 +7641,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":690
+    /* "cows/_skeletonize_3d_cy.pyx":695
  *             octree_labeling(2, label, cube)
  *             octree_labeling(3, label, cube)
  *         if cube[5] == 1:             # <<<<<<<<<<<<<<
@@ -7651,7 +7651,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[5]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":691
+      /* "cows/_skeletonize_3d_cy.pyx":696
  *             octree_labeling(3, label, cube)
  *         if cube[5] == 1:
  *             cube[5] = label             # <<<<<<<<<<<<<<
@@ -7660,7 +7660,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[5]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":692
+      /* "cows/_skeletonize_3d_cy.pyx":697
  *         if cube[5] == 1:
  *             cube[5] = label
  *             octree_labeling(2, label, cube)             # <<<<<<<<<<<<<<
@@ -7669,7 +7669,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(2, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":690
+      /* "cows/_skeletonize_3d_cy.pyx":695
  *             octree_labeling(2, label, cube)
  *             octree_labeling(3, label, cube)
  *         if cube[5] == 1:             # <<<<<<<<<<<<<<
@@ -7678,7 +7678,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":693
+    /* "cows/_skeletonize_3d_cy.pyx":698
  *             cube[5] = label
  *             octree_labeling(2, label, cube)
  *         if cube[13] == 1:             # <<<<<<<<<<<<<<
@@ -7688,7 +7688,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[13]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":694
+      /* "cows/_skeletonize_3d_cy.pyx":699
  *             octree_labeling(2, label, cube)
  *         if cube[13] == 1:
  *             cube[13] = label             # <<<<<<<<<<<<<<
@@ -7697,7 +7697,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[13]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":695
+      /* "cows/_skeletonize_3d_cy.pyx":700
  *         if cube[13] == 1:
  *             cube[13] = label
  *             octree_labeling(2, label, cube)             # <<<<<<<<<<<<<<
@@ -7706,7 +7706,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(2, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":696
+      /* "cows/_skeletonize_3d_cy.pyx":701
  *             cube[13] = label
  *             octree_labeling(2, label, cube)
  *             octree_labeling(6, label, cube)             # <<<<<<<<<<<<<<
@@ -7715,7 +7715,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(6, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":697
+      /* "cows/_skeletonize_3d_cy.pyx":702
  *             octree_labeling(2, label, cube)
  *             octree_labeling(6, label, cube)
  *             octree_labeling(8, label, cube)             # <<<<<<<<<<<<<<
@@ -7724,7 +7724,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(8, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":693
+      /* "cows/_skeletonize_3d_cy.pyx":698
  *             cube[5] = label
  *             octree_labeling(2, label, cube)
  *         if cube[13] == 1:             # <<<<<<<<<<<<<<
@@ -7733,7 +7733,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":698
+    /* "cows/_skeletonize_3d_cy.pyx":703
  *             octree_labeling(6, label, cube)
  *             octree_labeling(8, label, cube)
  *         if cube[7] == 1:             # <<<<<<<<<<<<<<
@@ -7743,7 +7743,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[7]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":699
+      /* "cows/_skeletonize_3d_cy.pyx":704
  *             octree_labeling(8, label, cube)
  *         if cube[7] == 1:
  *             cube[7] = label             # <<<<<<<<<<<<<<
@@ -7752,7 +7752,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[7]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":700
+      /* "cows/_skeletonize_3d_cy.pyx":705
  *         if cube[7] == 1:
  *             cube[7] = label
  *             octree_labeling(3, label, cube)             # <<<<<<<<<<<<<<
@@ -7761,7 +7761,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(3, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":698
+      /* "cows/_skeletonize_3d_cy.pyx":703
  *             octree_labeling(6, label, cube)
  *             octree_labeling(8, label, cube)
  *         if cube[7] == 1:             # <<<<<<<<<<<<<<
@@ -7770,7 +7770,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":701
+    /* "cows/_skeletonize_3d_cy.pyx":706
  *             cube[7] = label
  *             octree_labeling(3, label, cube)
  *         if cube[15] == 1:             # <<<<<<<<<<<<<<
@@ -7780,7 +7780,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[15]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":702
+      /* "cows/_skeletonize_3d_cy.pyx":707
  *             octree_labeling(3, label, cube)
  *         if cube[15] == 1:
  *             cube[15] = label             # <<<<<<<<<<<<<<
@@ -7789,7 +7789,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[15]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":703
+      /* "cows/_skeletonize_3d_cy.pyx":708
  *         if cube[15] == 1:
  *             cube[15] = label
  *             octree_labeling(3, label, cube)             # <<<<<<<<<<<<<<
@@ -7798,7 +7798,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(3, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":704
+      /* "cows/_skeletonize_3d_cy.pyx":709
  *             cube[15] = label
  *             octree_labeling(3, label, cube)
  *             octree_labeling(7, label, cube)             # <<<<<<<<<<<<<<
@@ -7807,7 +7807,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(7, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":705
+      /* "cows/_skeletonize_3d_cy.pyx":710
  *             octree_labeling(3, label, cube)
  *             octree_labeling(7, label, cube)
  *             octree_labeling(8, label, cube)             # <<<<<<<<<<<<<<
@@ -7816,7 +7816,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(8, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":701
+      /* "cows/_skeletonize_3d_cy.pyx":706
  *             cube[7] = label
  *             octree_labeling(3, label, cube)
  *         if cube[15] == 1:             # <<<<<<<<<<<<<<
@@ -7825,7 +7825,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":706
+    /* "cows/_skeletonize_3d_cy.pyx":711
  *             octree_labeling(7, label, cube)
  *             octree_labeling(8, label, cube)
  *         if cube[8] == 1:             # <<<<<<<<<<<<<<
@@ -7835,7 +7835,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[8]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":707
+      /* "cows/_skeletonize_3d_cy.pyx":712
  *             octree_labeling(8, label, cube)
  *         if cube[8] == 1:
  *             cube[8] = label             # <<<<<<<<<<<<<<
@@ -7844,7 +7844,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[8]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":706
+      /* "cows/_skeletonize_3d_cy.pyx":711
  *             octree_labeling(7, label, cube)
  *             octree_labeling(8, label, cube)
  *         if cube[8] == 1:             # <<<<<<<<<<<<<<
@@ -7853,7 +7853,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":708
+    /* "cows/_skeletonize_3d_cy.pyx":713
  *         if cube[8] == 1:
  *             cube[8] = label
  *         if cube[16] == 1:             # <<<<<<<<<<<<<<
@@ -7863,7 +7863,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[16]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":709
+      /* "cows/_skeletonize_3d_cy.pyx":714
  *             cube[8] = label
  *         if cube[16] == 1:
  *             cube[16] = label             # <<<<<<<<<<<<<<
@@ -7872,7 +7872,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[16]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":710
+      /* "cows/_skeletonize_3d_cy.pyx":715
  *         if cube[16] == 1:
  *             cube[16] = label
  *             octree_labeling(8, label, cube)             # <<<<<<<<<<<<<<
@@ -7881,7 +7881,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(8, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":708
+      /* "cows/_skeletonize_3d_cy.pyx":713
  *         if cube[8] == 1:
  *             cube[8] = label
  *         if cube[16] == 1:             # <<<<<<<<<<<<<<
@@ -7890,7 +7890,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":684
+    /* "cows/_skeletonize_3d_cy.pyx":689
  *             octree_labeling(8, label, cube)
  * 
  *     if octant == 4:             # <<<<<<<<<<<<<<
@@ -7899,7 +7899,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":712
+  /* "cows/_skeletonize_3d_cy.pyx":717
  *             octree_labeling(8, label, cube)
  * 
  *     if octant == 5:             # <<<<<<<<<<<<<<
@@ -7909,7 +7909,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
   __pyx_t_1 = ((__pyx_v_octant == 5) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":713
+    /* "cows/_skeletonize_3d_cy.pyx":718
  * 
  *     if octant == 5:
  *         if cube[9] == 1:             # <<<<<<<<<<<<<<
@@ -7919,7 +7919,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[9]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":714
+      /* "cows/_skeletonize_3d_cy.pyx":719
  *     if octant == 5:
  *         if cube[9] == 1:
  *             cube[9] = label             # <<<<<<<<<<<<<<
@@ -7928,7 +7928,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[9]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":715
+      /* "cows/_skeletonize_3d_cy.pyx":720
  *         if cube[9] == 1:
  *             cube[9] = label
  *             octree_labeling(1, label, cube)             # <<<<<<<<<<<<<<
@@ -7937,7 +7937,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(1, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":713
+      /* "cows/_skeletonize_3d_cy.pyx":718
  * 
  *     if octant == 5:
  *         if cube[9] == 1:             # <<<<<<<<<<<<<<
@@ -7946,7 +7946,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":716
+    /* "cows/_skeletonize_3d_cy.pyx":721
  *             cube[9] = label
  *             octree_labeling(1, label, cube)
  *         if cube[10] == 1:             # <<<<<<<<<<<<<<
@@ -7956,7 +7956,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[10]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":717
+      /* "cows/_skeletonize_3d_cy.pyx":722
  *             octree_labeling(1, label, cube)
  *         if cube[10] == 1:
  *             cube[10] = label             # <<<<<<<<<<<<<<
@@ -7965,7 +7965,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[10]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":718
+      /* "cows/_skeletonize_3d_cy.pyx":723
  *         if cube[10] == 1:
  *             cube[10] = label
  *             octree_labeling(1, label, cube)             # <<<<<<<<<<<<<<
@@ -7974,7 +7974,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(1, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":719
+      /* "cows/_skeletonize_3d_cy.pyx":724
  *             cube[10] = label
  *             octree_labeling(1, label, cube)
  *             octree_labeling(2, label, cube)             # <<<<<<<<<<<<<<
@@ -7983,7 +7983,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(2, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":720
+      /* "cows/_skeletonize_3d_cy.pyx":725
  *             octree_labeling(1, label, cube)
  *             octree_labeling(2, label, cube)
  *             octree_labeling(6, label, cube)             # <<<<<<<<<<<<<<
@@ -7992,7 +7992,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(6, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":716
+      /* "cows/_skeletonize_3d_cy.pyx":721
  *             cube[9] = label
  *             octree_labeling(1, label, cube)
  *         if cube[10] == 1:             # <<<<<<<<<<<<<<
@@ -8001,7 +8001,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":721
+    /* "cows/_skeletonize_3d_cy.pyx":726
  *             octree_labeling(2, label, cube)
  *             octree_labeling(6, label, cube)
  *         if cube[12] == 1:             # <<<<<<<<<<<<<<
@@ -8011,7 +8011,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[12]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":722
+      /* "cows/_skeletonize_3d_cy.pyx":727
  *             octree_labeling(6, label, cube)
  *         if cube[12] == 1:
  *             cube[12] = label             # <<<<<<<<<<<<<<
@@ -8020,7 +8020,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[12]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":723
+      /* "cows/_skeletonize_3d_cy.pyx":728
  *         if cube[12] == 1:
  *             cube[12] = label
  *             octree_labeling(1, label, cube)             # <<<<<<<<<<<<<<
@@ -8029,7 +8029,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(1, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":724
+      /* "cows/_skeletonize_3d_cy.pyx":729
  *             cube[12] = label
  *             octree_labeling(1, label, cube)
  *             octree_labeling(3, label, cube)             # <<<<<<<<<<<<<<
@@ -8038,7 +8038,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(3, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":725
+      /* "cows/_skeletonize_3d_cy.pyx":730
  *             octree_labeling(1, label, cube)
  *             octree_labeling(3, label, cube)
  *             octree_labeling(7, label, cube)             # <<<<<<<<<<<<<<
@@ -8047,7 +8047,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(7, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":721
+      /* "cows/_skeletonize_3d_cy.pyx":726
  *             octree_labeling(2, label, cube)
  *             octree_labeling(6, label, cube)
  *         if cube[12] == 1:             # <<<<<<<<<<<<<<
@@ -8056,7 +8056,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":726
+    /* "cows/_skeletonize_3d_cy.pyx":731
  *             octree_labeling(3, label, cube)
  *             octree_labeling(7, label, cube)
  *         if cube[17] == 1:             # <<<<<<<<<<<<<<
@@ -8066,7 +8066,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[17]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":727
+      /* "cows/_skeletonize_3d_cy.pyx":732
  *             octree_labeling(7, label, cube)
  *         if cube[17] == 1:
  *             cube[17] = label             # <<<<<<<<<<<<<<
@@ -8075,7 +8075,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[17]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":726
+      /* "cows/_skeletonize_3d_cy.pyx":731
  *             octree_labeling(3, label, cube)
  *             octree_labeling(7, label, cube)
  *         if cube[17] == 1:             # <<<<<<<<<<<<<<
@@ -8084,7 +8084,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":728
+    /* "cows/_skeletonize_3d_cy.pyx":733
  *         if cube[17] == 1:
  *             cube[17] = label
  *         if cube[18] == 1:             # <<<<<<<<<<<<<<
@@ -8094,7 +8094,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[18]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":729
+      /* "cows/_skeletonize_3d_cy.pyx":734
  *             cube[17] = label
  *         if cube[18] == 1:
  *             cube[18] = label             # <<<<<<<<<<<<<<
@@ -8103,7 +8103,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[18]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":730
+      /* "cows/_skeletonize_3d_cy.pyx":735
  *         if cube[18] == 1:
  *             cube[18] = label
  *             octree_labeling(6, label, cube)             # <<<<<<<<<<<<<<
@@ -8112,7 +8112,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(6, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":728
+      /* "cows/_skeletonize_3d_cy.pyx":733
  *         if cube[17] == 1:
  *             cube[17] = label
  *         if cube[18] == 1:             # <<<<<<<<<<<<<<
@@ -8121,7 +8121,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":731
+    /* "cows/_skeletonize_3d_cy.pyx":736
  *             cube[18] = label
  *             octree_labeling(6, label, cube)
  *         if cube[20] == 1:             # <<<<<<<<<<<<<<
@@ -8131,7 +8131,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[20]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":732
+      /* "cows/_skeletonize_3d_cy.pyx":737
  *             octree_labeling(6, label, cube)
  *         if cube[20] == 1:
  *             cube[20] = label             # <<<<<<<<<<<<<<
@@ -8140,7 +8140,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[20]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":733
+      /* "cows/_skeletonize_3d_cy.pyx":738
  *         if cube[20] == 1:
  *             cube[20] = label
  *             octree_labeling(7, label, cube)             # <<<<<<<<<<<<<<
@@ -8149,7 +8149,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(7, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":731
+      /* "cows/_skeletonize_3d_cy.pyx":736
  *             cube[18] = label
  *             octree_labeling(6, label, cube)
  *         if cube[20] == 1:             # <<<<<<<<<<<<<<
@@ -8158,7 +8158,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":734
+    /* "cows/_skeletonize_3d_cy.pyx":739
  *             cube[20] = label
  *             octree_labeling(7, label, cube)
  *         if cube[21] == 1:             # <<<<<<<<<<<<<<
@@ -8168,7 +8168,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[21]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":735
+      /* "cows/_skeletonize_3d_cy.pyx":740
  *             octree_labeling(7, label, cube)
  *         if cube[21] == 1:
  *             cube[21] = label             # <<<<<<<<<<<<<<
@@ -8177,7 +8177,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[21]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":736
+      /* "cows/_skeletonize_3d_cy.pyx":741
  *         if cube[21] == 1:
  *             cube[21] = label
  *             octree_labeling(6, label, cube)             # <<<<<<<<<<<<<<
@@ -8186,7 +8186,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(6, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":737
+      /* "cows/_skeletonize_3d_cy.pyx":742
  *             cube[21] = label
  *             octree_labeling(6, label, cube)
  *             octree_labeling(7, label, cube)             # <<<<<<<<<<<<<<
@@ -8195,7 +8195,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(7, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":738
+      /* "cows/_skeletonize_3d_cy.pyx":743
  *             octree_labeling(6, label, cube)
  *             octree_labeling(7, label, cube)
  *             octree_labeling(8, label, cube)             # <<<<<<<<<<<<<<
@@ -8204,7 +8204,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(8, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":734
+      /* "cows/_skeletonize_3d_cy.pyx":739
  *             cube[20] = label
  *             octree_labeling(7, label, cube)
  *         if cube[21] == 1:             # <<<<<<<<<<<<<<
@@ -8213,7 +8213,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":712
+    /* "cows/_skeletonize_3d_cy.pyx":717
  *             octree_labeling(8, label, cube)
  * 
  *     if octant == 5:             # <<<<<<<<<<<<<<
@@ -8222,7 +8222,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":740
+  /* "cows/_skeletonize_3d_cy.pyx":745
  *             octree_labeling(8, label, cube)
  * 
  *     if octant == 6:             # <<<<<<<<<<<<<<
@@ -8232,7 +8232,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
   __pyx_t_1 = ((__pyx_v_octant == 6) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":741
+    /* "cows/_skeletonize_3d_cy.pyx":746
  * 
  *     if octant == 6:
  *         if cube[10] == 1:             # <<<<<<<<<<<<<<
@@ -8242,7 +8242,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[10]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":742
+      /* "cows/_skeletonize_3d_cy.pyx":747
  *     if octant == 6:
  *         if cube[10] == 1:
  *             cube[10] = label             # <<<<<<<<<<<<<<
@@ -8251,7 +8251,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[10]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":743
+      /* "cows/_skeletonize_3d_cy.pyx":748
  *         if cube[10] == 1:
  *             cube[10] = label
  *             octree_labeling(1, label, cube)             # <<<<<<<<<<<<<<
@@ -8260,7 +8260,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(1, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":744
+      /* "cows/_skeletonize_3d_cy.pyx":749
  *             cube[10] = label
  *             octree_labeling(1, label, cube)
  *             octree_labeling(2, label, cube)             # <<<<<<<<<<<<<<
@@ -8269,7 +8269,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(2, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":745
+      /* "cows/_skeletonize_3d_cy.pyx":750
  *             octree_labeling(1, label, cube)
  *             octree_labeling(2, label, cube)
  *             octree_labeling(5, label, cube)             # <<<<<<<<<<<<<<
@@ -8278,7 +8278,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(5, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":741
+      /* "cows/_skeletonize_3d_cy.pyx":746
  * 
  *     if octant == 6:
  *         if cube[10] == 1:             # <<<<<<<<<<<<<<
@@ -8287,7 +8287,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":746
+    /* "cows/_skeletonize_3d_cy.pyx":751
  *             octree_labeling(2, label, cube)
  *             octree_labeling(5, label, cube)
  *         if cube[11] == 1:             # <<<<<<<<<<<<<<
@@ -8297,7 +8297,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[11]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":747
+      /* "cows/_skeletonize_3d_cy.pyx":752
  *             octree_labeling(5, label, cube)
  *         if cube[11] == 1:
  *             cube[11] = label             # <<<<<<<<<<<<<<
@@ -8306,7 +8306,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[11]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":748
+      /* "cows/_skeletonize_3d_cy.pyx":753
  *         if cube[11] == 1:
  *             cube[11] = label
  *             octree_labeling(2, label, cube)             # <<<<<<<<<<<<<<
@@ -8315,7 +8315,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(2, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":746
+      /* "cows/_skeletonize_3d_cy.pyx":751
  *             octree_labeling(2, label, cube)
  *             octree_labeling(5, label, cube)
  *         if cube[11] == 1:             # <<<<<<<<<<<<<<
@@ -8324,7 +8324,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":749
+    /* "cows/_skeletonize_3d_cy.pyx":754
  *             cube[11] = label
  *             octree_labeling(2, label, cube)
  *         if cube[13] == 1:             # <<<<<<<<<<<<<<
@@ -8334,7 +8334,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[13]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":750
+      /* "cows/_skeletonize_3d_cy.pyx":755
  *             octree_labeling(2, label, cube)
  *         if cube[13] == 1:
  *             cube[13] = label             # <<<<<<<<<<<<<<
@@ -8343,7 +8343,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[13]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":751
+      /* "cows/_skeletonize_3d_cy.pyx":756
  *         if cube[13] == 1:
  *             cube[13] = label
  *             octree_labeling(2, label, cube)             # <<<<<<<<<<<<<<
@@ -8352,7 +8352,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(2, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":752
+      /* "cows/_skeletonize_3d_cy.pyx":757
  *             cube[13] = label
  *             octree_labeling(2, label, cube)
  *             octree_labeling(4, label, cube)             # <<<<<<<<<<<<<<
@@ -8361,7 +8361,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(4, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":753
+      /* "cows/_skeletonize_3d_cy.pyx":758
  *             octree_labeling(2, label, cube)
  *             octree_labeling(4, label, cube)
  *             octree_labeling(8, label, cube)             # <<<<<<<<<<<<<<
@@ -8370,7 +8370,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(8, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":749
+      /* "cows/_skeletonize_3d_cy.pyx":754
  *             cube[11] = label
  *             octree_labeling(2, label, cube)
  *         if cube[13] == 1:             # <<<<<<<<<<<<<<
@@ -8379,7 +8379,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":754
+    /* "cows/_skeletonize_3d_cy.pyx":759
  *             octree_labeling(4, label, cube)
  *             octree_labeling(8, label, cube)
  *         if cube[18] == 1:             # <<<<<<<<<<<<<<
@@ -8389,7 +8389,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[18]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":755
+      /* "cows/_skeletonize_3d_cy.pyx":760
  *             octree_labeling(8, label, cube)
  *         if cube[18] == 1:
  *             cube[18] = label             # <<<<<<<<<<<<<<
@@ -8398,7 +8398,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[18]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":756
+      /* "cows/_skeletonize_3d_cy.pyx":761
  *         if cube[18] == 1:
  *             cube[18] = label
  *             octree_labeling(5, label, cube)             # <<<<<<<<<<<<<<
@@ -8407,7 +8407,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(5, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":754
+      /* "cows/_skeletonize_3d_cy.pyx":759
  *             octree_labeling(4, label, cube)
  *             octree_labeling(8, label, cube)
  *         if cube[18] == 1:             # <<<<<<<<<<<<<<
@@ -8416,7 +8416,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":757
+    /* "cows/_skeletonize_3d_cy.pyx":762
  *             cube[18] = label
  *             octree_labeling(5, label, cube)
  *         if cube[21] == 1:             # <<<<<<<<<<<<<<
@@ -8426,7 +8426,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[21]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":758
+      /* "cows/_skeletonize_3d_cy.pyx":763
  *             octree_labeling(5, label, cube)
  *         if cube[21] == 1:
  *             cube[21] = label             # <<<<<<<<<<<<<<
@@ -8435,7 +8435,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[21]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":759
+      /* "cows/_skeletonize_3d_cy.pyx":764
  *         if cube[21] == 1:
  *             cube[21] = label
  *             octree_labeling(5, label, cube)             # <<<<<<<<<<<<<<
@@ -8444,7 +8444,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(5, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":760
+      /* "cows/_skeletonize_3d_cy.pyx":765
  *             cube[21] = label
  *             octree_labeling(5, label, cube)
  *             octree_labeling(7, label, cube)             # <<<<<<<<<<<<<<
@@ -8453,7 +8453,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(7, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":761
+      /* "cows/_skeletonize_3d_cy.pyx":766
  *             octree_labeling(5, label, cube)
  *             octree_labeling(7, label, cube)
  *             octree_labeling(8, label, cube)             # <<<<<<<<<<<<<<
@@ -8462,7 +8462,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(8, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":757
+      /* "cows/_skeletonize_3d_cy.pyx":762
  *             cube[18] = label
  *             octree_labeling(5, label, cube)
  *         if cube[21] == 1:             # <<<<<<<<<<<<<<
@@ -8471,7 +8471,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":762
+    /* "cows/_skeletonize_3d_cy.pyx":767
  *             octree_labeling(7, label, cube)
  *             octree_labeling(8, label, cube)
  *         if cube[19] == 1:             # <<<<<<<<<<<<<<
@@ -8481,7 +8481,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[19]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":763
+      /* "cows/_skeletonize_3d_cy.pyx":768
  *             octree_labeling(8, label, cube)
  *         if cube[19] == 1:
  *             cube[19] = label             # <<<<<<<<<<<<<<
@@ -8490,7 +8490,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[19]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":762
+      /* "cows/_skeletonize_3d_cy.pyx":767
  *             octree_labeling(7, label, cube)
  *             octree_labeling(8, label, cube)
  *         if cube[19] == 1:             # <<<<<<<<<<<<<<
@@ -8499,7 +8499,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":764
+    /* "cows/_skeletonize_3d_cy.pyx":769
  *         if cube[19] == 1:
  *             cube[19] = label
  *         if cube[22] == 1:             # <<<<<<<<<<<<<<
@@ -8509,7 +8509,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[22]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":765
+      /* "cows/_skeletonize_3d_cy.pyx":770
  *             cube[19] = label
  *         if cube[22] == 1:
  *             cube[22] = label             # <<<<<<<<<<<<<<
@@ -8518,7 +8518,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[22]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":766
+      /* "cows/_skeletonize_3d_cy.pyx":771
  *         if cube[22] == 1:
  *             cube[22] = label
  *             octree_labeling(8, label, cube)             # <<<<<<<<<<<<<<
@@ -8527,7 +8527,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(8, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":764
+      /* "cows/_skeletonize_3d_cy.pyx":769
  *         if cube[19] == 1:
  *             cube[19] = label
  *         if cube[22] == 1:             # <<<<<<<<<<<<<<
@@ -8536,7 +8536,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":740
+    /* "cows/_skeletonize_3d_cy.pyx":745
  *             octree_labeling(8, label, cube)
  * 
  *     if octant == 6:             # <<<<<<<<<<<<<<
@@ -8545,7 +8545,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":768
+  /* "cows/_skeletonize_3d_cy.pyx":773
  *             octree_labeling(8, label, cube)
  * 
  *     if octant == 7:             # <<<<<<<<<<<<<<
@@ -8555,7 +8555,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
   __pyx_t_1 = ((__pyx_v_octant == 7) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":769
+    /* "cows/_skeletonize_3d_cy.pyx":774
  * 
  *     if octant == 7:
  *         if cube[12] == 1:             # <<<<<<<<<<<<<<
@@ -8565,7 +8565,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[12]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":770
+      /* "cows/_skeletonize_3d_cy.pyx":775
  *     if octant == 7:
  *         if cube[12] == 1:
  *             cube[12] = label             # <<<<<<<<<<<<<<
@@ -8574,7 +8574,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[12]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":771
+      /* "cows/_skeletonize_3d_cy.pyx":776
  *         if cube[12] == 1:
  *             cube[12] = label
  *             octree_labeling(1, label, cube)             # <<<<<<<<<<<<<<
@@ -8583,7 +8583,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(1, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":772
+      /* "cows/_skeletonize_3d_cy.pyx":777
  *             cube[12] = label
  *             octree_labeling(1, label, cube)
  *             octree_labeling(3, label, cube)             # <<<<<<<<<<<<<<
@@ -8592,7 +8592,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(3, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":773
+      /* "cows/_skeletonize_3d_cy.pyx":778
  *             octree_labeling(1, label, cube)
  *             octree_labeling(3, label, cube)
  *             octree_labeling(5, label, cube)             # <<<<<<<<<<<<<<
@@ -8601,7 +8601,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(5, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":769
+      /* "cows/_skeletonize_3d_cy.pyx":774
  * 
  *     if octant == 7:
  *         if cube[12] == 1:             # <<<<<<<<<<<<<<
@@ -8610,7 +8610,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":774
+    /* "cows/_skeletonize_3d_cy.pyx":779
  *             octree_labeling(3, label, cube)
  *             octree_labeling(5, label, cube)
  *         if cube[14] == 1:             # <<<<<<<<<<<<<<
@@ -8620,7 +8620,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[14]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":775
+      /* "cows/_skeletonize_3d_cy.pyx":780
  *             octree_labeling(5, label, cube)
  *         if cube[14] == 1:
  *             cube[14] = label             # <<<<<<<<<<<<<<
@@ -8629,7 +8629,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[14]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":776
+      /* "cows/_skeletonize_3d_cy.pyx":781
  *         if cube[14] == 1:
  *             cube[14] = label
  *             octree_labeling(3, label, cube)             # <<<<<<<<<<<<<<
@@ -8638,7 +8638,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(3, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":774
+      /* "cows/_skeletonize_3d_cy.pyx":779
  *             octree_labeling(3, label, cube)
  *             octree_labeling(5, label, cube)
  *         if cube[14] == 1:             # <<<<<<<<<<<<<<
@@ -8647,7 +8647,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":777
+    /* "cows/_skeletonize_3d_cy.pyx":782
  *             cube[14] = label
  *             octree_labeling(3, label, cube)
  *         if cube[15] == 1:             # <<<<<<<<<<<<<<
@@ -8657,7 +8657,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[15]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":778
+      /* "cows/_skeletonize_3d_cy.pyx":783
  *             octree_labeling(3, label, cube)
  *         if cube[15] == 1:
  *             cube[15] = label             # <<<<<<<<<<<<<<
@@ -8666,7 +8666,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[15]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":779
+      /* "cows/_skeletonize_3d_cy.pyx":784
  *         if cube[15] == 1:
  *             cube[15] = label
  *             octree_labeling(3, label, cube)             # <<<<<<<<<<<<<<
@@ -8675,7 +8675,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(3, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":780
+      /* "cows/_skeletonize_3d_cy.pyx":785
  *             cube[15] = label
  *             octree_labeling(3, label, cube)
  *             octree_labeling(4, label, cube)             # <<<<<<<<<<<<<<
@@ -8684,7 +8684,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(4, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":781
+      /* "cows/_skeletonize_3d_cy.pyx":786
  *             octree_labeling(3, label, cube)
  *             octree_labeling(4, label, cube)
  *             octree_labeling(8, label, cube)             # <<<<<<<<<<<<<<
@@ -8693,7 +8693,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(8, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":777
+      /* "cows/_skeletonize_3d_cy.pyx":782
  *             cube[14] = label
  *             octree_labeling(3, label, cube)
  *         if cube[15] == 1:             # <<<<<<<<<<<<<<
@@ -8702,7 +8702,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":782
+    /* "cows/_skeletonize_3d_cy.pyx":787
  *             octree_labeling(4, label, cube)
  *             octree_labeling(8, label, cube)
  *         if cube[20] == 1:             # <<<<<<<<<<<<<<
@@ -8712,7 +8712,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[20]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":783
+      /* "cows/_skeletonize_3d_cy.pyx":788
  *             octree_labeling(8, label, cube)
  *         if cube[20] == 1:
  *             cube[20] = label             # <<<<<<<<<<<<<<
@@ -8721,7 +8721,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[20]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":784
+      /* "cows/_skeletonize_3d_cy.pyx":789
  *         if cube[20] == 1:
  *             cube[20] = label
  *             octree_labeling(5, label, cube)             # <<<<<<<<<<<<<<
@@ -8730,7 +8730,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(5, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":782
+      /* "cows/_skeletonize_3d_cy.pyx":787
  *             octree_labeling(4, label, cube)
  *             octree_labeling(8, label, cube)
  *         if cube[20] == 1:             # <<<<<<<<<<<<<<
@@ -8739,7 +8739,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":785
+    /* "cows/_skeletonize_3d_cy.pyx":790
  *             cube[20] = label
  *             octree_labeling(5, label, cube)
  *         if cube[21] == 1:             # <<<<<<<<<<<<<<
@@ -8749,7 +8749,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[21]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":786
+      /* "cows/_skeletonize_3d_cy.pyx":791
  *             octree_labeling(5, label, cube)
  *         if cube[21] == 1:
  *             cube[21] = label             # <<<<<<<<<<<<<<
@@ -8758,7 +8758,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[21]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":787
+      /* "cows/_skeletonize_3d_cy.pyx":792
  *         if cube[21] == 1:
  *             cube[21] = label
  *             octree_labeling(5, label, cube)             # <<<<<<<<<<<<<<
@@ -8767,7 +8767,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(5, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":788
+      /* "cows/_skeletonize_3d_cy.pyx":793
  *             cube[21] = label
  *             octree_labeling(5, label, cube)
  *             octree_labeling(6, label, cube)             # <<<<<<<<<<<<<<
@@ -8776,7 +8776,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(6, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":789
+      /* "cows/_skeletonize_3d_cy.pyx":794
  *             octree_labeling(5, label, cube)
  *             octree_labeling(6, label, cube)
  *             octree_labeling(8, label, cube)             # <<<<<<<<<<<<<<
@@ -8785,7 +8785,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(8, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":785
+      /* "cows/_skeletonize_3d_cy.pyx":790
  *             cube[20] = label
  *             octree_labeling(5, label, cube)
  *         if cube[21] == 1:             # <<<<<<<<<<<<<<
@@ -8794,7 +8794,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":790
+    /* "cows/_skeletonize_3d_cy.pyx":795
  *             octree_labeling(6, label, cube)
  *             octree_labeling(8, label, cube)
  *         if cube[23] == 1:             # <<<<<<<<<<<<<<
@@ -8804,7 +8804,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[23]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":791
+      /* "cows/_skeletonize_3d_cy.pyx":796
  *             octree_labeling(8, label, cube)
  *         if cube[23] == 1:
  *             cube[23] = label             # <<<<<<<<<<<<<<
@@ -8813,7 +8813,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[23]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":790
+      /* "cows/_skeletonize_3d_cy.pyx":795
  *             octree_labeling(6, label, cube)
  *             octree_labeling(8, label, cube)
  *         if cube[23] == 1:             # <<<<<<<<<<<<<<
@@ -8822,7 +8822,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":792
+    /* "cows/_skeletonize_3d_cy.pyx":797
  *         if cube[23] == 1:
  *             cube[23] = label
  *         if cube[24] == 1:             # <<<<<<<<<<<<<<
@@ -8832,7 +8832,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[24]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":793
+      /* "cows/_skeletonize_3d_cy.pyx":798
  *             cube[23] = label
  *         if cube[24] == 1:
  *             cube[24] = label             # <<<<<<<<<<<<<<
@@ -8841,7 +8841,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[24]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":794
+      /* "cows/_skeletonize_3d_cy.pyx":799
  *         if cube[24] == 1:
  *             cube[24] = label
  *             octree_labeling(8, label, cube)             # <<<<<<<<<<<<<<
@@ -8850,7 +8850,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(8, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":792
+      /* "cows/_skeletonize_3d_cy.pyx":797
  *         if cube[23] == 1:
  *             cube[23] = label
  *         if cube[24] == 1:             # <<<<<<<<<<<<<<
@@ -8859,7 +8859,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":768
+    /* "cows/_skeletonize_3d_cy.pyx":773
  *             octree_labeling(8, label, cube)
  * 
  *     if octant == 7:             # <<<<<<<<<<<<<<
@@ -8868,7 +8868,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":796
+  /* "cows/_skeletonize_3d_cy.pyx":801
  *             octree_labeling(8, label, cube)
  * 
  *     if octant == 8:             # <<<<<<<<<<<<<<
@@ -8878,7 +8878,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
   __pyx_t_1 = ((__pyx_v_octant == 8) != 0);
   if (__pyx_t_1) {
 
-    /* "cows/_skeletonize_3d_cy.pyx":797
+    /* "cows/_skeletonize_3d_cy.pyx":802
  * 
  *     if octant == 8:
  *         if cube[13] == 1:             # <<<<<<<<<<<<<<
@@ -8888,7 +8888,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[13]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":798
+      /* "cows/_skeletonize_3d_cy.pyx":803
  *     if octant == 8:
  *         if cube[13] == 1:
  *             cube[13] = label             # <<<<<<<<<<<<<<
@@ -8897,7 +8897,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[13]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":799
+      /* "cows/_skeletonize_3d_cy.pyx":804
  *         if cube[13] == 1:
  *             cube[13] = label
  *             octree_labeling(2, label, cube)             # <<<<<<<<<<<<<<
@@ -8906,7 +8906,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(2, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":800
+      /* "cows/_skeletonize_3d_cy.pyx":805
  *             cube[13] = label
  *             octree_labeling(2, label, cube)
  *             octree_labeling(4, label, cube)             # <<<<<<<<<<<<<<
@@ -8915,7 +8915,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(4, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":801
+      /* "cows/_skeletonize_3d_cy.pyx":806
  *             octree_labeling(2, label, cube)
  *             octree_labeling(4, label, cube)
  *             octree_labeling(6, label, cube)             # <<<<<<<<<<<<<<
@@ -8924,7 +8924,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(6, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":797
+      /* "cows/_skeletonize_3d_cy.pyx":802
  * 
  *     if octant == 8:
  *         if cube[13] == 1:             # <<<<<<<<<<<<<<
@@ -8933,7 +8933,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":802
+    /* "cows/_skeletonize_3d_cy.pyx":807
  *             octree_labeling(4, label, cube)
  *             octree_labeling(6, label, cube)
  *         if cube[15] == 1:             # <<<<<<<<<<<<<<
@@ -8943,7 +8943,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[15]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":803
+      /* "cows/_skeletonize_3d_cy.pyx":808
  *             octree_labeling(6, label, cube)
  *         if cube[15] == 1:
  *             cube[15] = label             # <<<<<<<<<<<<<<
@@ -8952,7 +8952,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[15]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":804
+      /* "cows/_skeletonize_3d_cy.pyx":809
  *         if cube[15] == 1:
  *             cube[15] = label
  *             octree_labeling(3, label, cube)             # <<<<<<<<<<<<<<
@@ -8961,7 +8961,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(3, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":805
+      /* "cows/_skeletonize_3d_cy.pyx":810
  *             cube[15] = label
  *             octree_labeling(3, label, cube)
  *             octree_labeling(4, label, cube)             # <<<<<<<<<<<<<<
@@ -8970,7 +8970,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(4, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":806
+      /* "cows/_skeletonize_3d_cy.pyx":811
  *             octree_labeling(3, label, cube)
  *             octree_labeling(4, label, cube)
  *             octree_labeling(7, label, cube)             # <<<<<<<<<<<<<<
@@ -8979,7 +8979,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(7, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":802
+      /* "cows/_skeletonize_3d_cy.pyx":807
  *             octree_labeling(4, label, cube)
  *             octree_labeling(6, label, cube)
  *         if cube[15] == 1:             # <<<<<<<<<<<<<<
@@ -8988,7 +8988,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":807
+    /* "cows/_skeletonize_3d_cy.pyx":812
  *             octree_labeling(4, label, cube)
  *             octree_labeling(7, label, cube)
  *         if cube[16] == 1:             # <<<<<<<<<<<<<<
@@ -8998,7 +8998,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[16]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":808
+      /* "cows/_skeletonize_3d_cy.pyx":813
  *             octree_labeling(7, label, cube)
  *         if cube[16] == 1:
  *             cube[16] = label             # <<<<<<<<<<<<<<
@@ -9007,7 +9007,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[16]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":809
+      /* "cows/_skeletonize_3d_cy.pyx":814
  *         if cube[16] == 1:
  *             cube[16] = label
  *             octree_labeling(4, label, cube)             # <<<<<<<<<<<<<<
@@ -9016,7 +9016,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(4, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":807
+      /* "cows/_skeletonize_3d_cy.pyx":812
  *             octree_labeling(4, label, cube)
  *             octree_labeling(7, label, cube)
  *         if cube[16] == 1:             # <<<<<<<<<<<<<<
@@ -9025,7 +9025,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":810
+    /* "cows/_skeletonize_3d_cy.pyx":815
  *             cube[16] = label
  *             octree_labeling(4, label, cube)
  *         if cube[21] == 1:             # <<<<<<<<<<<<<<
@@ -9035,7 +9035,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[21]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":811
+      /* "cows/_skeletonize_3d_cy.pyx":816
  *             octree_labeling(4, label, cube)
  *         if cube[21] == 1:
  *             cube[21] = label             # <<<<<<<<<<<<<<
@@ -9044,7 +9044,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[21]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":812
+      /* "cows/_skeletonize_3d_cy.pyx":817
  *         if cube[21] == 1:
  *             cube[21] = label
  *             octree_labeling(5, label, cube)             # <<<<<<<<<<<<<<
@@ -9053,7 +9053,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(5, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":813
+      /* "cows/_skeletonize_3d_cy.pyx":818
  *             cube[21] = label
  *             octree_labeling(5, label, cube)
  *             octree_labeling(6, label, cube)             # <<<<<<<<<<<<<<
@@ -9062,7 +9062,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(6, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":814
+      /* "cows/_skeletonize_3d_cy.pyx":819
  *             octree_labeling(5, label, cube)
  *             octree_labeling(6, label, cube)
  *             octree_labeling(7, label, cube)             # <<<<<<<<<<<<<<
@@ -9071,7 +9071,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(7, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":810
+      /* "cows/_skeletonize_3d_cy.pyx":815
  *             cube[16] = label
  *             octree_labeling(4, label, cube)
  *         if cube[21] == 1:             # <<<<<<<<<<<<<<
@@ -9080,7 +9080,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":815
+    /* "cows/_skeletonize_3d_cy.pyx":820
  *             octree_labeling(6, label, cube)
  *             octree_labeling(7, label, cube)
  *         if cube[22] == 1:             # <<<<<<<<<<<<<<
@@ -9090,7 +9090,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[22]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":816
+      /* "cows/_skeletonize_3d_cy.pyx":821
  *             octree_labeling(7, label, cube)
  *         if cube[22] == 1:
  *             cube[22] = label             # <<<<<<<<<<<<<<
@@ -9099,7 +9099,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[22]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":817
+      /* "cows/_skeletonize_3d_cy.pyx":822
  *         if cube[22] == 1:
  *             cube[22] = label
  *             octree_labeling(6, label, cube)             # <<<<<<<<<<<<<<
@@ -9108,7 +9108,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(6, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":815
+      /* "cows/_skeletonize_3d_cy.pyx":820
  *             octree_labeling(6, label, cube)
  *             octree_labeling(7, label, cube)
  *         if cube[22] == 1:             # <<<<<<<<<<<<<<
@@ -9117,7 +9117,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":818
+    /* "cows/_skeletonize_3d_cy.pyx":823
  *             cube[22] = label
  *             octree_labeling(6, label, cube)
  *         if cube[24] == 1:             # <<<<<<<<<<<<<<
@@ -9127,7 +9127,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[24]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":819
+      /* "cows/_skeletonize_3d_cy.pyx":824
  *             octree_labeling(6, label, cube)
  *         if cube[24] == 1:
  *             cube[24] = label             # <<<<<<<<<<<<<<
@@ -9136,7 +9136,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       (__pyx_v_cube[24]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":820
+      /* "cows/_skeletonize_3d_cy.pyx":825
  *         if cube[24] == 1:
  *             cube[24] = label
  *             octree_labeling(7, label, cube)             # <<<<<<<<<<<<<<
@@ -9145,7 +9145,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
       __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(7, __pyx_v_label, __pyx_v_cube);
 
-      /* "cows/_skeletonize_3d_cy.pyx":818
+      /* "cows/_skeletonize_3d_cy.pyx":823
  *             cube[22] = label
  *             octree_labeling(6, label, cube)
  *         if cube[24] == 1:             # <<<<<<<<<<<<<<
@@ -9154,7 +9154,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":821
+    /* "cows/_skeletonize_3d_cy.pyx":826
  *             cube[24] = label
  *             octree_labeling(7, label, cube)
  *         if cube[25] == 1:             # <<<<<<<<<<<<<<
@@ -9163,14 +9163,14 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
     __pyx_t_1 = (((__pyx_v_cube[25]) == 1) != 0);
     if (__pyx_t_1) {
 
-      /* "cows/_skeletonize_3d_cy.pyx":822
+      /* "cows/_skeletonize_3d_cy.pyx":827
  *             octree_labeling(7, label, cube)
  *         if cube[25] == 1:
  *             cube[25] = label             # <<<<<<<<<<<<<<
  */
       (__pyx_v_cube[25]) = __pyx_v_label;
 
-      /* "cows/_skeletonize_3d_cy.pyx":821
+      /* "cows/_skeletonize_3d_cy.pyx":826
  *             cube[24] = label
  *             octree_labeling(7, label, cube)
  *         if cube[25] == 1:             # <<<<<<<<<<<<<<
@@ -9178,7 +9178,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
     }
 
-    /* "cows/_skeletonize_3d_cy.pyx":796
+    /* "cows/_skeletonize_3d_cy.pyx":801
  *             octree_labeling(8, label, cube)
  * 
  *     if octant == 8:             # <<<<<<<<<<<<<<
@@ -9187,7 +9187,7 @@ static void __pyx_f_4cows_18_skeletonize_3d_cy_octree_labeling(int __pyx_v_octan
  */
   }
 
-  /* "cows/_skeletonize_3d_cy.pyx":577
+  /* "cows/_skeletonize_3d_cy.pyx":582
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cdef void octree_labeling(int octant, int label, pixel_type cube[]) nogil:             # <<<<<<<<<<<<<<
@@ -24185,7 +24185,7 @@ static PyModuleDef_Slot __pyx_moduledef_slots[] = {
 static struct PyModuleDef __pyx_moduledef = {
     PyModuleDef_HEAD_INIT,
     "_skeletonize_3d_cy",
-    __pyx_k_This_is_an_implementation_of_th, /* m_doc */
+    __pyx_k_Contains_code_from_scikit_image, /* m_doc */
   #if CYTHON_PEP489_MULTI_PHASE_INIT
     0, /* m_size */
   #else
@@ -24338,7 +24338,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 113, __pyx_L1_error)
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(1, 947, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(2, 133, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(2, 148, __pyx_L1_error)
@@ -24356,25 +24356,25 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "cows/_skeletonize_3d_cy.pyx":273
+  /* "cows/_skeletonize_3d_cy.pyx":278
  *                  -1, 3, 1, 1, -1, -3, 3, -1, 1, 1, 3, -1, 1, -1, 1, 1, -1, 3,
  *                  1, 1, -1, 1, 3, 3, 1, 5, 3, 3, 1, -1, 1, 1, -1, 3, 1, 1, -1]
  *     cdef ndarray LUT = np.zeros(256, dtype=np.intc)             # <<<<<<<<<<<<<<
  *     LUT[1::2] = arr
  *     return LUT
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_int_256); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 273, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_int_256); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 278, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "cows/_skeletonize_3d_cy.pyx":274
+  /* "cows/_skeletonize_3d_cy.pyx":279
  *                  1, 1, -1, 1, 3, 3, 1, 5, 3, 3, 1, -1, 1, 1, -1, 3, 1, 1, -1]
  *     cdef ndarray LUT = np.zeros(256, dtype=np.intc)
  *     LUT[1::2] = arr             # <<<<<<<<<<<<<<
  *     return LUT
  * cdef int[::1] LUT = fill_Euler_LUT()
  */
-  __pyx_slice__2 = PySlice_New(__pyx_int_1, Py_None, __pyx_int_2); if (unlikely(!__pyx_slice__2)) __PYX_ERR(0, 274, __pyx_L1_error)
+  __pyx_slice__2 = PySlice_New(__pyx_int_1, Py_None, __pyx_int_2); if (unlikely(!__pyx_slice__2)) __PYX_ERR(0, 279, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__2);
   __Pyx_GIVEREF(__pyx_slice__2);
 
@@ -24592,29 +24592,29 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__22);
   __Pyx_GIVEREF(__pyx_tuple__22);
 
-  /* "cows/_skeletonize_3d_cy.pyx":50
+  /* "cows/_skeletonize_3d_cy.pyx":54
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def _compute_thin_image(pixel_type[:, :, ::1] img not None, periodic=False):             # <<<<<<<<<<<<<<
  *     """Compute a thin image.
  * 
  */
-  __pyx_tuple__23 = PyTuple_Pack(20, __pyx_n_s_img, __pyx_n_s_periodic, __pyx_n_s_unchanged_borders, __pyx_n_s_curr_border, __pyx_n_s_num_borders, __pyx_n_s_borders, __pyx_n_s_p, __pyx_n_s_r, __pyx_n_s_c, __pyx_n_s_imax, __pyx_n_s_jmax, __pyx_n_s_kmax, __pyx_n_s_no_change, __pyx_n_s_periodic_2, __pyx_n_s_simple_border_points, __pyx_n_s_point, __pyx_n_s_num_border_points, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_neighb); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(20, __pyx_n_s_img, __pyx_n_s_periodic, __pyx_n_s_unchanged_borders, __pyx_n_s_curr_border, __pyx_n_s_num_borders, __pyx_n_s_borders, __pyx_n_s_p, __pyx_n_s_r, __pyx_n_s_c, __pyx_n_s_imax, __pyx_n_s_jmax, __pyx_n_s_kmax, __pyx_n_s_no_change, __pyx_n_s_periodic_2, __pyx_n_s_simple_border_points, __pyx_n_s_point, __pyx_n_s_num_border_points, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_neighb); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(2, 0, 20, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_cows__skeletonize_3d_cy_pyx, __pyx_n_s_compute_thin_image, 50, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(2, 0, 20, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_cows__skeletonize_3d_cy_pyx, __pyx_n_s_compute_thin_image, 54, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 54, __pyx_L1_error)
 
-  /* "cows/_skeletonize_3d_cy.pyx":260
+  /* "cows/_skeletonize_3d_cy.pyx":265
  * 
  * ###### look-up tables
  * def fill_Euler_LUT():             # <<<<<<<<<<<<<<
  *     """ Look-up table for preserving Euler characteristic.
  * 
  */
-  __pyx_tuple__25 = PyTuple_Pack(2, __pyx_n_s_arr, __pyx_n_s_LUT); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_tuple__25 = PyTuple_Pack(2, __pyx_n_s_arr, __pyx_n_s_LUT); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
-  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_cows__skeletonize_3d_cy_pyx, __pyx_n_s_fill_Euler_LUT, 260, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_cows__skeletonize_3d_cy_pyx, __pyx_n_s_fill_Euler_LUT, 265, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 265, __pyx_L1_error)
 
   /* "View.MemoryView":286
  *         return self.name
@@ -25037,7 +25037,7 @@ if (!__Pyx_RefNanny) {
   Py_INCREF(__pyx_m);
   #else
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("_skeletonize_3d_cy", __pyx_methods, __pyx_k_This_is_an_implementation_of_th, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("_skeletonize_3d_cy", __pyx_methods, __pyx_k_Contains_code_from_scikit_image, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -25083,55 +25083,55 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "cows/_skeletonize_3d_cy.pyx":35
+  /* "cows/_skeletonize_3d_cy.pyx":39
  * from libcpp.vector cimport vector
  * 
  * import numpy as np             # <<<<<<<<<<<<<<
  * from numpy cimport npy_intp, npy_uint8, ndarray
  * cimport cython
  */
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_numpy, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_numpy, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cows/_skeletonize_3d_cy.pyx":50
+  /* "cows/_skeletonize_3d_cy.pyx":54
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def _compute_thin_image(pixel_type[:, :, ::1] img not None, periodic=False):             # <<<<<<<<<<<<<<
  *     """Compute a thin image.
  * 
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cows_18_skeletonize_3d_cy_1_compute_thin_image, NULL, __pyx_n_s_cows__skeletonize_3d_cy); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cows_18_skeletonize_3d_cy_1_compute_thin_image, NULL, __pyx_n_s_cows__skeletonize_3d_cy); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_compute_thin_image, __pyx_t_1) < 0) __PYX_ERR(0, 50, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_compute_thin_image, __pyx_t_1) < 0) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cows/_skeletonize_3d_cy.pyx":260
+  /* "cows/_skeletonize_3d_cy.pyx":265
  * 
  * ###### look-up tables
  * def fill_Euler_LUT():             # <<<<<<<<<<<<<<
  *     """ Look-up table for preserving Euler characteristic.
  * 
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cows_18_skeletonize_3d_cy_3fill_Euler_LUT, NULL, __pyx_n_s_cows__skeletonize_3d_cy); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cows_18_skeletonize_3d_cy_3fill_Euler_LUT, NULL, __pyx_n_s_cows__skeletonize_3d_cy); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_fill_Euler_LUT, __pyx_t_1) < 0) __PYX_ERR(0, 260, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_fill_Euler_LUT, __pyx_t_1) < 0) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cows/_skeletonize_3d_cy.pyx":276
+  /* "cows/_skeletonize_3d_cy.pyx":281
  *     LUT[1::2] = arr
  *     return LUT
  * cdef int[::1] LUT = fill_Euler_LUT()             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_fill_Euler_LUT); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_fill_Euler_LUT); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 281, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 281, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_to_MemoryviewSlice_dc_int(__pyx_t_2, PyBUF_WRITABLE); if (unlikely(!__pyx_t_3.memview)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_to_MemoryviewSlice_dc_int(__pyx_t_2, PyBUF_WRITABLE); if (unlikely(!__pyx_t_3.memview)) __PYX_ERR(0, 281, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __PYX_XDEC_MEMVIEW(&__pyx_v_4cows_18_skeletonize_3d_cy_LUT, 1);
   __pyx_v_4cows_18_skeletonize_3d_cy_LUT = __pyx_t_3;
@@ -25141,7 +25141,7 @@ if (!__Pyx_RefNanny) {
   /* "cows/_skeletonize_3d_cy.pyx":1
  * # distutils: language = c++             # <<<<<<<<<<<<<<
  * 
- * """
+ * '''
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);

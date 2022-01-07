@@ -36,8 +36,8 @@ if __name__ == '__main__':
 
 
     if USE_CYTHON:
-        extensions = [Extension("cows.filament", 
-                                ["src/cows/filament.pyx"],
+        extensions = [Extension("cows._filament", 
+                                ["src/cows/_filament.pyx"],
                                 language="c"),
                       Extension('cows._skeletonize_3d_cy',
                                 sources=['src/cows/_skeletonize_3d_cy.pyx'],
@@ -48,8 +48,8 @@ if __name__ == '__main__':
         extensions = cythonize(extensions, nthreads=cpu_count(),
                   compiler_directives={'language_level': 3})
     else:
-        extensions = [Extension("cows.filament", 
-                                ["src/cows/filament.c"],
+        extensions = [Extension("cows._filament", 
+                                ["src/cows/_filament.c"],
                                 language="c"),
                       Extension('cows._skeletonize_3d_cy',
                                 sources=['src/cows/_skeletonize_3d_cy.cpp'],
