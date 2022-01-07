@@ -1,86 +1,57 @@
-========
-Overview
-========
 
 .. start-badges
 
 .. list-table::
     :stub-columns: 1
 
-    * - docs
-      - |docs|
-    * - tests
-      - | |github-actions| |requires|
-        | |codecov|
     * - package
       - | |commits-since|
-.. |docs| image:: https://readthedocs.org/projects/python-cows/badge/?style=flat
-    :target: https://python-cows.readthedocs.io/
-    :alt: Documentation Status
-
-.. |github-actions| image:: https://github.com/SimonPfeifer/python-cows/actions/workflows/github-actions.yml/badge.svg
-    :alt: GitHub Actions Build Status
-    :target: https://github.com/SimonPfeifer/python-cows/actions
-
-.. |requires| image:: https://requires.io/github/SimonPfeifer/python-cows/requirements.svg?branch=master
-    :alt: Requirements Status
-    :target: https://requires.io/github/SimonPfeifer/python-cows/requirements/?branch=master
-
-.. |codecov| image:: https://codecov.io/gh/SimonPfeifer/python-cows/branch/master/graphs/badge.svg?branch=master
-    :alt: Coverage Status
-    :target: https://codecov.io/github/SimonPfeifer/python-cows
 
 .. |commits-since| image:: https://img.shields.io/github/commits-since/SimonPfeifer/python-cows/v0.0.0.svg
     :alt: Commits since latest release
     :target: https://github.com/SimonPfeifer/python-cows/compare/v0.0.0...master
 
-
-
 .. end-badges
 
-Cosmic filament finder
+====
+COWS
+====
 
-* Free software: BSD 3-Clause License
+The *cows* python package is an implelemtation of the cosmic filament finder COsmic Web Skeleton (COWS). The cosmic filament finder works on Hessian-based cosmic web idetifier (such as the V-web) and returns a catalogue of filament spines.
 
-Installation
-============
+It works by identifying the medial axis, or skeleton, of cosmic web filaments and then speparating this skeleton into individual filaments. For more information of the specifics of the method, see `here <https://arxiv.org/search/astro-ph?searchtype=author&query=Pfeifer%2C+S>`_.
 
+
+Requirements
+------------
 ::
+
+    numpy
+
+Quick installation
+------------------
+
+To install the *cows* python package using PyPI::
 
     pip install cows
 
-You can also install the in-development version with::
+To install the package from source::
 
-    pip install https://github.com/SimonPfeifer/python-cows/archive/master.zip
+    python setup.py install
 
+For more inforamtion on installation, see `INSTALL.rst <https://github.com/SimonPfeifer/cows/blob/master/INSTALLATION.rst>`_.
 
 Documentation
-=============
+==============
+
+The full documentation can be accessed at `readthedocs <https://python-cows.readthedocs.io/>`_ or generated as a set of local files by running::
+
+    sphinx-build ./doc ./doc_build
 
 
-https://python-cows.readthedocs.io/
+Citing
+======
 
+When using COWS in a publication, please cite the following paper:
 
-Development
-===========
-
-To run all the tests run::
-
-    tox
-
-Note, to combine the coverage data from all the tox environments run:
-
-.. list-table::
-    :widths: 10 90
-    :stub-columns: 1
-
-    - - Windows
-      - ::
-
-            set PYTEST_ADDOPTS=--cov-append
-            tox
-
-    - - Other
-      - ::
-
-            PYTEST_ADDOPTS=--cov-append tox
+`arXiv:XXXX.XXXXX <https://arxiv.org/search/astro-ph?searchtype=author&query=Pfeifer%2C+S>`_ : "COWS: A filament finder for Hessian cosmic web identifiers"
