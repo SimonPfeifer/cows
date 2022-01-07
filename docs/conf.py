@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 import os
 
+import cows
+
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
@@ -13,7 +15,11 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
+    'myst_nb'
 ]
+
+exclude_patterns = ['_build']
+
 source_suffix = '.rst'
 master_doc = 'index'
 project = 'cows'

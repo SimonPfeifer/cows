@@ -1,7 +1,1 @@
-============
-Installation
-============
-
-At the command line::
-
-    pip install cows
+.. include:: ../INSTALLATION.rst
