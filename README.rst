@@ -24,7 +24,7 @@ Requirements
 ------------
 ::
 
-    numpy
+    numpy>=1.19.3
 
 Quick installation
 ------------------
