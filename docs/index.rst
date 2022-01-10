@@ -21,7 +21,7 @@ Usage
 -----
 
 .. toctree::
-   :maxdepth:
+   :maxdepth: 1
 
    usage
 

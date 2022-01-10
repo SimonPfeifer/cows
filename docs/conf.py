@@ -15,7 +15,8 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
-    'nbsphinx'
+    # 'nbsphinx',
+    'myst_nb',
 ]
 
 exclude_patterns = ['_build']
