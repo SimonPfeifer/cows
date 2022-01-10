@@ -21,7 +21,7 @@ from multiprocessing import cpu_count
 from pkg_resources import parse_version
 
 USE_CYTHON = False
-CYTHON_VERSION = '0.23.4'
+CYTHON_VERSION = '0.29.1'
 
 if __name__ == '__main__':
 
