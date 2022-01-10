@@ -17,7 +17,7 @@ Quick installation
 
 To install the *cows* python package using PyPI::
 
-    pip install cows
+    pip install pycows
 
 To install the package from source::
 

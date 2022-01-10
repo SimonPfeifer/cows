@@ -83,13 +83,13 @@ if __name__ == '__main__':
 
 
     setup(
-        name='cows',
+        name='pycows',
         version='0.0.0',
         license='BSD-3-Clause',
         description='Cosmic filament finder',
         long_description='%s\n' % (
-            re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
-        ),
+            re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst'))),
+        long_description_content_type = 'text/x-rst',
         author='Simon Pfeifer',
         author_email='spfeifer@aip.de',
         url='https://github.com/SimonPfeifer/python-cows',
