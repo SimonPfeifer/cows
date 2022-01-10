@@ -1150,6 +1150,18 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
 /* GetBuiltinName.proto */
 static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
+/* RaiseDoubleKeywords.proto */
+static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
+
+/* ParseKeywords.proto */
+static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
+    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
+    const char* function_name);
+
+/* RaiseArgTupleInvalid.proto */
+static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
+    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
+
 /* PyDictVersioning.proto */
 #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
 #define __PYX_DICT_VERSION_INIT  ((PY_UINT64_T) -1)
@@ -1271,20 +1283,45 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject
 /* PyObjectCallOneArg.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
 
+/* PyIntBinop.proto */
+#if !CYTHON_COMPILING_IN_PYPY
+static PyObject* __Pyx_PyInt_SubtractObjC(PyObject *op1, PyObject *op2, long intval, int inplace, int zerodivision_check);
+#else
+#define __Pyx_PyInt_SubtractObjC(op1, op2, intval, inplace, zerodivision_check)\
+    (inplace ? PyNumber_InPlaceSubtract(op1, op2) : PyNumber_Subtract(op1, op2))
+#endif
+
+/* GetItemInt.proto */
+#define __Pyx_GetItemInt(o, i, type, is_signed, to_py_func, is_list, wraparound, boundscheck)\
+    (__Pyx_fits_Py_ssize_t(i, type, is_signed) ?\
+    __Pyx_GetItemInt_Fast(o, (Py_ssize_t)i, is_list, wraparound, boundscheck) :\
+    (is_list ? (PyErr_SetString(PyExc_IndexError, "list index out of range"), (PyObject*)NULL) :\
+               __Pyx_GetItemInt_Generic(o, to_py_func(i))))
+#define __Pyx_GetItemInt_List(o, i, type, is_signed, to_py_func, is_list, wraparound, boundscheck)\
+    (__Pyx_fits_Py_ssize_t(i, type, is_signed) ?\
+    __Pyx_GetItemInt_List_Fast(o, (Py_ssize_t)i, wraparound, boundscheck) :\
+    (PyErr_SetString(PyExc_IndexError, "list index out of range"), (PyObject*)NULL))
+static CYTHON_INLINE PyObject *__Pyx_GetItemInt_List_Fast(PyObject *o, Py_ssize_t i,
+                                                              int wraparound, int boundscheck);
+#define __Pyx_GetItemInt_Tuple(o, i, type, is_signed, to_py_func, is_list, wraparound, boundscheck)\
+    (__Pyx_fits_Py_ssize_t(i, type, is_signed) ?\
+    __Pyx_GetItemInt_Tuple_Fast(o, (Py_ssize_t)i, wraparound, boundscheck) :\
+    (PyErr_SetString(PyExc_IndexError, "tuple index out of range"), (PyObject*)NULL))
+static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Tuple_Fast(PyObject *o, Py_ssize_t i,
+                                                              int wraparound, int boundscheck);
+static PyObject *__Pyx_GetItemInt_Generic(PyObject *o, PyObject* j);
+static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i,
+                                                     int is_list, int wraparound, int boundscheck);
+
+/* ObjectGetItem.proto */
+#if CYTHON_USE_TYPE_SLOTS
+static CYTHON_INLINE PyObject *__Pyx_PyObject_GetItem(PyObject *obj, PyObject* key);
+#else
+#define __Pyx_PyObject_GetItem(obj, key)  PyObject_GetItem(obj, key)
+#endif
+
 /* PyIntCompare.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_NeObjC(PyObject *op1, PyObject *op2, long intval, long inplace);
-
-/* RaiseArgTupleInvalid.proto */
-static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
-    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
-
-/* RaiseDoubleKeywords.proto */
-static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
-
-/* ParseKeywords.proto */
-static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
-    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
-    const char* function_name);
 
 /* ArgTypeTest.proto */
 #define __Pyx_ArgTypeTest(obj, type, none_allowed, name, exact)\
@@ -1358,35 +1395,6 @@ static CYTHON_UNUSED int __pyx_array_getbuffer(PyObject *__pyx_v_self, Py_buffer
 static PyObject *__pyx_array_get_memview(struct __pyx_array_obj *); /*proto*/
 /* GetAttr.proto */
 static CYTHON_INLINE PyObject *__Pyx_GetAttr(PyObject *, PyObject *);
-
-/* GetItemInt.proto */
-#define __Pyx_GetItemInt(o, i, type, is_signed, to_py_func, is_list, wraparound, boundscheck)\
-    (__Pyx_fits_Py_ssize_t(i, type, is_signed) ?\
-    __Pyx_GetItemInt_Fast(o, (Py_ssize_t)i, is_list, wraparound, boundscheck) :\
-    (is_list ? (PyErr_SetString(PyExc_IndexError, "list index out of range"), (PyObject*)NULL) :\
-               __Pyx_GetItemInt_Generic(o, to_py_func(i))))
-#define __Pyx_GetItemInt_List(o, i, type, is_signed, to_py_func, is_list, wraparound, boundscheck)\
-    (__Pyx_fits_Py_ssize_t(i, type, is_signed) ?\
-    __Pyx_GetItemInt_List_Fast(o, (Py_ssize_t)i, wraparound, boundscheck) :\
-    (PyErr_SetString(PyExc_IndexError, "list index out of range"), (PyObject*)NULL))
-static CYTHON_INLINE PyObject *__Pyx_GetItemInt_List_Fast(PyObject *o, Py_ssize_t i,
-                                                              int wraparound, int boundscheck);
-#define __Pyx_GetItemInt_Tuple(o, i, type, is_signed, to_py_func, is_list, wraparound, boundscheck)\
-    (__Pyx_fits_Py_ssize_t(i, type, is_signed) ?\
-    __Pyx_GetItemInt_Tuple_Fast(o, (Py_ssize_t)i, wraparound, boundscheck) :\
-    (PyErr_SetString(PyExc_IndexError, "tuple index out of range"), (PyObject*)NULL))
-static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Tuple_Fast(PyObject *o, Py_ssize_t i,
-                                                              int wraparound, int boundscheck);
-static PyObject *__Pyx_GetItemInt_Generic(PyObject *o, PyObject* j);
-static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i,
-                                                     int is_list, int wraparound, int boundscheck);
-
-/* ObjectGetItem.proto */
-#if CYTHON_USE_TYPE_SLOTS
-static CYTHON_INLINE PyObject *__Pyx_PyObject_GetItem(PyObject *obj, PyObject* key);
-#else
-#define __Pyx_PyObject_GetItem(obj, key)  PyObject_GetItem(obj, key)
-#endif
 
 /* decode_c_string_utf16.proto */
 static CYTHON_INLINE PyObject *__Pyx_PyUnicode_DecodeUTF16(const char *s, Py_ssize_t size, const char *errors) {
@@ -1642,6 +1650,9 @@ __pyx_memoryview_copy_new_contig(const __Pyx_memviewslice *from_mvs,
                                  size_t sizeof_dtype, int contig_flag,
                                  int dtype_is_object);
 
+/* CIntToPy.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
+
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
@@ -1650,9 +1661,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
-
-/* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE char __Pyx_PyInt_As_char(PyObject *);
@@ -1726,7 +1734,8 @@ static int __pyx_f_4cows_9_filament_count_neighbours(__Pyx_memviewslice, int, in
 static PyObject *__pyx_f_4cows_9_filament_label_skeleton(__Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
 static int __pyx_f_4cows_9_filament_modulo_int(int, int); /*proto*/
 static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice, __Pyx_memviewslice, int *, int *, int *, int); /*proto*/
-static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
+static int __pyx_f_4cows_9_filament_check_has_neighbour_wrap(__Pyx_memviewslice, __Pyx_memviewslice, int *, int *, int *, int); /*proto*/
+static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, int); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
 static void *__pyx_align_pointer(void *, size_t); /*proto*/
 static PyObject *__pyx_memoryview_new(PyObject *, int, int, __Pyx_TypeInfo *); /*proto*/
@@ -1778,6 +1787,7 @@ static const char __pyx_k_O[] = "O";
 static const char __pyx_k_c[] = "c";
 static const char __pyx_k_id[] = "id";
 static const char __pyx_k_np[] = "np";
+static const char __pyx_k_rs[] = "rs";
 static const char __pyx_k_new[] = "__new__";
 static const char __pyx_k_obj[] = "obj";
 static const char __pyx_k_pad[] = "pad";
@@ -1823,8 +1833,10 @@ static const char __pyx_k_fortran[] = "fortran";
 static const char __pyx_k_memview[] = "memview";
 static const char __pyx_k_Ellipsis[] = "Ellipsis";
 static const char __pyx_k_cat_view[] = "cat_view";
+static const char __pyx_k_constant[] = "constant";
 static const char __pyx_k_getstate[] = "__getstate__";
 static const char __pyx_k_itemsize[] = "itemsize";
+static const char __pyx_k_periodic[] = "periodic";
 static const char __pyx_k_pyx_type[] = "__pyx_type";
 static const char __pyx_k_setstate[] = "__setstate__";
 static const char __pyx_k_TypeError[] = "TypeError";
@@ -1914,6 +1926,7 @@ static PyObject *__pyx_n_s_cat_view;
 static PyObject *__pyx_n_s_catalogue;
 static PyObject *__pyx_n_s_class;
 static PyObject *__pyx_n_s_cline_in_traceback;
+static PyObject *__pyx_n_u_constant;
 static PyObject *__pyx_kp_s_contiguous_and_direct;
 static PyObject *__pyx_kp_s_contiguous_and_indirect;
 static PyObject *__pyx_n_s_cows__filament;
@@ -1952,6 +1965,7 @@ static PyObject *__pyx_n_s_obj;
 static PyObject *__pyx_n_s_order;
 static PyObject *__pyx_n_s_pack;
 static PyObject *__pyx_n_s_pad;
+static PyObject *__pyx_n_s_periodic;
 static PyObject *__pyx_n_s_pickle;
 static PyObject *__pyx_n_s_pyx_PickleError;
 static PyObject *__pyx_n_s_pyx_checksum;
@@ -1967,6 +1981,7 @@ static PyObject *__pyx_n_s_reduce_cython;
 static PyObject *__pyx_n_s_reduce_ex;
 static PyObject *__pyx_n_s_result;
 static PyObject *__pyx_n_s_result_view;
+static PyObject *__pyx_n_s_rs;
 static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
 static PyObject *__pyx_n_s_shape;
@@ -1990,8 +2005,8 @@ static PyObject *__pyx_n_s_visit_map;
 static PyObject *__pyx_n_s_visit_map_view;
 static PyObject *__pyx_n_u_wrap;
 static PyObject *__pyx_n_s_zeros;
-static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data); /* proto */
-static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data); /* proto */
+static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data, PyObject *__pyx_v_periodic); /* proto */
+static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data, PyObject *__pyx_v_periodic); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array_2__getbuffer__(struct __pyx_array_obj *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_array___pyx_pf_15View_dot_MemoryView_5array_4__dealloc__(struct __pyx_array_obj *__pyx_v_self); /* proto */
@@ -2077,248 +2092,485 @@ static PyObject *__pyx_codeobj__29;
 /* "cows/_filament.pyx":4
  * cimport cython
  * 
- * def _label_skeleton(data):             # <<<<<<<<<<<<<<
+ * def _label_skeleton(data, periodic=False):             # <<<<<<<<<<<<<<
  *     ''' Label the skeleton.
  * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cows_9_filament_1_label_skeleton(PyObject *__pyx_self, PyObject *__pyx_v_data); /*proto*/
+static PyObject *__pyx_pw_4cows_9_filament_1_label_skeleton(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static char __pyx_doc_4cows_9_filament__label_skeleton[] = " Label the skeleton. \n\n        Python wrapper for the cdef function ``label_skeleton``.\n\n        Label all skeleton cells with their respective number of neighbour.\n        Also removes cells with zero or more than four neighbours by setting\n        them to the background value of zero.\n    ";
-static PyMethodDef __pyx_mdef_4cows_9_filament_1_label_skeleton = {"_label_skeleton", (PyCFunction)__pyx_pw_4cows_9_filament_1_label_skeleton, METH_O, __pyx_doc_4cows_9_filament__label_skeleton};
-static PyObject *__pyx_pw_4cows_9_filament_1_label_skeleton(PyObject *__pyx_self, PyObject *__pyx_v_data) {
+static PyMethodDef __pyx_mdef_4cows_9_filament_1_label_skeleton = {"_label_skeleton", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cows_9_filament_1_label_skeleton, METH_VARARGS|METH_KEYWORDS, __pyx_doc_4cows_9_filament__label_skeleton};
+static PyObject *__pyx_pw_4cows_9_filament_1_label_skeleton(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_data = 0;
+  PyObject *__pyx_v_periodic = 0;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("_label_skeleton (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cows_9_filament__label_skeleton(__pyx_self, ((PyObject *)__pyx_v_data));
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_data,&__pyx_n_s_periodic,0};
+    PyObject* values[2] = {0,0};
+    values[1] = ((PyObject *)Py_False);
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_periodic);
+          if (value) { values[1] = value; kw_args--; }
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "_label_skeleton") < 0)) __PYX_ERR(0, 4, __pyx_L3_error)
+      }
+    } else {
+      switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+    }
+    __pyx_v_data = values[0];
+    __pyx_v_periodic = values[1];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("_label_skeleton", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 4, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("cows._filament._label_skeleton", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_4cows_9_filament__label_skeleton(__pyx_self, __pyx_v_data, __pyx_v_periodic);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data) {
+static PyObject *__pyx_pf_4cows_9_filament__label_skeleton(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data, PyObject *__pyx_v_periodic) {
   PyObject *__pyx_v_result = NULL;
+  PyObject *__pyx_v_rs = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
+  int __pyx_t_1;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
-  __Pyx_memviewslice __pyx_t_6 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  PyObject *__pyx_t_6 = NULL;
   __Pyx_memviewslice __pyx_t_7 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_label_skeleton", 0);
   __Pyx_INCREF(__pyx_v_data);
 
-  /* "cows/_filament.pyx":15
+  /* "cows/_filament.pyx":14
+ *     '''
  * 
- *     # Pad data to deal with periodic boundaries
- *     data = np.pad(data, 1, mode='wrap')             # <<<<<<<<<<<<<<
+ *     if periodic:             # <<<<<<<<<<<<<<
+ *         # Pad/wrap data to deal with periodic boundaries
+ *         data = np.pad(data, 1, mode='wrap')
+ */
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_periodic); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 14, __pyx_L1_error)
+  if (__pyx_t_1) {
+
+    /* "cows/_filament.pyx":16
+ *     if periodic:
+ *         # Pad/wrap data to deal with periodic boundaries
+ *         data = np.pad(data, 1, mode='wrap')             # <<<<<<<<<<<<<<
+ *     else:
+ *         # Pad with zeros to make boundary conditions easier to handle
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_pad); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 16, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx_v_data);
+    __Pyx_GIVEREF(__pyx_v_data);
+    PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_data);
+    __Pyx_INCREF(__pyx_int_1);
+    __Pyx_GIVEREF(__pyx_int_1);
+    PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_int_1);
+    __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 16, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_mode, __pyx_n_u_wrap) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 16, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF_SET(__pyx_v_data, __pyx_t_5);
+    __pyx_t_5 = 0;
+
+    /* "cows/_filament.pyx":14
+ *     '''
+ * 
+ *     if periodic:             # <<<<<<<<<<<<<<
+ *         # Pad/wrap data to deal with periodic boundaries
+ *         data = np.pad(data, 1, mode='wrap')
+ */
+    goto __pyx_L3;
+  }
+
+  /* "cows/_filament.pyx":19
+ *     else:
+ *         # Pad with zeros to make boundary conditions easier to handle
+ *         data = np.pad(data, 1, mode='constant')             # <<<<<<<<<<<<<<
  *     data = np.array(data, dtype=np.int32, order='c')
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_pad); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(__pyx_v_data);
-  __Pyx_GIVEREF(__pyx_v_data);
-  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_data);
-  __Pyx_INCREF(__pyx_int_1);
-  __Pyx_GIVEREF(__pyx_int_1);
-  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_int_1);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_mode, __pyx_n_u_wrap) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF_SET(__pyx_v_data, __pyx_t_4);
-  __pyx_t_4 = 0;
+  /*else*/ {
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 19, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_pad); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 19, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 19, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_INCREF(__pyx_v_data);
+    __Pyx_GIVEREF(__pyx_v_data);
+    PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_data);
+    __Pyx_INCREF(__pyx_int_1);
+    __Pyx_GIVEREF(__pyx_int_1);
+    PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_int_1);
+    __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_mode, __pyx_n_u_constant) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 19, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF_SET(__pyx_v_data, __pyx_t_3);
+    __pyx_t_3 = 0;
+  }
+  __pyx_L3:;
 
-  /* "cows/_filament.pyx":16
- *     # Pad data to deal with periodic boundaries
- *     data = np.pad(data, 1, mode='wrap')
+  /* "cows/_filament.pyx":20
+ *         # Pad with zeros to make boundary conditions easier to handle
+ *         data = np.pad(data, 1, mode='constant')
  *     data = np.array(data, dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
  * 
  *     # Define output array
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 16, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 16, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_array); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_v_data);
   __Pyx_GIVEREF(__pyx_v_data);
-  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_data);
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int32); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 16, __pyx_L1_error)
+  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_data);
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_order, __pyx_n_u_c) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 16, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_int32); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF_SET(__pyx_v_data, __pyx_t_5);
-  __pyx_t_5 = 0;
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_order, __pyx_n_u_c) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_DECREF_SET(__pyx_v_data, __pyx_t_6);
+  __pyx_t_6 = 0;
 
-  /* "cows/_filament.pyx":19
+  /* "cows/_filament.pyx":23
  * 
  *     # Define output array
  *     result = np.zeros(data.shape, dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
  * 
  *     label_skeleton(data, result) # calls the cdef function
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_zeros); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_zeros); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_shape); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GIVEREF(__pyx_t_5);
-  PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5);
-  __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_shape); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_int32); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GIVEREF(__pyx_t_6);
+  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_6);
+  __pyx_t_6 = 0;
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_2) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int32); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_order, __pyx_n_u_c) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_dtype, __pyx_t_4) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_order, __pyx_n_u_c) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_v_result = __pyx_t_2;
-  __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_v_result = __pyx_t_4;
+  __pyx_t_4 = 0;
 
-  /* "cows/_filament.pyx":21
+  /* "cows/_filament.pyx":25
  *     result = np.zeros(data.shape, dtype=np.int32, order='c')
  * 
  *     label_skeleton(data, result) # calls the cdef function             # <<<<<<<<<<<<<<
- *     return np.asarray(result)
+ *     result = np.asarray(result)
  * 
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_int(__pyx_v_data, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 21, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_int(__pyx_v_result, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 21, __pyx_L1_error)
-  __pyx_t_2 = __pyx_f_4cows_9_filament_label_skeleton(__pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
-  __pyx_t_6.memview = NULL;
-  __pyx_t_6.data = NULL;
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_int(__pyx_v_data, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_int(__pyx_v_result, PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_4 = __pyx_f_4cows_9_filament_label_skeleton(__pyx_t_7, __pyx_t_8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "cows/_filament.pyx":22
+  /* "cows/_filament.pyx":26
  * 
  *     label_skeleton(data, result) # calls the cdef function
- *     return np.asarray(result)             # <<<<<<<<<<<<<<
+ *     result = np.asarray(result)             # <<<<<<<<<<<<<<
  * 
- * def _find_filaments(data):
+ *     # Remove the padding
  */
-  __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 22, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_asarray); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 22, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = NULL;
-  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
-    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
-    if (likely(__pyx_t_5)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-      __Pyx_INCREF(__pyx_t_5);
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_asarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_6)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_6);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
     }
   }
-  __pyx_t_2 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_v_result) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_result);
-  __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 22, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_6, __pyx_v_result) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_result);
+  __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF_SET(__pyx_v_result, __pyx_t_4);
+  __pyx_t_4 = 0;
+
+  /* "cows/_filament.pyx":29
+ * 
+ *     # Remove the padding
+ *     rs = result.shape             # <<<<<<<<<<<<<<
+ *     result = result[1:rs[0]-1, 1:rs[1]-1, 1:rs[2]-1]
+ * 
+ */
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_result, __pyx_n_s_shape); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_v_rs = __pyx_t_4;
+  __pyx_t_4 = 0;
+
+  /* "cows/_filament.pyx":30
+ *     # Remove the padding
+ *     rs = result.shape
+ *     result = result[1:rs[0]-1, 1:rs[1]-1, 1:rs[2]-1]             # <<<<<<<<<<<<<<
+ * 
+ *     return result
+ */
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_rs, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_3 = __Pyx_PyInt_SubtractObjC(__pyx_t_4, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_r = __pyx_t_2;
-  __pyx_t_2 = 0;
+  __pyx_t_4 = PySlice_New(__pyx_int_1, __pyx_t_3, Py_None); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_rs, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_6 = __Pyx_PyInt_SubtractObjC(__pyx_t_3, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = PySlice_New(__pyx_int_1, __pyx_t_6, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = __Pyx_GetItemInt(__pyx_v_rs, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_5 = __Pyx_PyInt_SubtractObjC(__pyx_t_6, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = PySlice_New(__pyx_int_1, __pyx_t_5, Py_None); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_GIVEREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_6);
+  PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_t_6);
+  __pyx_t_4 = 0;
+  __pyx_t_3 = 0;
+  __pyx_t_6 = 0;
+  __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_v_result, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_DECREF_SET(__pyx_v_result, __pyx_t_6);
+  __pyx_t_6 = 0;
+
+  /* "cows/_filament.pyx":32
+ *     result = result[1:rs[0]-1, 1:rs[1]-1, 1:rs[2]-1]
+ * 
+ *     return result             # <<<<<<<<<<<<<<
+ * 
+ * def _find_filaments(data, periodic=False):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(__pyx_v_result);
+  __pyx_r = __pyx_v_result;
   goto __pyx_L0;
 
   /* "cows/_filament.pyx":4
  * cimport cython
  * 
- * def _label_skeleton(data):             # <<<<<<<<<<<<<<
+ * def _label_skeleton(data, periodic=False):             # <<<<<<<<<<<<<<
  *     ''' Label the skeleton.
  * 
  */
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
-  __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
+  __Pyx_XDECREF(__pyx_t_6);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
+  __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
   __Pyx_AddTraceback("cows._filament._label_skeleton", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_result);
+  __Pyx_XDECREF(__pyx_v_rs);
   __Pyx_XDECREF(__pyx_v_data);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "cows/_filament.pyx":24
- *     return np.asarray(result)
+/* "cows/_filament.pyx":34
+ *     return result
  * 
- * def _find_filaments(data):             # <<<<<<<<<<<<<<
+ * def _find_filaments(data, periodic=False):             # <<<<<<<<<<<<<<
  *     ''' Find individual filament.
  * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4cows_9_filament_3_find_filaments(PyObject *__pyx_self, PyObject *__pyx_v_data); /*proto*/
+static PyObject *__pyx_pw_4cows_9_filament_3_find_filaments(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static char __pyx_doc_4cows_9_filament_2_find_filaments[] = " Find individual filament.\n\n        Python wrapper for the cdef function ``connect_neighbours``.\n\n        Connects all cells that are neighbours within a 3x3x3 neihbourhood.\n        The set of connected cells are labled with a unique ID.\n    ";
-static PyMethodDef __pyx_mdef_4cows_9_filament_3_find_filaments = {"_find_filaments", (PyCFunction)__pyx_pw_4cows_9_filament_3_find_filaments, METH_O, __pyx_doc_4cows_9_filament_2_find_filaments};
-static PyObject *__pyx_pw_4cows_9_filament_3_find_filaments(PyObject *__pyx_self, PyObject *__pyx_v_data) {
+static PyMethodDef __pyx_mdef_4cows_9_filament_3_find_filaments = {"_find_filaments", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4cows_9_filament_3_find_filaments, METH_VARARGS|METH_KEYWORDS, __pyx_doc_4cows_9_filament_2_find_filaments};
+static PyObject *__pyx_pw_4cows_9_filament_3_find_filaments(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_data = 0;
+  PyObject *__pyx_v_periodic = 0;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("_find_filaments (wrapper)", 0);
-  __pyx_r = __pyx_pf_4cows_9_filament_2_find_filaments(__pyx_self, ((PyObject *)__pyx_v_data));
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_data,&__pyx_n_s_periodic,0};
+    PyObject* values[2] = {0,0};
+    values[1] = ((PyObject *)Py_False);
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_periodic);
+          if (value) { values[1] = value; kw_args--; }
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "_find_filaments") < 0)) __PYX_ERR(0, 34, __pyx_L3_error)
+      }
+    } else {
+      switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+    }
+    __pyx_v_data = values[0];
+    __pyx_v_periodic = values[1];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("_find_filaments", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 34, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("cows._filament._find_filaments", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_4cows_9_filament_2_find_filaments(__pyx_self, __pyx_v_data, __pyx_v_periodic);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data) {
+static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_data, PyObject *__pyx_v_periodic) {
   PyObject *__pyx_v_result = NULL;
   PyObject *__pyx_v_visit_map = NULL;
   PyObject *__pyx_v_catalogue = NULL;
@@ -2335,40 +2587,41 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   PyObject *__pyx_t_5 = NULL;
   __Pyx_memviewslice __pyx_t_6 = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_t_7 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_t_8;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_find_filaments", 0);
   __Pyx_INCREF(__pyx_v_data);
 
-  /* "cows/_filament.pyx":34
+  /* "cows/_filament.pyx":44
  * 
  *     # Make sure input data is the correct type and ordering
  *     data = np.array(data, dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
  * 
  *     # Define output array, visitation map and catalogue
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_array); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_array); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_data);
   __Pyx_GIVEREF(__pyx_v_data);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_data);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_int32); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_int32); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_order, __pyx_n_u_c) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_order, __pyx_n_u_c) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -2376,36 +2629,36 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   __Pyx_DECREF_SET(__pyx_v_data, __pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "cows/_filament.pyx":37
+  /* "cows/_filament.pyx":47
  * 
  *     # Define output array, visitation map and catalogue
  *     result = np.zeros(data.shape, dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
  *     visit_map = np.zeros(data.shape, dtype=np.int32, order='c')
  *     catalogue = np.zeros([np.sum(data!=0), 4], dtype=np.int32, order='c')
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_shape); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_shape); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_5);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5);
   __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int32); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_int32); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_4) < 0) __PYX_ERR(0, 37, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_4) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_order, __pyx_n_u_c) < 0) __PYX_ERR(0, 37, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 37, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_order, __pyx_n_u_c) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -2413,36 +2666,36 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   __pyx_v_result = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "cows/_filament.pyx":38
+  /* "cows/_filament.pyx":48
  *     # Define output array, visitation map and catalogue
  *     result = np.zeros(data.shape, dtype=np.int32, order='c')
  *     visit_map = np.zeros(data.shape, dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
  *     catalogue = np.zeros([np.sum(data!=0), 4], dtype=np.int32, order='c')
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_zeros); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_zeros); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_shape); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_data, __pyx_n_s_shape); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_4);
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_int32); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_int32); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_dtype, __pyx_t_2) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_dtype, __pyx_t_2) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_order, __pyx_n_u_c) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_order, __pyx_n_u_c) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -2450,24 +2703,24 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   __pyx_v_visit_map = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cows/_filament.pyx":39
+  /* "cows/_filament.pyx":49
  *     result = np.zeros(data.shape, dtype=np.int32, order='c')
  *     visit_map = np.zeros(data.shape, dtype=np.int32, order='c')
  *     catalogue = np.zeros([np.sum(data!=0), 4], dtype=np.int32, order='c')             # <<<<<<<<<<<<<<
  * 
  *     # Define the C memory view of the variables
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_zeros); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_zeros); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sum); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sum); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_NeObjC(__pyx_v_data, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_NeObjC(__pyx_v_data, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -2482,10 +2735,10 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   __pyx_t_2 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_5, __pyx_t_3, __pyx_t_1) : __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_1);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyList_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_5 = PyList_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_2);
   PyList_SET_ITEM(__pyx_t_5, 0, __pyx_t_2);
@@ -2493,22 +2746,22 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   __Pyx_GIVEREF(__pyx_int_4);
   PyList_SET_ITEM(__pyx_t_5, 1, __pyx_int_4);
   __pyx_t_2 = 0;
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_5);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_5);
   __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_int32); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_int32); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_3) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_3) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_order, __pyx_n_u_c) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_order, __pyx_n_u_c) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -2516,74 +2769,104 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   __pyx_v_catalogue = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "cows/_filament.pyx":42
+  /* "cows/_filament.pyx":52
  * 
  *     # Define the C memory view of the variables
  *     cdef int[:, :, ::1] data_view = data             # <<<<<<<<<<<<<<
  *     cdef int[:, :, ::1] result_view = result
  *     cdef int[:, :, ::1] visit_map_view = visit_map
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_int(__pyx_v_data, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_int(__pyx_v_data, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 52, __pyx_L1_error)
   __pyx_v_data_view = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "cows/_filament.pyx":43
+  /* "cows/_filament.pyx":53
  *     # Define the C memory view of the variables
  *     cdef int[:, :, ::1] data_view = data
  *     cdef int[:, :, ::1] result_view = result             # <<<<<<<<<<<<<<
  *     cdef int[:, :, ::1] visit_map_view = visit_map
  *     cdef int[:, ::1] cat_view = catalogue
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_int(__pyx_v_result, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_int(__pyx_v_result, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 53, __pyx_L1_error)
   __pyx_v_result_view = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "cows/_filament.pyx":44
+  /* "cows/_filament.pyx":54
  *     cdef int[:, :, ::1] data_view = data
  *     cdef int[:, :, ::1] result_view = result
  *     cdef int[:, :, ::1] visit_map_view = visit_map             # <<<<<<<<<<<<<<
  *     cdef int[:, ::1] cat_view = catalogue
  * 
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_int(__pyx_v_visit_map, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_int(__pyx_v_visit_map, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 54, __pyx_L1_error)
   __pyx_v_visit_map_view = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "cows/_filament.pyx":45
+  /* "cows/_filament.pyx":55
  *     cdef int[:, :, ::1] result_view = result
  *     cdef int[:, :, ::1] visit_map_view = visit_map
  *     cdef int[:, ::1] cat_view = catalogue             # <<<<<<<<<<<<<<
  * 
- *     connect_neighbours(data_view, visit_map_view, result_view, cat_view)
+ *     connect_neighbours(data_view, visit_map_view, result_view, cat_view,
  */
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_int(__pyx_v_catalogue, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_int(__pyx_v_catalogue, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 55, __pyx_L1_error)
   __pyx_v_cat_view = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "cows/_filament.pyx":47
- *     cdef int[:, ::1] cat_view = catalogue
+  /* "cows/_filament.pyx":58
  * 
- *     connect_neighbours(data_view, visit_map_view, result_view, cat_view)             # <<<<<<<<<<<<<<
+ *     connect_neighbours(data_view, visit_map_view, result_view, cat_view,
+ *                        np.int32(periodic))             # <<<<<<<<<<<<<<
  *     return result, catalogue
  * 
  */
-  __pyx_t_3 = __pyx_f_4cows_9_filament_connect_neighbours(__pyx_v_data_view, __pyx_v_visit_map_view, __pyx_v_result_view, __pyx_v_cat_view); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_int32); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  __pyx_t_3 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_5, __pyx_v_periodic) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_periodic);
+  __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "cows/_filament.pyx":57
+ *     cdef int[:, ::1] cat_view = catalogue
+ * 
+ *     connect_neighbours(data_view, visit_map_view, result_view, cat_view,             # <<<<<<<<<<<<<<
+ *                        np.int32(periodic))
+ *     return result, catalogue
+ */
+  __pyx_t_3 = __pyx_f_4cows_9_filament_connect_neighbours(__pyx_v_data_view, __pyx_v_visit_map_view, __pyx_v_result_view, __pyx_v_cat_view, __pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cows/_filament.pyx":48
- * 
- *     connect_neighbours(data_view, visit_map_view, result_view, cat_view)
+  /* "cows/_filament.pyx":59
+ *     connect_neighbours(data_view, visit_map_view, result_view, cat_view,
+ *                        np.int32(periodic))
  *     return result, catalogue             # <<<<<<<<<<<<<<
  * 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_v_result);
   __Pyx_GIVEREF(__pyx_v_result);
@@ -2595,10 +2878,10 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "cows/_filament.pyx":24
- *     return np.asarray(result)
+  /* "cows/_filament.pyx":34
+ *     return result
  * 
- * def _find_filaments(data):             # <<<<<<<<<<<<<<
+ * def _find_filaments(data, periodic=False):             # <<<<<<<<<<<<<<
  *     ''' Find individual filament.
  * 
  */
@@ -2628,7 +2911,7 @@ static PyObject *__pyx_pf_4cows_9_filament_2_find_filaments(CYTHON_UNUSED PyObje
   return __pyx_r;
 }
 
-/* "cows/_filament.pyx":53
+/* "cows/_filament.pyx":64
  * @cython.boundscheck(False)  # Deactivate bounds checking
  * @cython.wraparound(False)   # Deactivate negative indexing.
  * cdef int count_neighbours(int[:,:,:] data, int i, int j, int k):             # <<<<<<<<<<<<<<
@@ -2652,7 +2935,7 @@ static int __pyx_f_4cows_9_filament_count_neighbours(__Pyx_memviewslice __pyx_v_
   int __pyx_t_7;
   __Pyx_RefNannySetupContext("count_neighbours", 0);
 
-  /* "cows/_filament.pyx":60
+  /* "cows/_filament.pyx":71
  *     cdef int counter
  * 
  *     counter = -1    # -1 because we count the centre             # <<<<<<<<<<<<<<
@@ -2661,7 +2944,7 @@ static int __pyx_f_4cows_9_filament_count_neighbours(__Pyx_memviewslice __pyx_v_
  */
   __pyx_v_counter = -1;
 
-  /* "cows/_filament.pyx":61
+  /* "cows/_filament.pyx":72
  * 
  *     counter = -1    # -1 because we count the centre
  *     for dk in range(-1, 2):             # <<<<<<<<<<<<<<
@@ -2671,7 +2954,7 @@ static int __pyx_f_4cows_9_filament_count_neighbours(__Pyx_memviewslice __pyx_v_
   for (__pyx_t_1 = -1L; __pyx_t_1 < 2; __pyx_t_1+=1) {
     __pyx_v_dk = __pyx_t_1;
 
-    /* "cows/_filament.pyx":62
+    /* "cows/_filament.pyx":73
  *     counter = -1    # -1 because we count the centre
  *     for dk in range(-1, 2):
  *         for dj in range(-1, 2):             # <<<<<<<<<<<<<<
@@ -2681,7 +2964,7 @@ static int __pyx_f_4cows_9_filament_count_neighbours(__Pyx_memviewslice __pyx_v_
     for (__pyx_t_2 = -1L; __pyx_t_2 < 2; __pyx_t_2+=1) {
       __pyx_v_dj = __pyx_t_2;
 
-      /* "cows/_filament.pyx":63
+      /* "cows/_filament.pyx":74
  *     for dk in range(-1, 2):
  *         for dj in range(-1, 2):
  *             for di in range(-1, 2):             # <<<<<<<<<<<<<<
@@ -2691,7 +2974,7 @@ static int __pyx_f_4cows_9_filament_count_neighbours(__Pyx_memviewslice __pyx_v_
       for (__pyx_t_3 = -1L; __pyx_t_3 < 2; __pyx_t_3+=1) {
         __pyx_v_di = __pyx_t_3;
 
-        /* "cows/_filament.pyx":64
+        /* "cows/_filament.pyx":75
  *         for dj in range(-1, 2):
  *             for di in range(-1, 2):
  *                 if data[k+dk, j+dj, i+di] != 0:             # <<<<<<<<<<<<<<
@@ -2704,7 +2987,7 @@ static int __pyx_f_4cows_9_filament_count_neighbours(__Pyx_memviewslice __pyx_v_
         __pyx_t_7 = (((*((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_data.data + __pyx_t_4 * __pyx_v_data.strides[0]) ) + __pyx_t_5 * __pyx_v_data.strides[1]) ) + __pyx_t_6 * __pyx_v_data.strides[2]) ))) != 0) != 0);
         if (__pyx_t_7) {
 
-          /* "cows/_filament.pyx":65
+          /* "cows/_filament.pyx":76
  *             for di in range(-1, 2):
  *                 if data[k+dk, j+dj, i+di] != 0:
  *                     counter += 1             # <<<<<<<<<<<<<<
@@ -2713,7 +2996,7 @@ static int __pyx_f_4cows_9_filament_count_neighbours(__Pyx_memviewslice __pyx_v_
  */
           __pyx_v_counter = (__pyx_v_counter + 1);
 
-          /* "cows/_filament.pyx":64
+          /* "cows/_filament.pyx":75
  *         for dj in range(-1, 2):
  *             for di in range(-1, 2):
  *                 if data[k+dk, j+dj, i+di] != 0:             # <<<<<<<<<<<<<<
@@ -2725,7 +3008,7 @@ static int __pyx_f_4cows_9_filament_count_neighbours(__Pyx_memviewslice __pyx_v_
     }
   }
 
-  /* "cows/_filament.pyx":66
+  /* "cows/_filament.pyx":77
  *                 if data[k+dk, j+dj, i+di] != 0:
  *                     counter += 1
  *     return counter             # <<<<<<<<<<<<<<
@@ -2735,7 +3018,7 @@ static int __pyx_f_4cows_9_filament_count_neighbours(__Pyx_memviewslice __pyx_v_
   __pyx_r = __pyx_v_counter;
   goto __pyx_L0;
 
-  /* "cows/_filament.pyx":53
+  /* "cows/_filament.pyx":64
  * @cython.boundscheck(False)  # Deactivate bounds checking
  * @cython.wraparound(False)   # Deactivate negative indexing.
  * cdef int count_neighbours(int[:,:,:] data, int i, int j, int k):             # <<<<<<<<<<<<<<
@@ -2749,7 +3032,7 @@ static int __pyx_f_4cows_9_filament_count_neighbours(__Pyx_memviewslice __pyx_v_
   return __pyx_r;
 }
 
-/* "cows/_filament.pyx":70
+/* "cows/_filament.pyx":81
  * @cython.boundscheck(False)  # Deactivate bounds checking
  * @cython.wraparound(False)   # Deactivate negative indexing.
  * cdef label_skeleton(int[:,:,:] data, int[:,:,:] result):             # <<<<<<<<<<<<<<
@@ -2780,10 +3063,9 @@ static PyObject *__pyx_f_4cows_9_filament_label_skeleton(__Pyx_memviewslice __py
   Py_ssize_t __pyx_t_11;
   Py_ssize_t __pyx_t_12;
   int __pyx_t_13;
-  int __pyx_t_14;
   __Pyx_RefNannySetupContext("label_skeleton", 0);
 
-  /* "cows/_filament.pyx":86
+  /* "cows/_filament.pyx":96
  *     cdef Py_ssize_t i, j, k, ii
  * 
  *     i_max = data.shape[2]             # <<<<<<<<<<<<<<
@@ -2792,7 +3074,7 @@ static PyObject *__pyx_f_4cows_9_filament_label_skeleton(__Pyx_memviewslice __py
  */
   __pyx_v_i_max = (__pyx_v_data.shape[2]);
 
-  /* "cows/_filament.pyx":87
+  /* "cows/_filament.pyx":97
  * 
  *     i_max = data.shape[2]
  *     j_max = data.shape[1]             # <<<<<<<<<<<<<<
@@ -2801,7 +3083,7 @@ static PyObject *__pyx_f_4cows_9_filament_label_skeleton(__Pyx_memviewslice __py
  */
   __pyx_v_j_max = (__pyx_v_data.shape[1]);
 
-  /* "cows/_filament.pyx":88
+  /* "cows/_filament.pyx":98
  *     i_max = data.shape[2]
  *     j_max = data.shape[1]
  *     k_max = data.shape[0]             # <<<<<<<<<<<<<<
@@ -2810,7 +3092,7 @@ static PyObject *__pyx_f_4cows_9_filament_label_skeleton(__Pyx_memviewslice __py
  */
   __pyx_v_k_max = (__pyx_v_data.shape[0]);
 
-  /* "cows/_filament.pyx":91
+  /* "cows/_filament.pyx":101
  * 
  *     # Loop from 1 to end-1 because data is padded
  *     for k in range(1, k_max-1):             # <<<<<<<<<<<<<<
@@ -2822,7 +3104,7 @@ static PyObject *__pyx_f_4cows_9_filament_label_skeleton(__Pyx_memviewslice __py
   for (__pyx_t_3 = 1; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_k = __pyx_t_3;
 
-    /* "cows/_filament.pyx":92
+    /* "cows/_filament.pyx":102
  *     # Loop from 1 to end-1 because data is padded
  *     for k in range(1, k_max-1):
  *         for j in range(1, j_max-1):             # <<<<<<<<<<<<<<
@@ -2834,7 +3116,7 @@ static PyObject *__pyx_f_4cows_9_filament_label_skeleton(__Pyx_memviewslice __py
     for (__pyx_t_6 = 1; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
-      /* "cows/_filament.pyx":93
+      /* "cows/_filament.pyx":103
  *     for k in range(1, k_max-1):
  *         for j in range(1, j_max-1):
  *             for i in range(1, i_max-1):             # <<<<<<<<<<<<<<
@@ -2846,7 +3128,7 @@ static PyObject *__pyx_f_4cows_9_filament_label_skeleton(__Pyx_memviewslice __py
       for (__pyx_t_9 = 1; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
         __pyx_v_i = __pyx_t_9;
 
-        /* "cows/_filament.pyx":94
+        /* "cows/_filament.pyx":104
  *         for j in range(1, j_max-1):
  *             for i in range(1, i_max-1):
  *                 if data[k, j, i] == 0:             # <<<<<<<<<<<<<<
@@ -2859,7 +3141,7 @@ static PyObject *__pyx_f_4cows_9_filament_label_skeleton(__Pyx_memviewslice __py
         __pyx_t_13 = (((*((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_data.data + __pyx_t_10 * __pyx_v_data.strides[0]) ) + __pyx_t_11 * __pyx_v_data.strides[1]) ) + __pyx_t_12 * __pyx_v_data.strides[2]) ))) == 0) != 0);
         if (__pyx_t_13) {
 
-          /* "cows/_filament.pyx":95
+          /* "cows/_filament.pyx":105
  *             for i in range(1, i_max-1):
  *                 if data[k, j, i] == 0:
  *                     continue             # <<<<<<<<<<<<<<
@@ -2868,7 +3150,7 @@ static PyObject *__pyx_f_4cows_9_filament_label_skeleton(__Pyx_memviewslice __py
  */
           goto __pyx_L7_continue;
 
-          /* "cows/_filament.pyx":94
+          /* "cows/_filament.pyx":104
  *         for j in range(1, j_max-1):
  *             for i in range(1, i_max-1):
  *                 if data[k, j, i] == 0:             # <<<<<<<<<<<<<<
@@ -2877,51 +3159,43 @@ static PyObject *__pyx_f_4cows_9_filament_label_skeleton(__Pyx_memviewslice __py
  */
         }
 
-        /* "cows/_filament.pyx":97
+        /* "cows/_filament.pyx":107
  *                     continue
  * 
  *                 n_neighbours = count_neighbours(data, i, j, k)             # <<<<<<<<<<<<<<
- *                 if n_neighbours < 5 and n_neighbours > 0:
- *                     # -1 on indices because of padding
+ *                 if n_neighbours > 0:
+ *                     result[k, j, i] = n_neighbours
  */
         __pyx_v_n_neighbours = __pyx_f_4cows_9_filament_count_neighbours(__pyx_v_data, __pyx_v_i, __pyx_v_j, __pyx_v_k);
 
-        /* "cows/_filament.pyx":98
+        /* "cows/_filament.pyx":108
  * 
  *                 n_neighbours = count_neighbours(data, i, j, k)
- *                 if n_neighbours < 5 and n_neighbours > 0:             # <<<<<<<<<<<<<<
- *                     # -1 on indices because of padding
- *                     result[k-1, j-1, i-1] = n_neighbours
+ *                 if n_neighbours > 0:             # <<<<<<<<<<<<<<
+ *                     result[k, j, i] = n_neighbours
+ * 
  */
-        __pyx_t_14 = ((__pyx_v_n_neighbours < 5) != 0);
-        if (__pyx_t_14) {
-        } else {
-          __pyx_t_13 = __pyx_t_14;
-          goto __pyx_L11_bool_binop_done;
-        }
-        __pyx_t_14 = ((__pyx_v_n_neighbours > 0) != 0);
-        __pyx_t_13 = __pyx_t_14;
-        __pyx_L11_bool_binop_done:;
+        __pyx_t_13 = ((__pyx_v_n_neighbours > 0) != 0);
         if (__pyx_t_13) {
 
-          /* "cows/_filament.pyx":100
- *                 if n_neighbours < 5 and n_neighbours > 0:
- *                     # -1 on indices because of padding
- *                     result[k-1, j-1, i-1] = n_neighbours             # <<<<<<<<<<<<<<
+          /* "cows/_filament.pyx":109
+ *                 n_neighbours = count_neighbours(data, i, j, k)
+ *                 if n_neighbours > 0:
+ *                     result[k, j, i] = n_neighbours             # <<<<<<<<<<<<<<
  * 
  * 
  */
-          __pyx_t_12 = (__pyx_v_k - 1);
-          __pyx_t_11 = (__pyx_v_j - 1);
-          __pyx_t_10 = (__pyx_v_i - 1);
+          __pyx_t_12 = __pyx_v_k;
+          __pyx_t_11 = __pyx_v_j;
+          __pyx_t_10 = __pyx_v_i;
           *((int *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_result.data + __pyx_t_12 * __pyx_v_result.strides[0]) ) + __pyx_t_11 * __pyx_v_result.strides[1]) ) + __pyx_t_10 * __pyx_v_result.strides[2]) )) = __pyx_v_n_neighbours;
 
-          /* "cows/_filament.pyx":98
+          /* "cows/_filament.pyx":108
  * 
  *                 n_neighbours = count_neighbours(data, i, j, k)
- *                 if n_neighbours < 5 and n_neighbours > 0:             # <<<<<<<<<<<<<<
- *                     # -1 on indices because of padding
- *                     result[k-1, j-1, i-1] = n_neighbours
+ *                 if n_neighbours > 0:             # <<<<<<<<<<<<<<
+ *                     result[k, j, i] = n_neighbours
+ * 
  */
         }
         __pyx_L7_continue:;
@@ -2929,7 +3203,7 @@ static PyObject *__pyx_f_4cows_9_filament_label_skeleton(__Pyx_memviewslice __py
     }
   }
 
-  /* "cows/_filament.pyx":70
+  /* "cows/_filament.pyx":81
  * @cython.boundscheck(False)  # Deactivate bounds checking
  * @cython.wraparound(False)   # Deactivate negative indexing.
  * cdef label_skeleton(int[:,:,:] data, int[:,:,:] result):             # <<<<<<<<<<<<<<
@@ -2944,7 +3218,7 @@ static PyObject *__pyx_f_4cows_9_filament_label_skeleton(__Pyx_memviewslice __py
   return __pyx_r;
 }
 
-/* "cows/_filament.pyx":104
+/* "cows/_filament.pyx":113
  * 
  * @cython.cdivision(True)     # Enable C modulo
  * cdef int modulo_int(int a, int b):             # <<<<<<<<<<<<<<
@@ -2958,7 +3232,7 @@ static int __pyx_f_4cows_9_filament_modulo_int(int __pyx_v_a, int __pyx_v_b) {
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("modulo_int", 0);
 
-  /* "cows/_filament.pyx":105
+  /* "cows/_filament.pyx":114
  * @cython.cdivision(True)     # Enable C modulo
  * cdef int modulo_int(int a, int b):
  *     return b+(a%b) if a<0 else a%b             # <<<<<<<<<<<<<<
@@ -2973,7 +3247,7 @@ static int __pyx_f_4cows_9_filament_modulo_int(int __pyx_v_a, int __pyx_v_b) {
   __pyx_r = __pyx_t_1;
   goto __pyx_L0;
 
-  /* "cows/_filament.pyx":104
+  /* "cows/_filament.pyx":113
  * 
  * @cython.cdivision(True)     # Enable C modulo
  * cdef int modulo_int(int a, int b):             # <<<<<<<<<<<<<<
@@ -2987,11 +3261,11 @@ static int __pyx_f_4cows_9_filament_modulo_int(int __pyx_v_a, int __pyx_v_b) {
   return __pyx_r;
 }
 
-/* "cows/_filament.pyx":109
+/* "cows/_filament.pyx":118
  * @cython.boundscheck(False)  # Deactivate bounds checking
  * @cython.wraparound(False)   # Deactivate negative indexing.
  * cdef int check_has_neighbour(int[:,:,::1] data, int[:,:,::1] visit_map,             # <<<<<<<<<<<<<<
- *                                  int* i, int* j, int* k, int ncells):
+ *                              int* i, int* j, int* k, int ncells):
  *     '''
  */
 
@@ -3008,13 +3282,13 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
   int __pyx_t_2;
   int __pyx_t_3;
   int __pyx_t_4;
-  Py_ssize_t __pyx_t_5;
+  int __pyx_t_5;
   Py_ssize_t __pyx_t_6;
   Py_ssize_t __pyx_t_7;
-  int __pyx_t_8;
+  Py_ssize_t __pyx_t_8;
   __Pyx_RefNannySetupContext("check_has_neighbour", 0);
 
-  /* "cows/_filament.pyx":124
+  /* "cows/_filament.pyx":133
  *     cdef int i_tmp, j_tmp, k_tmp
  * 
  *     for dk in range(-1, 2):             # <<<<<<<<<<<<<<
@@ -3024,7 +3298,279 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
   for (__pyx_t_1 = -1; __pyx_t_1 < 2; __pyx_t_1+=1) {
     __pyx_v_dk = __pyx_t_1;
 
-    /* "cows/_filament.pyx":125
+    /* "cows/_filament.pyx":134
+ * 
+ *     for dk in range(-1, 2):
+ *         for dj in range(-1, 2):             # <<<<<<<<<<<<<<
+ *             for di in range(-1, 2):
+ *                 i_tmp = i[0] + di
+ */
+    for (__pyx_t_2 = -1; __pyx_t_2 < 2; __pyx_t_2+=1) {
+      __pyx_v_dj = __pyx_t_2;
+
+      /* "cows/_filament.pyx":135
+ *     for dk in range(-1, 2):
+ *         for dj in range(-1, 2):
+ *             for di in range(-1, 2):             # <<<<<<<<<<<<<<
+ *                 i_tmp = i[0] + di
+ *                 j_tmp = j[0] + dj
+ */
+      for (__pyx_t_3 = -1; __pyx_t_3 < 2; __pyx_t_3+=1) {
+        __pyx_v_di = __pyx_t_3;
+
+        /* "cows/_filament.pyx":136
+ *         for dj in range(-1, 2):
+ *             for di in range(-1, 2):
+ *                 i_tmp = i[0] + di             # <<<<<<<<<<<<<<
+ *                 j_tmp = j[0] + dj
+ *                 k_tmp = k[0] + dk
+ */
+        __pyx_v_i_tmp = ((__pyx_v_i[0]) + __pyx_v_di);
+
+        /* "cows/_filament.pyx":137
+ *             for di in range(-1, 2):
+ *                 i_tmp = i[0] + di
+ *                 j_tmp = j[0] + dj             # <<<<<<<<<<<<<<
+ *                 k_tmp = k[0] + dk
+ *                 if (i_tmp>=0 and i_tmp<ncells and
+ */
+        __pyx_v_j_tmp = ((__pyx_v_j[0]) + __pyx_v_dj);
+
+        /* "cows/_filament.pyx":138
+ *                 i_tmp = i[0] + di
+ *                 j_tmp = j[0] + dj
+ *                 k_tmp = k[0] + dk             # <<<<<<<<<<<<<<
+ *                 if (i_tmp>=0 and i_tmp<ncells and
+ *                     j_tmp>=0 and j_tmp<ncells and
+ */
+        __pyx_v_k_tmp = ((__pyx_v_k[0]) + __pyx_v_dk);
+
+        /* "cows/_filament.pyx":139
+ *                 j_tmp = j[0] + dj
+ *                 k_tmp = k[0] + dk
+ *                 if (i_tmp>=0 and i_tmp<ncells and             # <<<<<<<<<<<<<<
+ *                     j_tmp>=0 and j_tmp<ncells and
+ *                     k_tmp>=0 and k_tmp<ncells):
+ */
+        __pyx_t_5 = ((__pyx_v_i_tmp >= 0) != 0);
+        if (__pyx_t_5) {
+        } else {
+          __pyx_t_4 = __pyx_t_5;
+          goto __pyx_L10_bool_binop_done;
+        }
+        __pyx_t_5 = ((__pyx_v_i_tmp < __pyx_v_ncells) != 0);
+        if (__pyx_t_5) {
+        } else {
+          __pyx_t_4 = __pyx_t_5;
+          goto __pyx_L10_bool_binop_done;
+        }
+
+        /* "cows/_filament.pyx":140
+ *                 k_tmp = k[0] + dk
+ *                 if (i_tmp>=0 and i_tmp<ncells and
+ *                     j_tmp>=0 and j_tmp<ncells and             # <<<<<<<<<<<<<<
+ *                     k_tmp>=0 and k_tmp<ncells):
+ *                     if (data[k_tmp, j_tmp, i_tmp] > 0 and
+ */
+        __pyx_t_5 = ((__pyx_v_j_tmp >= 0) != 0);
+        if (__pyx_t_5) {
+        } else {
+          __pyx_t_4 = __pyx_t_5;
+          goto __pyx_L10_bool_binop_done;
+        }
+        __pyx_t_5 = ((__pyx_v_j_tmp < __pyx_v_ncells) != 0);
+        if (__pyx_t_5) {
+        } else {
+          __pyx_t_4 = __pyx_t_5;
+          goto __pyx_L10_bool_binop_done;
+        }
+
+        /* "cows/_filament.pyx":141
+ *                 if (i_tmp>=0 and i_tmp<ncells and
+ *                     j_tmp>=0 and j_tmp<ncells and
+ *                     k_tmp>=0 and k_tmp<ncells):             # <<<<<<<<<<<<<<
+ *                     if (data[k_tmp, j_tmp, i_tmp] > 0 and
+ *                         visit_map[k_tmp, j_tmp, i_tmp] == 0):
+ */
+        __pyx_t_5 = ((__pyx_v_k_tmp >= 0) != 0);
+        if (__pyx_t_5) {
+        } else {
+          __pyx_t_4 = __pyx_t_5;
+          goto __pyx_L10_bool_binop_done;
+        }
+        __pyx_t_5 = ((__pyx_v_k_tmp < __pyx_v_ncells) != 0);
+        __pyx_t_4 = __pyx_t_5;
+        __pyx_L10_bool_binop_done:;
+
+        /* "cows/_filament.pyx":139
+ *                 j_tmp = j[0] + dj
+ *                 k_tmp = k[0] + dk
+ *                 if (i_tmp>=0 and i_tmp<ncells and             # <<<<<<<<<<<<<<
+ *                     j_tmp>=0 and j_tmp<ncells and
+ *                     k_tmp>=0 and k_tmp<ncells):
+ */
+        if (__pyx_t_4) {
+
+          /* "cows/_filament.pyx":142
+ *                     j_tmp>=0 and j_tmp<ncells and
+ *                     k_tmp>=0 and k_tmp<ncells):
+ *                     if (data[k_tmp, j_tmp, i_tmp] > 0 and             # <<<<<<<<<<<<<<
+ *                         visit_map[k_tmp, j_tmp, i_tmp] == 0):
+ *                         i[0] = i_tmp    # set the value of the pointers
+ */
+          __pyx_t_6 = __pyx_v_k_tmp;
+          __pyx_t_7 = __pyx_v_j_tmp;
+          __pyx_t_8 = __pyx_v_i_tmp;
+          __pyx_t_5 = (((*((int *) ( /* dim=2 */ ((char *) (((int *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_data.data + __pyx_t_6 * __pyx_v_data.strides[0]) ) + __pyx_t_7 * __pyx_v_data.strides[1]) )) + __pyx_t_8)) ))) > 0) != 0);
+          if (__pyx_t_5) {
+          } else {
+            __pyx_t_4 = __pyx_t_5;
+            goto __pyx_L17_bool_binop_done;
+          }
+
+          /* "cows/_filament.pyx":143
+ *                     k_tmp>=0 and k_tmp<ncells):
+ *                     if (data[k_tmp, j_tmp, i_tmp] > 0 and
+ *                         visit_map[k_tmp, j_tmp, i_tmp] == 0):             # <<<<<<<<<<<<<<
+ *                         i[0] = i_tmp    # set the value of the pointers
+ *                         j[0] = j_tmp    # to the neighbour indices
+ */
+          __pyx_t_8 = __pyx_v_k_tmp;
+          __pyx_t_7 = __pyx_v_j_tmp;
+          __pyx_t_6 = __pyx_v_i_tmp;
+          __pyx_t_5 = (((*((int *) ( /* dim=2 */ ((char *) (((int *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_visit_map.data + __pyx_t_8 * __pyx_v_visit_map.strides[0]) ) + __pyx_t_7 * __pyx_v_visit_map.strides[1]) )) + __pyx_t_6)) ))) == 0) != 0);
+          __pyx_t_4 = __pyx_t_5;
+          __pyx_L17_bool_binop_done:;
+
+          /* "cows/_filament.pyx":142
+ *                     j_tmp>=0 and j_tmp<ncells and
+ *                     k_tmp>=0 and k_tmp<ncells):
+ *                     if (data[k_tmp, j_tmp, i_tmp] > 0 and             # <<<<<<<<<<<<<<
+ *                         visit_map[k_tmp, j_tmp, i_tmp] == 0):
+ *                         i[0] = i_tmp    # set the value of the pointers
+ */
+          if (__pyx_t_4) {
+
+            /* "cows/_filament.pyx":144
+ *                     if (data[k_tmp, j_tmp, i_tmp] > 0 and
+ *                         visit_map[k_tmp, j_tmp, i_tmp] == 0):
+ *                         i[0] = i_tmp    # set the value of the pointers             # <<<<<<<<<<<<<<
+ *                         j[0] = j_tmp    # to the neighbour indices
+ *                         k[0] = k_tmp
+ */
+            (__pyx_v_i[0]) = __pyx_v_i_tmp;
+
+            /* "cows/_filament.pyx":145
+ *                         visit_map[k_tmp, j_tmp, i_tmp] == 0):
+ *                         i[0] = i_tmp    # set the value of the pointers
+ *                         j[0] = j_tmp    # to the neighbour indices             # <<<<<<<<<<<<<<
+ *                         k[0] = k_tmp
+ *                         return 1
+ */
+            (__pyx_v_j[0]) = __pyx_v_j_tmp;
+
+            /* "cows/_filament.pyx":146
+ *                         i[0] = i_tmp    # set the value of the pointers
+ *                         j[0] = j_tmp    # to the neighbour indices
+ *                         k[0] = k_tmp             # <<<<<<<<<<<<<<
+ *                         return 1
+ *     return 0
+ */
+            (__pyx_v_k[0]) = __pyx_v_k_tmp;
+
+            /* "cows/_filament.pyx":147
+ *                         j[0] = j_tmp    # to the neighbour indices
+ *                         k[0] = k_tmp
+ *                         return 1             # <<<<<<<<<<<<<<
+ *     return 0
+ * 
+ */
+            __pyx_r = 1;
+            goto __pyx_L0;
+
+            /* "cows/_filament.pyx":142
+ *                     j_tmp>=0 and j_tmp<ncells and
+ *                     k_tmp>=0 and k_tmp<ncells):
+ *                     if (data[k_tmp, j_tmp, i_tmp] > 0 and             # <<<<<<<<<<<<<<
+ *                         visit_map[k_tmp, j_tmp, i_tmp] == 0):
+ *                         i[0] = i_tmp    # set the value of the pointers
+ */
+          }
+
+          /* "cows/_filament.pyx":139
+ *                 j_tmp = j[0] + dj
+ *                 k_tmp = k[0] + dk
+ *                 if (i_tmp>=0 and i_tmp<ncells and             # <<<<<<<<<<<<<<
+ *                     j_tmp>=0 and j_tmp<ncells and
+ *                     k_tmp>=0 and k_tmp<ncells):
+ */
+        }
+      }
+    }
+  }
+
+  /* "cows/_filament.pyx":148
+ *                         k[0] = k_tmp
+ *                         return 1
+ *     return 0             # <<<<<<<<<<<<<<
+ * 
+ * @cython.boundscheck(False)  # Deactivate bounds checking
+ */
+  __pyx_r = 0;
+  goto __pyx_L0;
+
+  /* "cows/_filament.pyx":118
+ * @cython.boundscheck(False)  # Deactivate bounds checking
+ * @cython.wraparound(False)   # Deactivate negative indexing.
+ * cdef int check_has_neighbour(int[:,:,::1] data, int[:,:,::1] visit_map,             # <<<<<<<<<<<<<<
+ *                              int* i, int* j, int* k, int ncells):
+ *     '''
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "cows/_filament.pyx":152
+ * @cython.boundscheck(False)  # Deactivate bounds checking
+ * @cython.wraparound(False)   # Deactivate negative indexing.
+ * cdef int check_has_neighbour_wrap(int[:,:,::1] data, int[:,:,::1] visit_map,             # <<<<<<<<<<<<<<
+ *                                   int* i, int* j, int* k, int ncells):
+ *     '''
+ */
+
+static int __pyx_f_4cows_9_filament_check_has_neighbour_wrap(__Pyx_memviewslice __pyx_v_data, __Pyx_memviewslice __pyx_v_visit_map, int *__pyx_v_i, int *__pyx_v_j, int *__pyx_v_k, int __pyx_v_ncells) {
+  int __pyx_v_di;
+  int __pyx_v_dj;
+  int __pyx_v_dk;
+  int __pyx_v_i_tmp;
+  int __pyx_v_j_tmp;
+  int __pyx_v_k_tmp;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  int __pyx_t_4;
+  Py_ssize_t __pyx_t_5;
+  Py_ssize_t __pyx_t_6;
+  Py_ssize_t __pyx_t_7;
+  int __pyx_t_8;
+  __Pyx_RefNannySetupContext("check_has_neighbour_wrap", 0);
+
+  /* "cows/_filament.pyx":167
+ *     cdef int i_tmp, j_tmp, k_tmp
+ * 
+ *     for dk in range(-1, 2):             # <<<<<<<<<<<<<<
+ *         for dj in range(-1, 2):
+ *             for di in range(-1, 2):
+ */
+  for (__pyx_t_1 = -1; __pyx_t_1 < 2; __pyx_t_1+=1) {
+    __pyx_v_dk = __pyx_t_1;
+
+    /* "cows/_filament.pyx":168
  * 
  *     for dk in range(-1, 2):
  *         for dj in range(-1, 2):             # <<<<<<<<<<<<<<
@@ -3034,7 +3580,7 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
     for (__pyx_t_2 = -1; __pyx_t_2 < 2; __pyx_t_2+=1) {
       __pyx_v_dj = __pyx_t_2;
 
-      /* "cows/_filament.pyx":126
+      /* "cows/_filament.pyx":169
  *     for dk in range(-1, 2):
  *         for dj in range(-1, 2):
  *             for di in range(-1, 2):             # <<<<<<<<<<<<<<
@@ -3044,7 +3590,7 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
       for (__pyx_t_3 = -1; __pyx_t_3 < 2; __pyx_t_3+=1) {
         __pyx_v_di = __pyx_t_3;
 
-        /* "cows/_filament.pyx":127
+        /* "cows/_filament.pyx":170
  *         for dj in range(-1, 2):
  *             for di in range(-1, 2):
  *                 i_tmp = modulo_int(i[0] + di, ncells)             # <<<<<<<<<<<<<<
@@ -3053,7 +3599,7 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
  */
         __pyx_v_i_tmp = __pyx_f_4cows_9_filament_modulo_int(((__pyx_v_i[0]) + __pyx_v_di), __pyx_v_ncells);
 
-        /* "cows/_filament.pyx":128
+        /* "cows/_filament.pyx":171
  *             for di in range(-1, 2):
  *                 i_tmp = modulo_int(i[0] + di, ncells)
  *                 j_tmp = modulo_int(j[0] + dj, ncells)             # <<<<<<<<<<<<<<
@@ -3062,7 +3608,7 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
  */
         __pyx_v_j_tmp = __pyx_f_4cows_9_filament_modulo_int(((__pyx_v_j[0]) + __pyx_v_dj), __pyx_v_ncells);
 
-        /* "cows/_filament.pyx":129
+        /* "cows/_filament.pyx":172
  *                 i_tmp = modulo_int(i[0] + di, ncells)
  *                 j_tmp = modulo_int(j[0] + dj, ncells)
  *                 k_tmp = modulo_int(k[0] + dk, ncells)             # <<<<<<<<<<<<<<
@@ -3071,7 +3617,7 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
  */
         __pyx_v_k_tmp = __pyx_f_4cows_9_filament_modulo_int(((__pyx_v_k[0]) + __pyx_v_dk), __pyx_v_ncells);
 
-        /* "cows/_filament.pyx":130
+        /* "cows/_filament.pyx":173
  *                 j_tmp = modulo_int(j[0] + dj, ncells)
  *                 k_tmp = modulo_int(k[0] + dk, ncells)
  *                 if (data[k_tmp, j_tmp, i_tmp] > 0 and             # <<<<<<<<<<<<<<
@@ -3088,7 +3634,7 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
           goto __pyx_L10_bool_binop_done;
         }
 
-        /* "cows/_filament.pyx":131
+        /* "cows/_filament.pyx":174
  *                 k_tmp = modulo_int(k[0] + dk, ncells)
  *                 if (data[k_tmp, j_tmp, i_tmp] > 0 and
  *                     visit_map[k_tmp, j_tmp, i_tmp] == 0):             # <<<<<<<<<<<<<<
@@ -3102,7 +3648,7 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
         __pyx_t_4 = __pyx_t_8;
         __pyx_L10_bool_binop_done:;
 
-        /* "cows/_filament.pyx":130
+        /* "cows/_filament.pyx":173
  *                 j_tmp = modulo_int(j[0] + dj, ncells)
  *                 k_tmp = modulo_int(k[0] + dk, ncells)
  *                 if (data[k_tmp, j_tmp, i_tmp] > 0 and             # <<<<<<<<<<<<<<
@@ -3111,7 +3657,7 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
  */
         if (__pyx_t_4) {
 
-          /* "cows/_filament.pyx":132
+          /* "cows/_filament.pyx":175
  *                 if (data[k_tmp, j_tmp, i_tmp] > 0 and
  *                     visit_map[k_tmp, j_tmp, i_tmp] == 0):
  *                     i[0] = i_tmp    # set the value of the pointers             # <<<<<<<<<<<<<<
@@ -3120,7 +3666,7 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
  */
           (__pyx_v_i[0]) = __pyx_v_i_tmp;
 
-          /* "cows/_filament.pyx":133
+          /* "cows/_filament.pyx":176
  *                     visit_map[k_tmp, j_tmp, i_tmp] == 0):
  *                     i[0] = i_tmp    # set the value of the pointers
  *                     j[0] = j_tmp    # to the neighbour indices             # <<<<<<<<<<<<<<
@@ -3129,7 +3675,7 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
  */
           (__pyx_v_j[0]) = __pyx_v_j_tmp;
 
-          /* "cows/_filament.pyx":134
+          /* "cows/_filament.pyx":177
  *                     i[0] = i_tmp    # set the value of the pointers
  *                     j[0] = j_tmp    # to the neighbour indices
  *                     k[0] = k_tmp             # <<<<<<<<<<<<<<
@@ -3138,7 +3684,7 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
  */
           (__pyx_v_k[0]) = __pyx_v_k_tmp;
 
-          /* "cows/_filament.pyx":135
+          /* "cows/_filament.pyx":178
  *                     j[0] = j_tmp    # to the neighbour indices
  *                     k[0] = k_tmp
  *                     return 1             # <<<<<<<<<<<<<<
@@ -3148,7 +3694,7 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
           __pyx_r = 1;
           goto __pyx_L0;
 
-          /* "cows/_filament.pyx":130
+          /* "cows/_filament.pyx":173
  *                 j_tmp = modulo_int(j[0] + dj, ncells)
  *                 k_tmp = modulo_int(k[0] + dk, ncells)
  *                 if (data[k_tmp, j_tmp, i_tmp] > 0 and             # <<<<<<<<<<<<<<
@@ -3160,7 +3706,7 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
     }
   }
 
-  /* "cows/_filament.pyx":136
+  /* "cows/_filament.pyx":179
  *                     k[0] = k_tmp
  *                     return 1
  *     return 0             # <<<<<<<<<<<<<<
@@ -3170,11 +3716,11 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "cows/_filament.pyx":109
+  /* "cows/_filament.pyx":152
  * @cython.boundscheck(False)  # Deactivate bounds checking
  * @cython.wraparound(False)   # Deactivate negative indexing.
- * cdef int check_has_neighbour(int[:,:,::1] data, int[:,:,::1] visit_map,             # <<<<<<<<<<<<<<
- *                                  int* i, int* j, int* k, int ncells):
+ * cdef int check_has_neighbour_wrap(int[:,:,::1] data, int[:,:,::1] visit_map,             # <<<<<<<<<<<<<<
+ *                                   int* i, int* j, int* k, int ncells):
  *     '''
  */
 
@@ -3184,15 +3730,15 @@ static int __pyx_f_4cows_9_filament_check_has_neighbour(__Pyx_memviewslice __pyx
   return __pyx_r;
 }
 
-/* "cows/_filament.pyx":140
+/* "cows/_filament.pyx":183
  * @cython.boundscheck(False)  # Deactivate bounds checking
  * @cython.wraparound(False)   # Deactivate negative indexing.
  * cdef connect_neighbours(int[:,:,::1] data, int[:,:,::1] visit_map,             # <<<<<<<<<<<<<<
- *                             int[:,:,::1] result, int[:, ::1] cat):
- *     '''
+ *                         int[:,:,::1] result, int[:, ::1] cat,
+ *                         int periodic):
  */
 
-static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice __pyx_v_data, __Pyx_memviewslice __pyx_v_visit_map, __Pyx_memviewslice __pyx_v_result, __Pyx_memviewslice __pyx_v_cat) {
+static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice __pyx_v_data, __Pyx_memviewslice __pyx_v_visit_map, __Pyx_memviewslice __pyx_v_result, __Pyx_memviewslice __pyx_v_cat, int __pyx_v_periodic) {
   int __pyx_v_i;
   int __pyx_v_j;
   int __pyx_v_k;
@@ -3221,7 +3767,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
   int __pyx_t_14;
   __Pyx_RefNannySetupContext("connect_neighbours", 0);
 
-  /* "cows/_filament.pyx":165
+  /* "cows/_filament.pyx":209
  *     cdef int zero_count, one_count, two_count
  * 
  *     ncells = data.shape[0]             # <<<<<<<<<<<<<<
@@ -3230,7 +3776,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
  */
   __pyx_v_ncells = (__pyx_v_data.shape[0]);
 
-  /* "cows/_filament.pyx":167
+  /* "cows/_filament.pyx":211
  *     ncells = data.shape[0]
  * 
  *     count = 0             # <<<<<<<<<<<<<<
@@ -3239,7 +3785,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
  */
   __pyx_v_count = 0;
 
-  /* "cows/_filament.pyx":168
+  /* "cows/_filament.pyx":212
  * 
  *     count = 0
  *     n_filaments = 0             # <<<<<<<<<<<<<<
@@ -3248,7 +3794,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
  */
   __pyx_v_n_filaments = 0;
 
-  /* "cows/_filament.pyx":169
+  /* "cows/_filament.pyx":213
  *     count = 0
  *     n_filaments = 0
  *     for k in range(ncells):             # <<<<<<<<<<<<<<
@@ -3260,7 +3806,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_k = __pyx_t_3;
 
-    /* "cows/_filament.pyx":170
+    /* "cows/_filament.pyx":214
  *     n_filaments = 0
  *     for k in range(ncells):
  *         for j in range(ncells):             # <<<<<<<<<<<<<<
@@ -3272,7 +3818,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
-      /* "cows/_filament.pyx":171
+      /* "cows/_filament.pyx":215
  *     for k in range(ncells):
  *         for j in range(ncells):
  *             for i in range(ncells):             # <<<<<<<<<<<<<<
@@ -3284,7 +3830,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
       for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
         __pyx_v_i = __pyx_t_9;
 
-        /* "cows/_filament.pyx":172
+        /* "cows/_filament.pyx":216
  *         for j in range(ncells):
  *             for i in range(ncells):
  *                 if (data[k, j, i] != 1 or             # <<<<<<<<<<<<<<
@@ -3301,7 +3847,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
           goto __pyx_L10_bool_binop_done;
         }
 
-        /* "cows/_filament.pyx":173
+        /* "cows/_filament.pyx":217
  *             for i in range(ncells):
  *                 if (data[k, j, i] != 1 or
  *                     visit_map[k, j, i] == 1):             # <<<<<<<<<<<<<<
@@ -3315,7 +3861,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
         __pyx_t_10 = __pyx_t_14;
         __pyx_L10_bool_binop_done:;
 
-        /* "cows/_filament.pyx":172
+        /* "cows/_filament.pyx":216
  *         for j in range(ncells):
  *             for i in range(ncells):
  *                 if (data[k, j, i] != 1 or             # <<<<<<<<<<<<<<
@@ -3324,7 +3870,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
  */
         if (__pyx_t_10) {
 
-          /* "cows/_filament.pyx":174
+          /* "cows/_filament.pyx":218
  *                 if (data[k, j, i] != 1 or
  *                     visit_map[k, j, i] == 1):
  *                     continue             # <<<<<<<<<<<<<<
@@ -3333,7 +3879,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
  */
           goto __pyx_L7_continue;
 
-          /* "cows/_filament.pyx":172
+          /* "cows/_filament.pyx":216
  *         for j in range(ncells):
  *             for i in range(ncells):
  *                 if (data[k, j, i] != 1 or             # <<<<<<<<<<<<<<
@@ -3342,7 +3888,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
  */
         }
 
-        /* "cows/_filament.pyx":176
+        /* "cows/_filament.pyx":220
  *                     continue
  * 
  *                 idx_i = i             # <<<<<<<<<<<<<<
@@ -3351,7 +3897,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
  */
         __pyx_v_idx_i = __pyx_v_i;
 
-        /* "cows/_filament.pyx":177
+        /* "cows/_filament.pyx":221
  * 
  *                 idx_i = i
  *                 idx_j = j             # <<<<<<<<<<<<<<
@@ -3360,7 +3906,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
  */
         __pyx_v_idx_j = __pyx_v_j;
 
-        /* "cows/_filament.pyx":178
+        /* "cows/_filament.pyx":222
  *                 idx_i = i
  *                 idx_j = j
  *                 idx_k = k             # <<<<<<<<<<<<<<
@@ -3369,7 +3915,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
  */
         __pyx_v_idx_k = __pyx_v_k;
 
-        /* "cows/_filament.pyx":179
+        /* "cows/_filament.pyx":223
  *                 idx_j = j
  *                 idx_k = k
  *                 n_filaments += 1             # <<<<<<<<<<<<<<
@@ -3378,7 +3924,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
  */
         __pyx_v_n_filaments = (__pyx_v_n_filaments + 1);
 
-        /* "cows/_filament.pyx":180
+        /* "cows/_filament.pyx":224
  *                 idx_k = k
  *                 n_filaments += 1
  *                 has_neighbour = 1             # <<<<<<<<<<<<<<
@@ -3387,7 +3933,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
  */
         __pyx_v_has_neighbour = 1;
 
-        /* "cows/_filament.pyx":181
+        /* "cows/_filament.pyx":225
  *                 n_filaments += 1
  *                 has_neighbour = 1
  *                 while has_neighbour == 1:             # <<<<<<<<<<<<<<
@@ -3398,7 +3944,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
           __pyx_t_10 = ((__pyx_v_has_neighbour == 1) != 0);
           if (!__pyx_t_10) break;
 
-          /* "cows/_filament.pyx":182
+          /* "cows/_filament.pyx":226
  *                 has_neighbour = 1
  *                 while has_neighbour == 1:
  *                     cat[count, 0] = n_filaments             # <<<<<<<<<<<<<<
@@ -3409,7 +3955,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
           __pyx_t_12 = 0;
           *((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_cat.data + __pyx_t_11 * __pyx_v_cat.strides[0]) )) + __pyx_t_12)) )) = __pyx_v_n_filaments;
 
-          /* "cows/_filament.pyx":183
+          /* "cows/_filament.pyx":227
  *                 while has_neighbour == 1:
  *                     cat[count, 0] = n_filaments
  *                     cat[count, 1] = idx_i             # <<<<<<<<<<<<<<
@@ -3420,7 +3966,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
           __pyx_t_11 = 1;
           *((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_cat.data + __pyx_t_12 * __pyx_v_cat.strides[0]) )) + __pyx_t_11)) )) = __pyx_v_idx_i;
 
-          /* "cows/_filament.pyx":184
+          /* "cows/_filament.pyx":228
  *                     cat[count, 0] = n_filaments
  *                     cat[count, 1] = idx_i
  *                     cat[count, 2] = idx_j             # <<<<<<<<<<<<<<
@@ -3431,7 +3977,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
           __pyx_t_12 = 2;
           *((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_cat.data + __pyx_t_11 * __pyx_v_cat.strides[0]) )) + __pyx_t_12)) )) = __pyx_v_idx_j;
 
-          /* "cows/_filament.pyx":185
+          /* "cows/_filament.pyx":229
  *                     cat[count, 1] = idx_i
  *                     cat[count, 2] = idx_j
  *                     cat[count, 3] = idx_k             # <<<<<<<<<<<<<<
@@ -3442,7 +3988,7 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
           __pyx_t_11 = 3;
           *((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_cat.data + __pyx_t_12 * __pyx_v_cat.strides[0]) )) + __pyx_t_11)) )) = __pyx_v_idx_k;
 
-          /* "cows/_filament.pyx":187
+          /* "cows/_filament.pyx":231
  *                     cat[count, 3] = idx_k
  * 
  *                     result[idx_k ,idx_j, idx_i] = n_filaments             # <<<<<<<<<<<<<<
@@ -3454,30 +4000,70 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
           __pyx_t_13 = __pyx_v_idx_i;
           *((int *) ( /* dim=2 */ ((char *) (((int *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_result.data + __pyx_t_11 * __pyx_v_result.strides[0]) ) + __pyx_t_12 * __pyx_v_result.strides[1]) )) + __pyx_t_13)) )) = __pyx_v_n_filaments;
 
-          /* "cows/_filament.pyx":188
+          /* "cows/_filament.pyx":232
  * 
  *                     result[idx_k ,idx_j, idx_i] = n_filaments
  *                     visit_map[idx_k, idx_j, idx_i] = 1             # <<<<<<<<<<<<<<
  * 
- *                     has_neighbour = check_has_neighbour(data, visit_map,
+ *                     if periodic == 0:
  */
           __pyx_t_13 = __pyx_v_idx_k;
           __pyx_t_12 = __pyx_v_idx_j;
           __pyx_t_11 = __pyx_v_idx_i;
           *((int *) ( /* dim=2 */ ((char *) (((int *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_visit_map.data + __pyx_t_13 * __pyx_v_visit_map.strides[0]) ) + __pyx_t_12 * __pyx_v_visit_map.strides[1]) )) + __pyx_t_11)) )) = 1;
 
-          /* "cows/_filament.pyx":190
+          /* "cows/_filament.pyx":234
  *                     visit_map[idx_k, idx_j, idx_i] = 1
  * 
- *                     has_neighbour = check_has_neighbour(data, visit_map,             # <<<<<<<<<<<<<<
- *                                                         &idx_i, &idx_j,
- *                                                         &idx_k, ncells)
+ *                     if periodic == 0:             # <<<<<<<<<<<<<<
+ *                         has_neighbour = check_has_neighbour(data, visit_map,
+ *                                                             &idx_i, &idx_j,
  */
-          __pyx_v_has_neighbour = __pyx_f_4cows_9_filament_check_has_neighbour(__pyx_v_data, __pyx_v_visit_map, (&__pyx_v_idx_i), (&__pyx_v_idx_j), (&__pyx_v_idx_k), __pyx_v_ncells);
+          __pyx_t_10 = ((__pyx_v_periodic == 0) != 0);
+          if (__pyx_t_10) {
 
-          /* "cows/_filament.pyx":193
- *                                                         &idx_i, &idx_j,
- *                                                         &idx_k, ncells)
+            /* "cows/_filament.pyx":235
+ * 
+ *                     if periodic == 0:
+ *                         has_neighbour = check_has_neighbour(data, visit_map,             # <<<<<<<<<<<<<<
+ *                                                             &idx_i, &idx_j,
+ *                                                             &idx_k, ncells)
+ */
+            __pyx_v_has_neighbour = __pyx_f_4cows_9_filament_check_has_neighbour(__pyx_v_data, __pyx_v_visit_map, (&__pyx_v_idx_i), (&__pyx_v_idx_j), (&__pyx_v_idx_k), __pyx_v_ncells);
+
+            /* "cows/_filament.pyx":234
+ *                     visit_map[idx_k, idx_j, idx_i] = 1
+ * 
+ *                     if periodic == 0:             # <<<<<<<<<<<<<<
+ *                         has_neighbour = check_has_neighbour(data, visit_map,
+ *                                                             &idx_i, &idx_j,
+ */
+            goto __pyx_L14;
+          }
+
+          /* "cows/_filament.pyx":239
+ *                                                             &idx_k, ncells)
+ *                     else:
+ *                         has_neighbour = check_has_neighbour_wrap(data,             # <<<<<<<<<<<<<<
+ *                                                                  visit_map,
+ *                                                                  &idx_i,
+ */
+          /*else*/ {
+
+            /* "cows/_filament.pyx":244
+ *                                                                  &idx_j,
+ *                                                                  &idx_k,
+ *                                                                  ncells)             # <<<<<<<<<<<<<<
+ * 
+ *                     count += 1
+ */
+            __pyx_v_has_neighbour = __pyx_f_4cows_9_filament_check_has_neighbour_wrap(__pyx_v_data, __pyx_v_visit_map, (&__pyx_v_idx_i), (&__pyx_v_idx_j), (&__pyx_v_idx_k), __pyx_v_ncells);
+          }
+          __pyx_L14:;
+
+          /* "cows/_filament.pyx":246
+ *                                                                  ncells)
+ * 
  *                     count += 1             # <<<<<<<<<<<<<<
  */
           __pyx_v_count = (__pyx_v_count + 1);
@@ -3487,12 +4073,12 @@ static PyObject *__pyx_f_4cows_9_filament_connect_neighbours(__Pyx_memviewslice 
     }
   }
 
-  /* "cows/_filament.pyx":140
+  /* "cows/_filament.pyx":183
  * @cython.boundscheck(False)  # Deactivate bounds checking
  * @cython.wraparound(False)   # Deactivate negative indexing.
  * cdef connect_neighbours(int[:,:,::1] data, int[:,:,::1] visit_map,             # <<<<<<<<<<<<<<
- *                             int[:,:,::1] result, int[:, ::1] cat):
- *     '''
+ *                         int[:,:,::1] result, int[:, ::1] cat,
+ *                         int periodic):
  */
 
   /* function exit code */
@@ -17314,6 +17900,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_catalogue, __pyx_k_catalogue, sizeof(__pyx_k_catalogue), 0, 0, 1, 1},
   {&__pyx_n_s_class, __pyx_k_class, sizeof(__pyx_k_class), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
+  {&__pyx_n_u_constant, __pyx_k_constant, sizeof(__pyx_k_constant), 0, 1, 0, 1},
   {&__pyx_kp_s_contiguous_and_direct, __pyx_k_contiguous_and_direct, sizeof(__pyx_k_contiguous_and_direct), 0, 0, 1, 0},
   {&__pyx_kp_s_contiguous_and_indirect, __pyx_k_contiguous_and_indirect, sizeof(__pyx_k_contiguous_and_indirect), 0, 0, 1, 0},
   {&__pyx_n_s_cows__filament, __pyx_k_cows__filament, sizeof(__pyx_k_cows__filament), 0, 0, 1, 1},
@@ -17352,6 +17939,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_order, __pyx_k_order, sizeof(__pyx_k_order), 0, 0, 1, 1},
   {&__pyx_n_s_pack, __pyx_k_pack, sizeof(__pyx_k_pack), 0, 0, 1, 1},
   {&__pyx_n_s_pad, __pyx_k_pad, sizeof(__pyx_k_pad), 0, 0, 1, 1},
+  {&__pyx_n_s_periodic, __pyx_k_periodic, sizeof(__pyx_k_periodic), 0, 0, 1, 1},
   {&__pyx_n_s_pickle, __pyx_k_pickle, sizeof(__pyx_k_pickle), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_PickleError, __pyx_k_pyx_PickleError, sizeof(__pyx_k_pyx_PickleError), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_checksum, __pyx_k_pyx_checksum, sizeof(__pyx_k_pyx_checksum), 0, 0, 1, 1},
@@ -17367,6 +17955,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
   {&__pyx_n_s_result, __pyx_k_result, sizeof(__pyx_k_result), 0, 0, 1, 1},
   {&__pyx_n_s_result_view, __pyx_k_result_view, sizeof(__pyx_k_result_view), 0, 0, 1, 1},
+  {&__pyx_n_s_rs, __pyx_k_rs, sizeof(__pyx_k_rs), 0, 0, 1, 1},
   {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
   {&__pyx_n_s_shape, __pyx_k_shape, sizeof(__pyx_k_shape), 0, 0, 1, 1},
@@ -17393,7 +17982,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 61, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 72, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 133, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(1, 148, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 151, __pyx_L1_error)
@@ -17605,26 +18194,26 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "cows/_filament.pyx":4
  * cimport cython
  * 
- * def _label_skeleton(data):             # <<<<<<<<<<<<<<
+ * def _label_skeleton(data, periodic=False):             # <<<<<<<<<<<<<<
  *     ''' Label the skeleton.
  * 
  */
-  __pyx_tuple__19 = PyTuple_Pack(2, __pyx_n_s_data, __pyx_n_s_result); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(4, __pyx_n_s_data, __pyx_n_s_periodic, __pyx_n_s_result, __pyx_n_s_rs); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_cows__filament_pyx, __pyx_n_s_label_skeleton, 4, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_cows__filament_pyx, __pyx_n_s_label_skeleton, 4, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 4, __pyx_L1_error)
 
-  /* "cows/_filament.pyx":24
- *     return np.asarray(result)
+  /* "cows/_filament.pyx":34
+ *     return result
  * 
- * def _find_filaments(data):             # <<<<<<<<<<<<<<
+ * def _find_filaments(data, periodic=False):             # <<<<<<<<<<<<<<
  *     ''' Find individual filament.
  * 
  */
-  __pyx_tuple__21 = PyTuple_Pack(8, __pyx_n_s_data, __pyx_n_s_result, __pyx_n_s_visit_map, __pyx_n_s_catalogue, __pyx_n_s_data_view, __pyx_n_s_result_view, __pyx_n_s_visit_map_view, __pyx_n_s_cat_view); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_tuple__21 = PyTuple_Pack(9, __pyx_n_s_data, __pyx_n_s_periodic, __pyx_n_s_result, __pyx_n_s_visit_map, __pyx_n_s_catalogue, __pyx_n_s_data_view, __pyx_n_s_result_view, __pyx_n_s_visit_map_view, __pyx_n_s_cat_view); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(1, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_cows__filament_pyx, __pyx_n_s_find_filaments, 24, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(2, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_cows__filament_pyx, __pyx_n_s_find_filaments, 34, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 34, __pyx_L1_error)
 
   /* "View.MemoryView":286
  *         return self.name
@@ -18051,7 +18640,7 @@ if (!__Pyx_RefNanny) {
   /* "cows/_filament.pyx":4
  * cimport cython
  * 
- * def _label_skeleton(data):             # <<<<<<<<<<<<<<
+ * def _label_skeleton(data, periodic=False):             # <<<<<<<<<<<<<<
  *     ''' Label the skeleton.
  * 
  */
@@ -18060,16 +18649,16 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_label_skeleton, __pyx_t_1) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cows/_filament.pyx":24
- *     return np.asarray(result)
+  /* "cows/_filament.pyx":34
+ *     return result
  * 
- * def _find_filaments(data):             # <<<<<<<<<<<<<<
+ * def _find_filaments(data, periodic=False):             # <<<<<<<<<<<<<<
  *     ''' Find individual filament.
  * 
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cows_9_filament_3_find_filaments, NULL, __pyx_n_s_cows__filament); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_4cows_9_filament_3_find_filaments, NULL, __pyx_n_s_cows__filament); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_find_filaments, __pyx_t_1) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_find_filaments, __pyx_t_1) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "cows/_filament.pyx":1
@@ -18303,6 +18892,148 @@ static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
 #endif
     }
     return result;
+}
+
+/* RaiseDoubleKeywords */
+static void __Pyx_RaiseDoubleKeywordsError(
+    const char* func_name,
+    PyObject* kw_name)
+{
+    PyErr_Format(PyExc_TypeError,
+        #if PY_MAJOR_VERSION >= 3
+        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
+        #else
+        "%s() got multiple values for keyword argument '%s'", func_name,
+        PyString_AsString(kw_name));
+        #endif
+}
+
+/* ParseKeywords */
+static int __Pyx_ParseOptionalKeywords(
+    PyObject *kwds,
+    PyObject **argnames[],
+    PyObject *kwds2,
+    PyObject *values[],
+    Py_ssize_t num_pos_args,
+    const char* function_name)
+{
+    PyObject *key = 0, *value = 0;
+    Py_ssize_t pos = 0;
+    PyObject*** name;
+    PyObject*** first_kw_arg = argnames + num_pos_args;
+    while (PyDict_Next(kwds, &pos, &key, &value)) {
+        name = first_kw_arg;
+        while (*name && (**name != key)) name++;
+        if (*name) {
+            values[name-argnames] = value;
+            continue;
+        }
+        name = first_kw_arg;
+        #if PY_MAJOR_VERSION < 3
+        if (likely(PyString_Check(key))) {
+            while (*name) {
+                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
+                        && _PyString_Eq(**name, key)) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    if ((**argname == key) || (
+                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
+                             && _PyString_Eq(**argname, key))) {
+                        goto arg_passed_twice;
+                    }
+                    argname++;
+                }
+            }
+        } else
+        #endif
+        if (likely(PyUnicode_Check(key))) {
+            while (*name) {
+                int cmp = (**name == key) ? 0 :
+                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                    (__Pyx_PyUnicode_GET_LENGTH(**name) != __Pyx_PyUnicode_GET_LENGTH(key)) ? 1 :
+                #endif
+                    PyUnicode_Compare(**name, key);
+                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                if (cmp == 0) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    int cmp = (**argname == key) ? 0 :
+                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                        (__Pyx_PyUnicode_GET_LENGTH(**argname) != __Pyx_PyUnicode_GET_LENGTH(key)) ? 1 :
+                    #endif
+                        PyUnicode_Compare(**argname, key);
+                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                    if (cmp == 0) goto arg_passed_twice;
+                    argname++;
+                }
+            }
+        } else
+            goto invalid_keyword_type;
+        if (kwds2) {
+            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
+        } else {
+            goto invalid_keyword;
+        }
+    }
+    return 0;
+arg_passed_twice:
+    __Pyx_RaiseDoubleKeywordsError(function_name, key);
+    goto bad;
+invalid_keyword_type:
+    PyErr_Format(PyExc_TypeError,
+        "%.200s() keywords must be strings", function_name);
+    goto bad;
+invalid_keyword:
+    PyErr_Format(PyExc_TypeError,
+    #if PY_MAJOR_VERSION < 3
+        "%.200s() got an unexpected keyword argument '%.200s'",
+        function_name, PyString_AsString(key));
+    #else
+        "%s() got an unexpected keyword argument '%U'",
+        function_name, key);
+    #endif
+bad:
+    return -1;
+}
+
+/* RaiseArgTupleInvalid */
+static void __Pyx_RaiseArgtupleInvalid(
+    const char* func_name,
+    int exact,
+    Py_ssize_t num_min,
+    Py_ssize_t num_max,
+    Py_ssize_t num_found)
+{
+    Py_ssize_t num_expected;
+    const char *more_or_less;
+    if (num_found < num_min) {
+        num_expected = num_min;
+        more_or_less = "at least";
+    } else {
+        num_expected = num_max;
+        more_or_less = "at most";
+    }
+    if (exact) {
+        more_or_less = "exactly";
+    }
+    PyErr_Format(PyExc_TypeError,
+                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
+                 func_name, more_or_less, num_expected,
+                 (num_expected == 1) ? "" : "s", num_found);
 }
 
 /* PyDictVersioning */
@@ -18749,6 +19480,246 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
 }
 #endif
 
+/* PyIntBinop */
+#if !CYTHON_COMPILING_IN_PYPY
+static PyObject* __Pyx_PyInt_SubtractObjC(PyObject *op1, PyObject *op2, CYTHON_UNUSED long intval, int inplace, int zerodivision_check) {
+    (void)inplace;
+    (void)zerodivision_check;
+    #if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_CheckExact(op1))) {
+        const long b = intval;
+        long x;
+        long a = PyInt_AS_LONG(op1);
+            x = (long)((unsigned long)a - b);
+            if (likely((x^a) >= 0 || (x^~b) >= 0))
+                return PyInt_FromLong(x);
+            return PyLong_Type.tp_as_number->nb_subtract(op1, op2);
+    }
+    #endif
+    #if CYTHON_USE_PYLONG_INTERNALS
+    if (likely(PyLong_CheckExact(op1))) {
+        const long b = intval;
+        long a, x;
+#ifdef HAVE_LONG_LONG
+        const PY_LONG_LONG llb = intval;
+        PY_LONG_LONG lla, llx;
+#endif
+        const digit* digits = ((PyLongObject*)op1)->ob_digit;
+        const Py_ssize_t size = Py_SIZE(op1);
+        if (likely(__Pyx_sst_abs(size) <= 1)) {
+            a = likely(size) ? digits[0] : 0;
+            if (size == -1) a = -a;
+        } else {
+            switch (size) {
+                case -2:
+                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
+                        a = -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+#ifdef HAVE_LONG_LONG
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
+                        lla = -(PY_LONG_LONG) (((((unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+#endif
+                    }
+                    CYTHON_FALLTHROUGH;
+                case 2:
+                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
+                        a = (long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+#ifdef HAVE_LONG_LONG
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
+                        lla = (PY_LONG_LONG) (((((unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+#endif
+                    }
+                    CYTHON_FALLTHROUGH;
+                case -3:
+                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
+                        a = -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+#ifdef HAVE_LONG_LONG
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
+                        lla = -(PY_LONG_LONG) (((((((unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+#endif
+                    }
+                    CYTHON_FALLTHROUGH;
+                case 3:
+                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
+                        a = (long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+#ifdef HAVE_LONG_LONG
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
+                        lla = (PY_LONG_LONG) (((((((unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+#endif
+                    }
+                    CYTHON_FALLTHROUGH;
+                case -4:
+                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
+                        a = -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+#ifdef HAVE_LONG_LONG
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
+                        lla = -(PY_LONG_LONG) (((((((((unsigned PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+#endif
+                    }
+                    CYTHON_FALLTHROUGH;
+                case 4:
+                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
+                        a = (long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
+                        break;
+#ifdef HAVE_LONG_LONG
+                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
+                        lla = (PY_LONG_LONG) (((((((((unsigned PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
+                        goto long_long;
+#endif
+                    }
+                    CYTHON_FALLTHROUGH;
+                default: return PyLong_Type.tp_as_number->nb_subtract(op1, op2);
+            }
+        }
+                x = a - b;
+            return PyLong_FromLong(x);
+#ifdef HAVE_LONG_LONG
+        long_long:
+                llx = lla - llb;
+            return PyLong_FromLongLong(llx);
+#endif
+        
+        
+    }
+    #endif
+    if (PyFloat_CheckExact(op1)) {
+        const long b = intval;
+        double a = PyFloat_AS_DOUBLE(op1);
+            double result;
+            PyFPE_START_PROTECT("subtract", return NULL)
+            result = ((double)a) - (double)b;
+            PyFPE_END_PROTECT(result)
+            return PyFloat_FromDouble(result);
+    }
+    return (inplace ? PyNumber_InPlaceSubtract : PyNumber_Subtract)(op1, op2);
+}
+#endif
+
+/* GetItemInt */
+static PyObject *__Pyx_GetItemInt_Generic(PyObject *o, PyObject* j) {
+    PyObject *r;
+    if (!j) return NULL;
+    r = PyObject_GetItem(o, j);
+    Py_DECREF(j);
+    return r;
+}
+static CYTHON_INLINE PyObject *__Pyx_GetItemInt_List_Fast(PyObject *o, Py_ssize_t i,
+                                                              CYTHON_NCP_UNUSED int wraparound,
+                                                              CYTHON_NCP_UNUSED int boundscheck) {
+#if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+    Py_ssize_t wrapped_i = i;
+    if (wraparound & unlikely(i < 0)) {
+        wrapped_i += PyList_GET_SIZE(o);
+    }
+    if ((!boundscheck) || likely(__Pyx_is_valid_index(wrapped_i, PyList_GET_SIZE(o)))) {
+        PyObject *r = PyList_GET_ITEM(o, wrapped_i);
+        Py_INCREF(r);
+        return r;
+    }
+    return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
+#else
+    return PySequence_GetItem(o, i);
+#endif
+}
+static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Tuple_Fast(PyObject *o, Py_ssize_t i,
+                                                              CYTHON_NCP_UNUSED int wraparound,
+                                                              CYTHON_NCP_UNUSED int boundscheck) {
+#if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+    Py_ssize_t wrapped_i = i;
+    if (wraparound & unlikely(i < 0)) {
+        wrapped_i += PyTuple_GET_SIZE(o);
+    }
+    if ((!boundscheck) || likely(__Pyx_is_valid_index(wrapped_i, PyTuple_GET_SIZE(o)))) {
+        PyObject *r = PyTuple_GET_ITEM(o, wrapped_i);
+        Py_INCREF(r);
+        return r;
+    }
+    return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
+#else
+    return PySequence_GetItem(o, i);
+#endif
+}
+static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i, int is_list,
+                                                     CYTHON_NCP_UNUSED int wraparound,
+                                                     CYTHON_NCP_UNUSED int boundscheck) {
+#if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS && CYTHON_USE_TYPE_SLOTS
+    if (is_list || PyList_CheckExact(o)) {
+        Py_ssize_t n = ((!wraparound) | likely(i >= 0)) ? i : i + PyList_GET_SIZE(o);
+        if ((!boundscheck) || (likely(__Pyx_is_valid_index(n, PyList_GET_SIZE(o))))) {
+            PyObject *r = PyList_GET_ITEM(o, n);
+            Py_INCREF(r);
+            return r;
+        }
+    }
+    else if (PyTuple_CheckExact(o)) {
+        Py_ssize_t n = ((!wraparound) | likely(i >= 0)) ? i : i + PyTuple_GET_SIZE(o);
+        if ((!boundscheck) || likely(__Pyx_is_valid_index(n, PyTuple_GET_SIZE(o)))) {
+            PyObject *r = PyTuple_GET_ITEM(o, n);
+            Py_INCREF(r);
+            return r;
+        }
+    } else {
+        PySequenceMethods *m = Py_TYPE(o)->tp_as_sequence;
+        if (likely(m && m->sq_item)) {
+            if (wraparound && unlikely(i < 0) && likely(m->sq_length)) {
+                Py_ssize_t l = m->sq_length(o);
+                if (likely(l >= 0)) {
+                    i += l;
+                } else {
+                    if (!PyErr_ExceptionMatches(PyExc_OverflowError))
+                        return NULL;
+                    PyErr_Clear();
+                }
+            }
+            return m->sq_item(o, i);
+        }
+    }
+#else
+    if (is_list || PySequence_Check(o)) {
+        return PySequence_GetItem(o, i);
+    }
+#endif
+    return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
+}
+
+/* ObjectGetItem */
+#if CYTHON_USE_TYPE_SLOTS
+static PyObject *__Pyx_PyObject_GetIndex(PyObject *obj, PyObject* index) {
+    PyObject *runerr;
+    Py_ssize_t key_value;
+    PySequenceMethods *m = Py_TYPE(obj)->tp_as_sequence;
+    if (unlikely(!(m && m->sq_item))) {
+        PyErr_Format(PyExc_TypeError, "'%.200s' object is not subscriptable", Py_TYPE(obj)->tp_name);
+        return NULL;
+    }
+    key_value = __Pyx_PyIndex_AsSsize_t(index);
+    if (likely(key_value != -1 || !(runerr = PyErr_Occurred()))) {
+        return __Pyx_GetItemInt_Fast(obj, key_value, 0, 1, 1);
+    }
+    if (PyErr_GivenExceptionMatches(runerr, PyExc_OverflowError)) {
+        PyErr_Clear();
+        PyErr_Format(PyExc_IndexError, "cannot fit '%.200s' into an index-sized integer", Py_TYPE(index)->tp_name);
+    }
+    return NULL;
+}
+static PyObject *__Pyx_PyObject_GetItem(PyObject *obj, PyObject* key) {
+    PyMappingMethods *m = Py_TYPE(obj)->tp_as_mapping;
+    if (likely(m && m->mp_subscript)) {
+        return m->mp_subscript(obj, key);
+    }
+    return __Pyx_PyObject_GetIndex(obj, key);
+}
+#endif
+
 /* PyIntCompare */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_NeObjC(PyObject *op1, PyObject *op2, CYTHON_UNUSED long intval, CYTHON_UNUSED long inplace) {
     if (op1 == op2) {
@@ -18814,148 +19785,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_NeObjC(PyObject *op1, PyObject *op2, 
     }
     return (
         PyObject_RichCompare(op1, op2, Py_NE));
-}
-
-/* RaiseArgTupleInvalid */
-static void __Pyx_RaiseArgtupleInvalid(
-    const char* func_name,
-    int exact,
-    Py_ssize_t num_min,
-    Py_ssize_t num_max,
-    Py_ssize_t num_found)
-{
-    Py_ssize_t num_expected;
-    const char *more_or_less;
-    if (num_found < num_min) {
-        num_expected = num_min;
-        more_or_less = "at least";
-    } else {
-        num_expected = num_max;
-        more_or_less = "at most";
-    }
-    if (exact) {
-        more_or_less = "exactly";
-    }
-    PyErr_Format(PyExc_TypeError,
-                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
-                 func_name, more_or_less, num_expected,
-                 (num_expected == 1) ? "" : "s", num_found);
-}
-
-/* RaiseDoubleKeywords */
-static void __Pyx_RaiseDoubleKeywordsError(
-    const char* func_name,
-    PyObject* kw_name)
-{
-    PyErr_Format(PyExc_TypeError,
-        #if PY_MAJOR_VERSION >= 3
-        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
-        #else
-        "%s() got multiple values for keyword argument '%s'", func_name,
-        PyString_AsString(kw_name));
-        #endif
-}
-
-/* ParseKeywords */
-static int __Pyx_ParseOptionalKeywords(
-    PyObject *kwds,
-    PyObject **argnames[],
-    PyObject *kwds2,
-    PyObject *values[],
-    Py_ssize_t num_pos_args,
-    const char* function_name)
-{
-    PyObject *key = 0, *value = 0;
-    Py_ssize_t pos = 0;
-    PyObject*** name;
-    PyObject*** first_kw_arg = argnames + num_pos_args;
-    while (PyDict_Next(kwds, &pos, &key, &value)) {
-        name = first_kw_arg;
-        while (*name && (**name != key)) name++;
-        if (*name) {
-            values[name-argnames] = value;
-            continue;
-        }
-        name = first_kw_arg;
-        #if PY_MAJOR_VERSION < 3
-        if (likely(PyString_Check(key))) {
-            while (*name) {
-                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
-                        && _PyString_Eq(**name, key)) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    if ((**argname == key) || (
-                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
-                             && _PyString_Eq(**argname, key))) {
-                        goto arg_passed_twice;
-                    }
-                    argname++;
-                }
-            }
-        } else
-        #endif
-        if (likely(PyUnicode_Check(key))) {
-            while (*name) {
-                int cmp = (**name == key) ? 0 :
-                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                    (__Pyx_PyUnicode_GET_LENGTH(**name) != __Pyx_PyUnicode_GET_LENGTH(key)) ? 1 :
-                #endif
-                    PyUnicode_Compare(**name, key);
-                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                if (cmp == 0) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    int cmp = (**argname == key) ? 0 :
-                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                        (__Pyx_PyUnicode_GET_LENGTH(**argname) != __Pyx_PyUnicode_GET_LENGTH(key)) ? 1 :
-                    #endif
-                        PyUnicode_Compare(**argname, key);
-                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                    if (cmp == 0) goto arg_passed_twice;
-                    argname++;
-                }
-            }
-        } else
-            goto invalid_keyword_type;
-        if (kwds2) {
-            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
-        } else {
-            goto invalid_keyword;
-        }
-    }
-    return 0;
-arg_passed_twice:
-    __Pyx_RaiseDoubleKeywordsError(function_name, key);
-    goto bad;
-invalid_keyword_type:
-    PyErr_Format(PyExc_TypeError,
-        "%.200s() keywords must be strings", function_name);
-    goto bad;
-invalid_keyword:
-    PyErr_Format(PyExc_TypeError,
-    #if PY_MAJOR_VERSION < 3
-        "%.200s() got an unexpected keyword argument '%.200s'",
-        function_name, PyString_AsString(key));
-    #else
-        "%s() got an unexpected keyword argument '%U'",
-        function_name, key);
-    #endif
-bad:
-    return -1;
 }
 
 /* ArgTypeTest */
@@ -19331,122 +20160,6 @@ static CYTHON_INLINE PyObject *__Pyx_GetAttr(PyObject *o, PyObject *n) {
 #endif
     return PyObject_GetAttr(o, n);
 }
-
-/* GetItemInt */
-static PyObject *__Pyx_GetItemInt_Generic(PyObject *o, PyObject* j) {
-    PyObject *r;
-    if (!j) return NULL;
-    r = PyObject_GetItem(o, j);
-    Py_DECREF(j);
-    return r;
-}
-static CYTHON_INLINE PyObject *__Pyx_GetItemInt_List_Fast(PyObject *o, Py_ssize_t i,
-                                                              CYTHON_NCP_UNUSED int wraparound,
-                                                              CYTHON_NCP_UNUSED int boundscheck) {
-#if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    Py_ssize_t wrapped_i = i;
-    if (wraparound & unlikely(i < 0)) {
-        wrapped_i += PyList_GET_SIZE(o);
-    }
-    if ((!boundscheck) || likely(__Pyx_is_valid_index(wrapped_i, PyList_GET_SIZE(o)))) {
-        PyObject *r = PyList_GET_ITEM(o, wrapped_i);
-        Py_INCREF(r);
-        return r;
-    }
-    return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
-#else
-    return PySequence_GetItem(o, i);
-#endif
-}
-static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Tuple_Fast(PyObject *o, Py_ssize_t i,
-                                                              CYTHON_NCP_UNUSED int wraparound,
-                                                              CYTHON_NCP_UNUSED int boundscheck) {
-#if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    Py_ssize_t wrapped_i = i;
-    if (wraparound & unlikely(i < 0)) {
-        wrapped_i += PyTuple_GET_SIZE(o);
-    }
-    if ((!boundscheck) || likely(__Pyx_is_valid_index(wrapped_i, PyTuple_GET_SIZE(o)))) {
-        PyObject *r = PyTuple_GET_ITEM(o, wrapped_i);
-        Py_INCREF(r);
-        return r;
-    }
-    return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
-#else
-    return PySequence_GetItem(o, i);
-#endif
-}
-static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i, int is_list,
-                                                     CYTHON_NCP_UNUSED int wraparound,
-                                                     CYTHON_NCP_UNUSED int boundscheck) {
-#if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS && CYTHON_USE_TYPE_SLOTS
-    if (is_list || PyList_CheckExact(o)) {
-        Py_ssize_t n = ((!wraparound) | likely(i >= 0)) ? i : i + PyList_GET_SIZE(o);
-        if ((!boundscheck) || (likely(__Pyx_is_valid_index(n, PyList_GET_SIZE(o))))) {
-            PyObject *r = PyList_GET_ITEM(o, n);
-            Py_INCREF(r);
-            return r;
-        }
-    }
-    else if (PyTuple_CheckExact(o)) {
-        Py_ssize_t n = ((!wraparound) | likely(i >= 0)) ? i : i + PyTuple_GET_SIZE(o);
-        if ((!boundscheck) || likely(__Pyx_is_valid_index(n, PyTuple_GET_SIZE(o)))) {
-            PyObject *r = PyTuple_GET_ITEM(o, n);
-            Py_INCREF(r);
-            return r;
-        }
-    } else {
-        PySequenceMethods *m = Py_TYPE(o)->tp_as_sequence;
-        if (likely(m && m->sq_item)) {
-            if (wraparound && unlikely(i < 0) && likely(m->sq_length)) {
-                Py_ssize_t l = m->sq_length(o);
-                if (likely(l >= 0)) {
-                    i += l;
-                } else {
-                    if (!PyErr_ExceptionMatches(PyExc_OverflowError))
-                        return NULL;
-                    PyErr_Clear();
-                }
-            }
-            return m->sq_item(o, i);
-        }
-    }
-#else
-    if (is_list || PySequence_Check(o)) {
-        return PySequence_GetItem(o, i);
-    }
-#endif
-    return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
-}
-
-/* ObjectGetItem */
-#if CYTHON_USE_TYPE_SLOTS
-static PyObject *__Pyx_PyObject_GetIndex(PyObject *obj, PyObject* index) {
-    PyObject *runerr;
-    Py_ssize_t key_value;
-    PySequenceMethods *m = Py_TYPE(obj)->tp_as_sequence;
-    if (unlikely(!(m && m->sq_item))) {
-        PyErr_Format(PyExc_TypeError, "'%.200s' object is not subscriptable", Py_TYPE(obj)->tp_name);
-        return NULL;
-    }
-    key_value = __Pyx_PyIndex_AsSsize_t(index);
-    if (likely(key_value != -1 || !(runerr = PyErr_Occurred()))) {
-        return __Pyx_GetItemInt_Fast(obj, key_value, 0, 1, 1);
-    }
-    if (PyErr_GivenExceptionMatches(runerr, PyExc_OverflowError)) {
-        PyErr_Clear();
-        PyErr_Format(PyExc_IndexError, "cannot fit '%.200s' into an index-sized integer", Py_TYPE(index)->tp_name);
-    }
-    return NULL;
-}
-static PyObject *__Pyx_PyObject_GetItem(PyObject *obj, PyObject* key) {
-    PyMappingMethods *m = Py_TYPE(obj)->tp_as_mapping;
-    if (likely(m && m->mp_subscript)) {
-        return m->mp_subscript(obj, key);
-    }
-    return __Pyx_PyObject_GetIndex(obj, key);
-}
-#endif
 
 /* decode_c_string */
 static CYTHON_INLINE PyObject* __Pyx_decode_c_string(
@@ -20614,6 +21327,44 @@ no_fail:
     return new_mvs;
 }
 
+/* CIntToPy */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#endif
+    const long neg_one = (long) -1, const_zero = (long) 0;
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic pop
+#endif
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(long) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(long) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(long) <= sizeof(unsigned PY_LONG_LONG)) {
+            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+#endif
+        }
+    } else {
+        if (sizeof(long) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(long) <= sizeof(PY_LONG_LONG)) {
+            return PyLong_FromLongLong((PY_LONG_LONG) value);
+#endif
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(long),
+                                     little, !is_unsigned);
+    }
+}
+
 /* CIntFromPy */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
 #ifdef __Pyx_HAS_GCC_DIAGNOSTIC
@@ -21042,44 +21793,6 @@ raise_neg_overflow:
     PyErr_SetString(PyExc_OverflowError,
         "can't convert negative value to long");
     return (long) -1;
-}
-
-/* CIntToPy */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wconversion"
-#endif
-    const long neg_one = (long) -1, const_zero = (long) 0;
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic pop
-#endif
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(long) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(long) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(long) <= sizeof(unsigned PY_LONG_LONG)) {
-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
-#endif
-        }
-    } else {
-        if (sizeof(long) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(long) <= sizeof(PY_LONG_LONG)) {
-            return PyLong_FromLongLong((PY_LONG_LONG) value);
-#endif
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(long),
-                                     little, !is_unsigned);
-    }
 }
 
 /* CIntFromPy */

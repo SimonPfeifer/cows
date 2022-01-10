@@ -1,7 +1,7 @@
 import numpy as np
 cimport cython
 
-def _label_skeleton(data):
+def _label_skeleton(data, periodic=False):
     ''' Label the skeleton. 
 
         Python wrapper for the cdef function ``label_skeleton``.
@@ -11,17 +11,27 @@ def _label_skeleton(data):
         them to the background value of zero.
     '''
 
-    # Pad data to deal with periodic boundaries
-    data = np.pad(data, 1, mode='wrap')
+    if periodic:
+        # Pad/wrap data to deal with periodic boundaries
+        data = np.pad(data, 1, mode='wrap')
+    else:
+        # Pad with zeros to make boundary conditions easier to handle
+        data = np.pad(data, 1, mode='constant')
     data = np.array(data, dtype=np.int32, order='c')
     
     # Define output array
     result = np.zeros(data.shape, dtype=np.int32, order='c')
 
     label_skeleton(data, result) # calls the cdef function
-    return np.asarray(result)
+    result = np.asarray(result)
 
-def _find_filaments(data):
+    # Remove the padding
+    rs = result.shape
+    result = result[1:rs[0]-1, 1:rs[1]-1, 1:rs[2]-1]
+
+    return result
+
+def _find_filaments(data, periodic=False):
     ''' Find individual filament.
 
         Python wrapper for the cdef function ``connect_neighbours``.
@@ -44,7 +54,8 @@ def _find_filaments(data):
     cdef int[:, :, ::1] visit_map_view = visit_map
     cdef int[:, ::1] cat_view = catalogue
 
-    connect_neighbours(data_view, visit_map_view, result_view, cat_view)
+    connect_neighbours(data_view, visit_map_view, result_view, cat_view, 
+                       np.int32(periodic))
     return result, catalogue
 
 
@@ -71,14 +82,13 @@ cdef label_skeleton(int[:,:,:] data, int[:,:,:] result):
     '''
         Loop through the data and assign a value equal to the number
         of neighbours each cell has for that cell.
+        Cells with no neighbours are set to background.
         Cells with only 1 neighbour are endpoints.
         Cells with 2 neighbours are regular cells.
         Cells with 3 neighbours are T-junctions.
         Cells with 4 neighbours are X-junctions.
-        Cells with no neighbours are set to background.
-        Cells with more than 4 neighbours are not classified and
-        are set to the background. This can happen if there are
-        cavities in the data.
+        Cells with more than 4 neighbours are most likely artefact from
+        cavities in the input data.
     '''
     cdef Py_ssize_t i_max, j_max, k_max
     cdef Py_ssize_t i, j, k, ii
@@ -95,9 +105,8 @@ cdef label_skeleton(int[:,:,:] data, int[:,:,:] result):
                     continue
 
                 n_neighbours = count_neighbours(data, i, j, k)
-                if n_neighbours < 5 and n_neighbours > 0:
-                    # -1 on indices because of padding
-                    result[k-1, j-1, i-1] = n_neighbours
+                if n_neighbours > 0:
+                    result[k, j, i] = n_neighbours
 
 
 @cython.cdivision(True)     # Enable C modulo
@@ -106,13 +115,47 @@ cdef int modulo_int(int a, int b):
 
 @cython.boundscheck(False)  # Deactivate bounds checking
 @cython.wraparound(False)   # Deactivate negative indexing.
-cdef int check_has_neighbour(int[:,:,::1] data, int[:,:,::1] visit_map, 
-                                 int* i, int* j, int* k, int ncells):
+cdef int check_has_neighbour(int[:,:,::1] data, int[:,:,::1] visit_map,
+                             int* i, int* j, int* k, int ncells):
     '''
         Check if cell with index (i,j,k) has a neighbour that has not been 
         visited before given a visitation map. Returns 1 if it has a neighbour
         and 0 otherwise. Also sets the input index pointers to the index of 
         the neighbour. 
+        Note: This algorithm is lazy an will return the first neighour that
+        meets the conditons. Therefore it is assumed that the input cell has
+        at most one unvisited neighbour to return a complete set.
+    '''
+
+    cdef int di, dj, dk
+    cdef int i_tmp, j_tmp, k_tmp
+
+    for dk in range(-1, 2):
+        for dj in range(-1, 2):
+            for di in range(-1, 2):
+                i_tmp = i[0] + di
+                j_tmp = j[0] + dj
+                k_tmp = k[0] + dk
+                if (i_tmp>=0 and i_tmp<ncells and
+                    j_tmp>=0 and j_tmp<ncells and
+                    k_tmp>=0 and k_tmp<ncells):
+                    if (data[k_tmp, j_tmp, i_tmp] > 0 and 
+                        visit_map[k_tmp, j_tmp, i_tmp] == 0):
+                        i[0] = i_tmp    # set the value of the pointers
+                        j[0] = j_tmp    # to the neighbour indices
+                        k[0] = k_tmp
+                        return 1
+    return 0
+
+@cython.boundscheck(False)  # Deactivate bounds checking
+@cython.wraparound(False)   # Deactivate negative indexing.
+cdef int check_has_neighbour_wrap(int[:,:,::1] data, int[:,:,::1] visit_map,
+                                  int* i, int* j, int* k, int ncells):
+    '''
+        Check if cell with index (i,j,k) has a neighbour that has not been 
+        visited before given a visitation map. Returns 1 if it has a neighbour
+        and 0 otherwise. Also sets the input index pointers to the index of 
+        the neighbour. Uses periodic wrapping.
         Note: This algorithm is lazy an will return the first neighour that
         meets the conditons. Therefore it is assumed that the input cell has
         at most one unvisited neighbour to return a complete set.
@@ -138,7 +181,8 @@ cdef int check_has_neighbour(int[:,:,::1] data, int[:,:,::1] visit_map,
 @cython.boundscheck(False)  # Deactivate bounds checking
 @cython.wraparound(False)   # Deactivate negative indexing.
 cdef connect_neighbours(int[:,:,::1] data, int[:,:,::1] visit_map, 
-                            int[:,:,::1] result, int[:, ::1] cat):
+                        int[:,:,::1] result, int[:, ::1] cat,
+                        int periodic):
     '''
         Find connected cells and mark each set with a unique ID starting
         at 1 and going to total sets of connected cells. 
@@ -187,7 +231,16 @@ cdef connect_neighbours(int[:,:,::1] data, int[:,:,::1] visit_map,
                     result[idx_k ,idx_j, idx_i] = n_filaments
                     visit_map[idx_k, idx_j, idx_i] = 1
 
-                    has_neighbour = check_has_neighbour(data, visit_map, 
-                                                        &idx_i, &idx_j, 
-                                                        &idx_k, ncells)
+                    if periodic == 0:
+                        has_neighbour = check_has_neighbour(data, visit_map,
+                                                            &idx_i, &idx_j, 
+                                                            &idx_k, ncells)
+                    else:
+                        has_neighbour = check_has_neighbour_wrap(data, 
+                                                                 visit_map,
+                                                                 &idx_i, 
+                                                                 &idx_j, 
+                                                                 &idx_k,
+                                                                 ncells)
+
                     count += 1

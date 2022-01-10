@@ -2,18 +2,20 @@ import numpy as np
 from ._filament import _label_skeleton, _find_filaments
 
 
-def label_skeleton(skel):
+def label_skeleton(skel, periodic=False):
     ''' Label the skeleton.
 
-        Label all skeleton cells with their respective number of neighbour.
-        Also removes cells with zero or more than four neighbours by setting
-        them to the background value of zero.
+        Label all skeleton cells with their respective number of neighbour
+        that they share a face, edge or vertex with (N_26).
 
     Parameters
     ----------
     skel : ndarray, 3D
         A binary image containing the skeletonized objects. Zeros
         represent background, nonzero values are foreground.
+    periodic: bool
+        If True, the skeletonization uses periodic boundary conditions 
+        for the input array. Input array must be 3D.
 
     Returns
     -------
@@ -22,9 +24,10 @@ def label_skeleton(skel):
     '''
     assert skel.ndim == 3
 
-    return _label_skeleton(skel)
+    return _label_skeleton(skel, periodic)
 
-def separate_skeleton(skel):
+
+def separate_skeleton(skel, periodic=False):
     ''' Separate the skeleton.
 
         Set all the skeleton cells with more than 2 neighbours to the
@@ -36,6 +39,9 @@ def separate_skeleton(skel):
     skel : ndarray, 3D
         A binary image containing the skeletonized objects. Zeros
         represent background, nonzero values are foreground.
+    periodic: bool
+        If True, the skeletonization uses periodic boundary conditions 
+        for the input array. Input array must be 3D.
 
     Returns
     -------
@@ -45,15 +51,19 @@ def separate_skeleton(skel):
     assert skel.ndim == 3
 
     # Label the skeleton
-    skel = _label_skeleton(skel)
+    skel = _label_skeleton(skel, periodic)
     
     # Remove all cells with more than two neighbours
     data_shape = skel.shape
     skel[skel>2] = 0
-    
-    return skel.reshape(data_shape)
 
-def find_filaments(skel):
+    # Label the separated skeleton
+    skel = _label_skeleton(skel, periodic)
+    
+    return skel
+
+
+def find_filaments(skel, periodic=False):
     ''' Find individual filament.
 
         Connects all cells that are neighbours within a 3x3x3 neihbourhood.
@@ -65,6 +75,9 @@ def find_filaments(skel):
             An array containing the classified and separated skeleton. Zeros
             represent background, ones are endpoints and twos are regular
             cells.
+        periodic: bool
+            If True, the skeletonization uses periodic boundary conditions 
+            for the input array. Input array must be 3D.
 
         Returns
         -------
@@ -79,4 +92,4 @@ def find_filaments(skel):
     assert skel.shape[0] == skel.shape[1]
     assert skel.shape[0] == skel.shape[2]
 
-    return _find_filaments(skel)
+    return _find_filaments(skel, periodic)

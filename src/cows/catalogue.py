@@ -3,7 +3,7 @@ import numpy as np
 from .filament import label_skeleton, find_filaments
 
 
-def gen_catalogue(data, sort=True):
+def gen_catalogue(data, periodic=False, sort=True):
     ''' Generate a catalogue of filaments
 
         Generates a catalogue of filaments given an array containing a
@@ -14,6 +14,9 @@ def gen_catalogue(data, sort=True):
         data : ndarray, 3D
             An array containing the separated skeleton. Zeros represent 
             background, ones are endpoints and, twos are regular cells.
+        periodic: bool
+            If True, the skeletonization uses periodic boundary conditions 
+            for the input array. Input array must be 3D.
         sort : boolean
             If sort=True, the filaments are sorted by filament length in
             descending order and reassigned IDs such that the longest filament
@@ -39,13 +42,17 @@ def gen_catalogue(data, sort=True):
     ncells = data.shape[0]
 
     # Classify the skeleton to identify endpoints and regular cells
-    data = label_skeleton(data)
+    data = label_skeleton(data, periodic=periodic)
 
     # Connect cells within a 3x3x3 neighbourhood from endpoint to endpoint
     # and store in the first column 
-    _, cat = find_filaments(data)
+    _, cat = find_filaments(data, periodic=periodic)
     catalogue = np.zeros([cat.shape[0], 8], order='c')
     catalogue[:,0] = cat[:,0]
+
+    # Return the empty catalogue if no filaments were found
+    if catalogue.shape[0] == 0:
+        return catalogue
 
     # Store the filament cell positions
     catalogue[:,2:5] = cat[:,1:]
@@ -68,12 +75,10 @@ def gen_catalogue(data, sort=True):
 
     return catalogue
 
-def _get_direction(index, pos, box_size, norm=True):
+def _get_direction(index, pos, box_size):
     '''
         Calculates the direction of a filament cell based on the location
-        of that cells' neighbours.
-
-        The direction vector is normalised if norm=True.
+        of that cells' neighbours. The direction vector is normalised.
     '''
 
     assert pos.ndim == 2
@@ -88,12 +93,10 @@ def _get_direction(index, pos, box_size, norm=True):
     dxyz_tmp = np.mod((pos[:-1]-pos[1:])+1, box_size) - 1
 
     # Add direction to appropriate indices
-    dxyz_tmp = dxyz_tmp * idx_diff[:,None] # set to 0 at between filaments
+    dxyz_tmp = dxyz_tmp * idx_diff[:,None] # set to 0 between filaments
     dxyz[:-1] += dxyz_tmp 
     dxyz[1:] += dxyz_tmp
 
     # Noramlise direction vector
-    if norm:
-        r = np.sqrt(np.sum(dxyz**2,axis=1))
-        return dxyz/r[:,None]
-    return dxyz
+    r = np.sqrt(np.sum(dxyz**2, axis=1))
+    return dxyz/r[:,None]
