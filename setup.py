@@ -20,7 +20,7 @@ from numpy import get_include
 from multiprocessing import cpu_count
 from pkg_resources import parse_version
 
-USE_CYTHON = True
+USE_CYTHON = False
 CYTHON_VERSION = '0.23.4'
 
 if __name__ == '__main__':
@@ -100,11 +100,8 @@ if __name__ == '__main__':
         zip_safe=False,
         classifiers=[
             # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
-            'Development Status :: 5 - Production/Stable',
-            'Intended Audience :: Developers',
             'License :: OSI Approved :: BSD License',
             'Operating System :: Unix',
-            'Operating System :: POSIX',
             'Operating System :: Microsoft :: Windows',
             'Programming Language :: Python',
             'Programming Language :: Python :: 3',
@@ -114,8 +111,6 @@ if __name__ == '__main__':
             'Programming Language :: Python :: 3.8',
             'Programming Language :: Python :: 3.9',
             'Programming Language :: Python :: 3.10',
-            'Programming Language :: Python :: Implementation :: CPython',
-            'Programming Language :: Python :: Implementation :: PyPy',
             # uncomment if you test on these interpreters:
             # 'Programming Language :: Python :: Implementation :: IronPython',
             # 'Programming Language :: Python :: Implementation :: Jython',
@@ -124,8 +119,7 @@ if __name__ == '__main__':
         ],
         project_urls={
             'Documentation': 'https://python-cows.readthedocs.io/',
-            'Changelog': 'https://python-cows.readthedocs.io/en/latest/changelog.html',
-            'Issue Tracker': 'https://github.com/SimonPfeifer/python-cows/issues',
+            'Issue Tracker': 'https://github.com/SimonPfeifer/cows/issues',
         },
         keywords=[
             # eg: 'keyword1', 'keyword2', 'keyword3',
