@@ -2948,7 +2948,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
  *                 # Periodic boundary conditions were added by SP
  *                 if _periodic == 1:             # <<<<<<<<<<<<<<
  *                     with gil:
- *                         img = np.pad(np.asarray(img[1:imax-1,1:jmax-1,1:kmax-1]), 1, mode='wrap')
+ *                         img = np.pad(np.asarray(img[1:kmax-1,1:jmax-1,1:imax-1]), 1, mode='wrap')
  */
             __pyx_t_2 = ((__pyx_v__periodic == 1) != 0);
             if (__pyx_t_2) {
@@ -2957,7 +2957,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
  *                 # Periodic boundary conditions were added by SP
  *                 if _periodic == 1:
  *                     with gil:             # <<<<<<<<<<<<<<
- *                         img = np.pad(np.asarray(img[1:imax-1,1:jmax-1,1:kmax-1]), 1, mode='wrap')
+ *                         img = np.pad(np.asarray(img[1:kmax-1,1:jmax-1,1:imax-1]), 1, mode='wrap')
  * 
  */
               {
@@ -2969,7 +2969,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
                     /* "cows/_skeletonize_3d_cy.pyx":118
  *                 if _periodic == 1:
  *                     with gil:
- *                         img = np.pad(np.asarray(img[1:imax-1,1:jmax-1,1:kmax-1]), 1, mode='wrap')             # <<<<<<<<<<<<<<
+ *                         img = np.pad(np.asarray(img[1:kmax-1,1:jmax-1,1:imax-1]), 1, mode='wrap')             # <<<<<<<<<<<<<<
  * 
  *                 curr_border = borders[j]
  */
@@ -2994,7 +2994,7 @@ static PyObject *__pyx_pf_4cows_18_skeletonize_3d_cy__compute_thin_image(CYTHON_
     0,
     &__pyx_t_11,
     1,
-    (__pyx_v_imax - 1),
+    (__pyx_v_kmax - 1),
     0,
     1,
     1,
@@ -3028,7 +3028,7 @@ if (unlikely(__pyx_memoryview_slice_memviewslice(
     2,
     &__pyx_t_11,
     1,
-    (__pyx_v_kmax - 1),
+    (__pyx_v_imax - 1),
     0,
     1,
     1,
@@ -3087,7 +3087,7 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
  *                 # Periodic boundary conditions were added by SP
  *                 if _periodic == 1:
  *                     with gil:             # <<<<<<<<<<<<<<
- *                         img = np.pad(np.asarray(img[1:imax-1,1:jmax-1,1:kmax-1]), 1, mode='wrap')
+ *                         img = np.pad(np.asarray(img[1:kmax-1,1:jmax-1,1:imax-1]), 1, mode='wrap')
  * 
  */
                   /*finally:*/ {
@@ -3112,12 +3112,12 @@ __pyx_t_8 = __pyx_memoryview_fromslice(__pyx_t_10, 3, (PyObject *(*)(char *)) __
  *                 # Periodic boundary conditions were added by SP
  *                 if _periodic == 1:             # <<<<<<<<<<<<<<
  *                     with gil:
- *                         img = np.pad(np.asarray(img[1:imax-1,1:jmax-1,1:kmax-1]), 1, mode='wrap')
+ *                         img = np.pad(np.asarray(img[1:kmax-1,1:jmax-1,1:imax-1]), 1, mode='wrap')
  */
             }
 
             /* "cows/_skeletonize_3d_cy.pyx":120
- *                         img = np.pad(np.asarray(img[1:imax-1,1:jmax-1,1:kmax-1]), 1, mode='wrap')
+ *                         img = np.pad(np.asarray(img[1:kmax-1,1:jmax-1,1:imax-1]), 1, mode='wrap')
  * 
  *                 curr_border = borders[j]             # <<<<<<<<<<<<<<
  * 

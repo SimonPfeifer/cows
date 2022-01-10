@@ -115,7 +115,7 @@ def _compute_thin_image(pixel_type[:, :, ::1] img not None, periodic=False):
                 # Periodic boundary conditions were added by SP
                 if _periodic == 1:
                     with gil:
-                        img = np.pad(np.asarray(img[1:imax-1,1:jmax-1,1:kmax-1]), 1, mode='wrap')
+                        img = np.pad(np.asarray(img[1:kmax-1,1:jmax-1,1:imax-1]), 1, mode='wrap')
 
                 curr_border = borders[j]
 
