@@ -44,7 +44,7 @@ Documentation
 
 The full documentation can be accessed at `readthedocs <https://python-cows.readthedocs.io/en/latest/index.html>`_ or generated as a set of local files by running::
 
-    sphinx-build ./doc ./docs/_build
+    sphinx-build ./docs ./docs/_build
 
 
 Citing
