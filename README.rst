@@ -1,7 +1,7 @@
 
 .. start-badges
 
-.. image:: https://badgen.net/pypi/python/pycows
+.. image:: https://img.shields.io/pypi/v/pycows.svg
     :alt: PyPi version
     :target: https://pypi.com/v/pycows
 
