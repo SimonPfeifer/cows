@@ -1,3 +1,6 @@
+====
+COWS
+====
 
 .. start-badges
 
@@ -22,9 +25,6 @@
 
 .. end-badges
 
-====
-COWS
-====
 
 The *cows* python package is an implementation of the cosmic filament finder COsmic Web Skeleton (COWS). The cosmic filament finder works on Hessian-based cosmic web idetifier (such as the V-web) and returns a catalogue of filament spines.
 
