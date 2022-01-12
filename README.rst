@@ -1,13 +1,24 @@
 
 .. start-badges
 
+.. image:: https://badgen.net/pypi/v/pip/
+    :alt: PyPi version
+    :target: https://pypi.com/pycows/pip
+
+
 .. image:: https://img.shields.io/github/commits-since/SimonPfeifer/python-cows/v0.0.1.svg
     :alt: Commits since latest release
     :target: https://github.com/SimonPfeifer/python-cows/compare/v0.0.1...master
 
+
+.. image:: https://img.shields.io/pypi/pyversions/ansicolortags.svg
+    :alt: Python versions
+    :target: https://pypi.python.org/pypi/ansicolortags/
+
+
 .. image:: https://readthedocs.org/projects/python-cows/badge/?version=latest
-    :target: https://python-cows.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
+    :target: https://python-cows.readthedocs.io/en/latest/?badge=latest
 
 .. end-badges
 
