@@ -84,7 +84,7 @@ if __name__ == '__main__':
 
     setup(
         name='pycows',
-        version='0.0.0',
+        version='0.0.1',
         license='BSD-3-Clause',
         description='Cosmic filament finder',
         long_description='%s\n' % (

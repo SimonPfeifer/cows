@@ -1,9 +1,9 @@
 
 .. start-badges
 
-.. image:: https://img.shields.io/github/commits-since/SimonPfeifer/python-cows/v0.0.0.svg
+.. image:: https://img.shields.io/github/commits-since/SimonPfeifer/python-cows/v0.0.1.svg
     :alt: Commits since latest release
-    :target: https://github.com/SimonPfeifer/python-cows/compare/v0.0.0...master
+    :target: https://github.com/SimonPfeifer/python-cows/compare/v0.0.1...master
 
 .. image:: https://readthedocs.org/projects/python-cows/badge/?version=latest
     :target: https://python-cows.readthedocs.io/en/latest/?badge=latest
