@@ -9,7 +9,7 @@ from .arraycrop import crop
 from ._skeletonize_3d_cy import _compute_thin_image
 
 
-def skeletonize(image, periodic=False):
+def skeletonize(image, surface=False, periodic=False):
     """Compute the skeleton of a binary image.
 
     Thinning is used to reduce each connected component in a binary image
@@ -20,13 +20,16 @@ def skeletonize(image, periodic=False):
     image : ndarray, 2D or 3D
         A binary image containing the objects to be skeletonized. Zeros
         represent background, nonzero values are foreground.
+    surface: bool
+        If True, the skeletonization uses medial surface thinning instead
+        medial axis thinning
     periodic: bool
         If True, the skeletonization uses periodic boundary conditions 
         for the input array. Input array must be 3D.
 
     Returns
     -------
-    skeleton : ndarray
+    image_o : ndarray
         The thinned image.
 
     Notes
@@ -71,7 +74,9 @@ def skeletonize(image, periodic=False):
     image_o[image_o != 0] = 1
 
     # do the computation
-    image_o = np.asarray(_compute_thin_image(image_o, periodic=periodic))
+    image_o = np.asarray(_compute_thin_image(image_o,
+                                             surface=surface,
+                                             periodic=periodic))
 
     # crop it back and restore the original intensity range
     image_o = crop(image_o, crop_width=1)

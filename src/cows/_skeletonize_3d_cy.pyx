@@ -51,7 +51,9 @@ cdef struct coordinate:
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def _compute_thin_image(pixel_type[:, :, ::1] img not None, periodic=False):
+def _compute_thin_image(pixel_type[:, :, ::1] img not None,
+                        surface= False,
+                        periodic=False):
     """Compute a thin image.
 
     Loop through the image multiple times, removing "simple" points, i.e.
@@ -81,7 +83,7 @@ def _compute_thin_image(pixel_type[:, :, ::1] img not None, periodic=False):
         npy_intp imax, jmax, kmax
         bint no_change
 
-        bint _periodic
+        bint surface_flag, periodic_flag
 
         # list simple_border_points
         vector[coordinate] simple_border_points
@@ -91,10 +93,13 @@ def _compute_thin_image(pixel_type[:, :, ::1] img not None, periodic=False):
 
         pixel_type neighb[27]
 
-    _periodic = int(periodic)
+    # define the flag to be passed on
+    surface_flag = int(surface)
+    periodic_flag = int(periodic)
 
     # loop over the six directions in this order (for consistency with ImageJ)
-    borders[:] = [4, 3, 2, 1, 5, 6]
+    # borders[:] = [4, 3, 2, 1, 5, 6]
+    borders[:] = [5, 6, 1, 2, 4, 3] # 1=N, 2=S, 3=E, 4=W, 5=U, 6=B
 
     # no need to worry about the z direction if the original image is 2D.
     if img.shape[0] == 3:
@@ -105,38 +110,44 @@ def _compute_thin_image(pixel_type[:, :, ::1] img not None, periodic=False):
         jmax = img.shape[1]
         imax = img.shape[2]
 
-    with nogil:
-        # loop through the image several times until there is no change for all
-        # the six border types
-        while unchanged_borders < num_borders:
-            unchanged_borders = 0
-            for j in range(num_borders):
+    # with nogil:
+    # loop through the image several times until there is no change for all
+    # the six border types
+    while unchanged_borders < num_borders:
+        unchanged_borders = 0
+        for j in range(num_borders):
 
-                # Periodic boundary conditions were added by SP
-                if _periodic == 1:
-                    with gil:
-                        img = np.pad(np.asarray(img[1:kmax-1,1:jmax-1,1:imax-1]), 1, mode='wrap')
+            # Periodic boundary conditions were added by SP
+            if periodic_flag == 1:
 
-                curr_border = borders[j]
+                # with gil:
+                    img = np.pad(np.asarray(img[1:kmax-1,1:jmax-1,1:imax-1]),
+                                 1, 
+                                 mode='wrap')
 
-                find_simple_point_candidates(img, curr_border, simple_border_points)
+            curr_border = borders[j]
 
-                # sequential re-checking to preserve connectivity when deleting
-                # in a parallel way
-                no_change = True
-                num_border_points = simple_border_points.size()
-                for i in range(num_border_points):
-                    point = simple_border_points[i]
-                    p = point.p
-                    r = point.r
-                    c = point.c
-                    get_neighborhood(img, p, r, c, neighb)
-                    if is_simple_point(neighb):
-                        img[p, r, c] = 0
-                        no_change = False
+            find_simple_point_candidates(img,
+                                         curr_border,
+                                         simple_border_points,
+                                         surface_flag)
 
-                if no_change:
-                    unchanged_borders += 1
+            # sequential re-checking to preserve connectivity when deleting
+            # in a parallel way
+            no_change = True
+            num_border_points = simple_border_points.size()
+            for i in range(num_border_points):
+                point = simple_border_points[i]
+                p = point.p
+                r = point.r
+                c = point.c
+                get_neighborhood(img, p, r, c, neighb)
+                if is_simple_point(neighb):
+                    img[p, r, c] = 0
+                    no_change = False
+
+            if no_change:
+                unchanged_borders += 1
 
     return np.asarray(img)
 
@@ -145,7 +156,8 @@ def _compute_thin_image(pixel_type[:, :, ::1] img not None, periodic=False):
 @cython.wraparound(False)
 cdef void find_simple_point_candidates(pixel_type[:, :, ::1] img,
                                        int curr_border,
-                                       vector[coordinate] & simple_border_points) nogil:
+                                       vector[coordinate] & simple_border_points,
+                                       bint surface_flag):# nogil:
     """Inner loop of compute_thin_image.
 
     The algorithm of [Lee94]_ proceeds in two steps: (1) six directions are
@@ -166,6 +178,8 @@ cdef void find_simple_point_candidates(pixel_type[:, :, ::1] img,
         # rebind a global name to avoid lookup. The table is filled in
         # at import time.
         int[::1] Euler_LUT = LUT
+        int[:, ::1] NO_idx = NOI
+        int[:, ::1] NO_idx_old = NOIOLD
 
     # clear the output vector
     simple_border_points.clear();
@@ -193,14 +207,23 @@ cdef void find_simple_point_candidates(pixel_type[:, :, ::1] img,
                 get_neighborhood(img, p, r, c, neighborhood)
 
                 # check if (p, r, c) can be deleted:
-                # * it must not be an endpoint;
                 # * it must be Euler invariant (condition 1 in [Lee94]_); and
                 # * it must be simple (i.e., its deletion does not change
-                #   connectivity in the 3x3x3 neighborhood)
-                #   this is conditions 2 and 3 in [Lee94]_
-                if (is_endpoint(neighborhood) or
-                    not is_Euler_invariant(neighborhood, Euler_LUT) or
+                #   connectivity in the 3x3x3 neighborhood; conditions 2 and 
+                #   3 in [Lee94]_); and
+                # * it must not be an endpoint for medial axis thinning or
+                #   a surface endpoint for medial surface thinning
+                #   (condition 4 in [Lee94]_)
+                if (not is_Euler_invariant(neighborhood, NO_idx, NO_idx_old, Euler_LUT) or
                     not is_simple_point(neighborhood)):
+                    continue
+                if (surface_flag == 0 and
+                    is_endpoint(neighborhood)):
+                    print('A hello')
+                    continue
+                elif (surface_flag == 1 and 
+                      is_surface_endpoint(neighborhood, NO_idx, NO_idx_old)):
+                    print("S hello")
                     continue
 
                 # ok, add (p, r, c) to the list of simple border points
@@ -261,7 +284,8 @@ cdef void get_neighborhood(pixel_type[:, :, ::1] img,
     neighborhood[26] = img[p+1, r+1, c+1]
 
 
-###### look-up tables
+# Fill the look-up table for indexing octants for computing the Euler
+# characteristic. See is_Euler_invariant routine below.
 def fill_Euler_LUT():
     """ Look-up table for preserving Euler characteristic.
 
@@ -281,14 +305,83 @@ def fill_Euler_LUT():
 cdef int[::1] LUT = fill_Euler_LUT()
 
 
-# Fill the look-up table for indexing octants for computing the Euler
-# characteristic. See is_Euler_invariant routine below.
+def gen_neighborhood_octant_indices(old=False):
+    """ The indices of points in a N_26 neighborhood for all 8 octants.
+
+    It assumes that the centre point in the neighborhood (index 13) is
+    included and is always in the final position.
+    """
+    cdef ndarray arr = np.zeros((8,7), dtype=np.intc)
+    if old:
+        arr[:] = [[ 2,  1, 11, 10,  5,  4, 14], # octant 0
+                  [ 0,  9,  3, 12,  1, 10,  4], # octant 1
+                  [ 8,  7, 17, 16,  5,  4, 14], # octant 2
+                  [ 6, 15,  7, 16,  3, 12,  4], # octant 3
+                  [20, 23, 19, 22, 11, 14, 10], # octant 4
+                  [18, 21,  9, 12, 19, 22, 10], # octant 5
+                  [26, 23, 17, 14, 25, 22, 16], # octant 6
+                  [24, 25, 15, 16, 21, 22, 12]] # octant 7
+    else:    
+        arr[:] = [[ 2,  1, 11, 10,  5,  4, 14], # octant 0
+                  [ 0,  3,  9, 12,  1,  4, 10], # octant 1
+                  [ 8,  5, 17, 14,  7,  4, 16], # octant 2
+                  [ 6,  7, 15, 16,  3,  4, 12], # octant 3
+                  [20, 23, 11, 14, 19, 22, 10], # octant 4
+                  [18, 21, 19, 22,  9, 12, 10], # octant 5
+                  [26, 17, 23, 14, 25, 16, 22], # octant 6
+                  [24, 25, 21, 22, 15, 16, 12]] # octant 7
+    return arr
+cdef int[:, ::1] NOI = gen_neighborhood_octant_indices()
+cdef int[:, ::1] NOIOLD = gen_neighborhood_octant_indices(True)
+
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cdef int octant_decimal(pixel_type octant[]) nogil:
+    """Calculate the decimal index of an octant configuration.
+    
+    Parameters
+    ----------
+    octant
+        List of points in an octant. List must be ordered by
+        appropriate binary octant order.
+
+    Returns
+    -------
+    octant_index (int)
+        The decimal index of the octant
+
+    Notes
+    -----
+    This function assumes that the last point of the octant,
+    in binary order, is always part of the foreground. This point 
+    corresponds to the centre point in the N_26 neighbourhood.
+
+    """
+
+    cdef int octant_index = 1
+    cdef int increment[7]
+    increment[0] = 128
+    increment[1] = 64
+    increment[2] = 32
+    increment[3] = 16
+    increment[4] = 8
+    increment[5] = 4
+    increment[6] = 2
+
+    for i in range(7): # assume last point is foreground
+        if octant[i] == 1:
+            octant_index |= increment[i]
+
+    return octant_index
 
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
 cdef bint is_Euler_invariant(pixel_type neighbors[],
-                             int[::1] lut) nogil:
+                             int[:, ::1] noi,
+                             int[:, ::1] noi_old,
+                             int[::1] lut): #nogil:
     """Check if a point is Euler invariant.
 
     Calculate Euler characteristic for each octant and sum up.
@@ -305,208 +398,27 @@ cdef bint is_Euler_invariant(pixel_type neighbors[],
     bool (C bool, that is)
 
     """
-    cdef int n, euler_char = 0
-
-    # octant 0:
-    n = 1
-    if neighbors[2] == 1:
-        n |= 128
-
-    if neighbors[1] == 1:
-        n |= 64
-
-    if neighbors[11] == 1:
-        n |= 32
-
-    if neighbors[10] == 1:
-        n |= 16
-
-    if neighbors[5] == 1:
-        n |= 8
-
-    if neighbors[4] == 1:
-        n |= 4
-
-    if neighbors[14] == 1:
-        n |= 2
-
-    euler_char += lut[n]
-
-    # octant 1:
-    n = 1
-    if neighbors[0] == 1:
-        n |= 128
-
-    if neighbors[9] == 1:
-        n |= 64
-
-    if neighbors[3] == 1:
-        n |= 32
-
-    if neighbors[12] == 1:
-        n |= 16
-
-    if neighbors[1] == 1:
-        n |= 8
-
-    if neighbors[10] == 1:
-        n |= 4
-
-    if neighbors[4] == 1:
-        n |= 2
-
-    euler_char += lut[n]
-
-    # octant 2:
-    n = 1
-    if neighbors[8] == 1:
-        n |= 128
-
-    if neighbors[7] == 1:
-        n |= 64
-
-    if neighbors[17] == 1:
-        n |= 32
-
-    if neighbors[16] == 1:
-        n |= 16
-
-    if neighbors[5] == 1:
-        n |= 8
-
-    if neighbors[4] == 1:
-        n |= 4
-
-    if neighbors[14] == 1:
-        n |= 2
-
-    euler_char += lut[n]
-
-    # octant 3:
-    n = 1
-    if neighbors[6] == 1:
-        n |= 128
-
-    if neighbors[15] == 1:
-        n |= 64
-
-    if neighbors[7] == 1:
-        n |= 32
-
-    if neighbors[16] == 1:
-        n |= 16
-
-    if neighbors[3] == 1:
-        n |= 8
-
-    if neighbors[12] == 1:
-        n |= 4
-
-    if neighbors[4] == 1:
-        n |= 2
-
-    euler_char += lut[n]
-
-    # octant 4:
-    n = 1
-    if neighbors[20] == 1:
-        n |= 128
-
-    if neighbors[23] == 1:
-        n |= 64
-
-    if neighbors[19] == 1:
-        n |= 32
-
-    if neighbors[22] == 1:
-        n |= 16
-
-    if neighbors[11] == 1:
-        n |= 8
-
-    if neighbors[14] == 1:
-        n |= 4
-
-    if neighbors[10] == 1:
-        n |= 2
-
-    euler_char += lut[n]
-
-    # octant 5:
-    n = 1
-    if neighbors[18] == 1:
-        n |= 128
-
-    if neighbors[21] == 1:
-        n |= 64
-
-    if neighbors[9] == 1:
-        n |= 32
-
-    if neighbors[12] == 1:
-        n |= 16
-
-    if neighbors[19] == 1:
-        n |= 8
-
-    if neighbors[22] == 1:
-        n |= 4
-
-    if neighbors[10] == 1:
-        n |= 2
-
-    euler_char += lut[n]
-
-    # octant 6:
-    n = 1
-    if neighbors[26] == 1:
-        n |= 128
-
-    if neighbors[23] == 1:
-        n |= 64
-
-    if neighbors[17] == 1:
-        n |= 32
-
-    if neighbors[14] == 1:
-        n |= 16
-
-    if neighbors[25] == 1:
-        n |= 8
-
-    if neighbors[22] == 1:
-        n |= 4
-
-    if neighbors[16] == 1:
-        n |= 2
-
-    euler_char += lut[n]
-
-    # octant 7:
-    n = 1
-    if neighbors[24] == 1:
-        n |= 128
-
-    if neighbors[25] == 1:
-        n |= 64
-
-    if neighbors[15] == 1:
-        n |= 32
-
-    if neighbors[16] == 1:
-        n |= 16
-
-    if neighbors[21] == 1:
-        n |= 8
-
-    if neighbors[22] == 1:
-        n |= 4
-
-    if neighbors[12] == 1:
-        n |= 2
-
-    euler_char += lut[n]
-    return euler_char == 0
+    cdef int octant_index
+    cdef int euler_char = 0
+    cdef int euler_char2 = 0
+    cdef pixel_type octant[7]
+    cdef pixel_type octant2[7]
+    cdef npy_intp i_oct, j_pnt
+
+    for i_oct in range(8): # loop over octants
+        for j_pnt in range(7): # loop over points
+            octant[j_pnt] = neighbors[noi[i_oct,j_pnt]]
+            octant2[j_pnt] = neighbors[noi_old[i_oct,j_pnt]]
+        if lut[octant_decimal(octant)] != lut[octant_decimal(octant2)]:
+            print('Euler octant {i_ict} mismatch:', lut[octant_decimal(octant)],
+                                                    lut[octant_decimal(octant2)])
+        euler_char += lut[octant_decimal(octant)]
+        euler_char2 += lut[octant_decimal(octant2)]
+
+    if euler_char != euler_char2:
+        print('Euler:', euler_char, euler_char2, euler_char==euler_char2)
+
+    return euler_char2 == 0
 
 
 cdef inline bint is_endpoint(pixel_type neighbors[]) nogil:
@@ -518,11 +430,87 @@ cdef inline bint is_endpoint(pixel_type neighbors[]) nogil:
         s += neighbors[j]
     return s == 2
 
+cdef bint is_surface_endpoint(pixel_type neighbors[],
+                              int[:, ::1] noi,
+                              int[:, ::1] noi_old): #nogil:
+    """Check if a point is a surface endpoint.
+
+    Check if each octant index is part of a set [240, 165, 170,
+    204] and each octant contains less than 3 foreground points.
+    This is Definition 1 in [Lee94]_.
+
+    Parameters
+    ----------
+    neighbors
+        Neighbors of a point.
+
+    Returns
+    -------
+    bool
+        Whether the point is a surface endpoint.
+
+    """
+    
+    cdef int n_octant, n_octant2
+    cdef int octant_index, octant_index2
+    cdef pixel_type octant[7], octant2[7]
+
+    cdef int euler_char = 0, euler_char2 = 0
+    cdef int[::1] lut = fill_Euler_LUT()
+
+    cdef int is_sep = 1, is_sep2 = 1
+
+    cdef npy_intp i_oct, j_pnt
+
+    for i_oct in range(8): # loop over octants
+        n_octant = 1
+        n_octant2 = 1
+        for j_pnt in range(7): # loop over points
+            # fill octant
+            octant[j_pnt] = neighbors[noi[i_oct,j_pnt]]
+            octant2[j_pnt] = neighbors[noi_old[i_oct,j_pnt]]
+            # count point in octant
+            n_octant += octant[j_pnt]
+            n_octant2 += octant2[j_pnt]
+
+
+        # get decimal index
+        octant_index = octant_decimal(octant)
+        octant_index2 = octant_decimal(octant2)
+        if lut[octant_index] != lut[octant_index2]: # check Euler mismatch
+            print('Euler octant {i_ict} mismatch:', lut[octant_index],
+                                                    lut[octant_index2])
+        # sum up Euler
+        euler_char += lut[octant_index]
+        euler_char2 += lut[octant_index2]
+
+        
+        if (octant_index != 15 and octant_index != 165 and
+            octant_index != 85 and octant_index != 51 and
+            n_octant >= 4):
+            is_sep = 0
+            return False
+        if (octant_index2 != 15 and octant_index2 != 165 and
+            octant_index2 != 85 and octant_index2 != 51 and
+            n_octant2 >= 4):
+            is_sep2 = 0
+
+    if euler_char != euler_char2:
+        print('Euler:', euler_char, euler_char2, euler_char==euler_char2)
+
+    if is_sep != is_sep2:
+        print('Surface endpoint mismatch:', is_sep, is_sep2)
+
+    if is_sep:
+        return True
+    else:
+        return False
+
 
 cdef bint is_simple_point(pixel_type neighbors[]) nogil:
     """Check is a point is a Simple Point.
 
-    A point is simple iff its deletion does not change connectivity in
+    A point is simple if its deletion does not change connectivity in
     the 3x3x3 neighborhood. (cf conditions 2 and 3 in [Lee94]_).
 
     This method is named "N(v)_labeling" in [Lee94]_.
