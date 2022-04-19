@@ -47,6 +47,12 @@ def gen_catalogue(data, periodic=False, sort=True):
     # Connect cells within a 3x3x3 neighbourhood from endpoint to endpoint
     # and store in the first column 
     _, cat = find_filaments(data, periodic=periodic)
+
+    # Crop the catalogue if not completely full
+    if np.any(cat[:, 0] == 0):
+        cat = cat[:np.argmin(cat[:, 0])]
+
+    # Copy into new array
     catalogue = np.zeros([cat.shape[0], 8], order='c')
     catalogue[:,0] = cat[:,0]
 
