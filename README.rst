@@ -9,9 +9,9 @@ COWS
     :target: https://pypi.com/v/pycows
 
 
-.. image:: https://img.shields.io/github/commits-since/SimonPfeifer/python-cows/v/v/v0.0.2...master.svg.svg
+.. image:: https://img.shields.io/github/commits-since/SimonPfeifer/python-cows/v0.0.2.svg
     :alt: Commits since latest release
-    :target: https://github.com/SimonPfeifer/python-cows/compare/v/v/v0.0.2...master.svg...master
+    :target: https://github.com/SimonPfeifer/python-cows/compare/v0.0.2...master
 
 
 .. image:: https://img.shields.io/pypi/pyversions/pycows.svg
