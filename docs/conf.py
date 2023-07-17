@@ -27,7 +27,7 @@ project = 'cows'
 year = '2022'
 author = 'Simon Pfeifer'
 copyright = '{0}, {1}'.format(year, author)
-version = release = '0.0.1'
+version = release = 'version = release = '0.0.1''
 
 pygments_style = 'trac'
 templates_path = ['.']
