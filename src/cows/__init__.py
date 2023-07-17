@@ -1,4 +1,4 @@
-__version__ = '__version__ = '0.0.1''
+__version__ = '__version__ = '0.0.2''
 
 from .skeletonize import skeletonize
 from .filament import label_skeleton, separate_skeleton, find_filaments
